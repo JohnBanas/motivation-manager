@@ -1,12 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="title" content="Motivation Manager" />
+    <meta
+      name="description"
+      content="Fully Responsive, interactive daily motivation scheduler application
+    that includes that allows you to accomplishment more with less"
+    />
+    <meta
+      name="keywords"
+      content="motivation, scheduler, responsive, interactive"
+    />
+    <meta name="author" content="Vanderbilt Bootcamp Team" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--Google Fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap"
+      rel="stylesheet"
+    />
+    <!--Open Iconic Stylesheet-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic.min.css"
+      integrity="sha512-LeCmts7kEi09nKc+DwGJqDV+dNQi/W8/qb0oUSsBLzTYiBwxj0KBlAow2//jV7jwEHwSCPShRN2+IWwWcn1x7Q=="
+      crossorigin="anonymous"
+    />
+    <!--Style Sheets-->
+    <link rel="stylesheet" href="./assets/css/style.css" />
+
+    <title>Motivation Manager</title>
+    <link rel="shortcut icon" type="image/jpg" href="assets/images/"
+  </head>
+  <body>
+    <!--Header-->
+    <header>
+      <!--Logo-->
+      <h1>Motivation <span>Manager</span></h1>
+      <!--Navigation Bar-->
+      <nav>
+        <ul>
+          <li><a href="#">Daily</a></li>
+          <li><a href="#">Weekly</a></li>
+          <li><a href="#">Monthly</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!--Main-->
+    <main>
+      <!--Quote API Section-->
+      <section id="quoteAPI">
+        <article>
+          <h3>Quote of the day</h3>
+          <p>"To Be or...Not to be... - William Shakespeare</p>
+        </article>
+      </section>
+
+      <!--Weather API Section-->
+      <section id="weatherAPI">
+        <article>
+          <h3>Daily Forecast</h3>
+          <!--Notes, simple weather icon with tempurature-->
+          <div></div>
+        </article>
+      </section>
+
+      <!-- Grateful Section-->
+      <!-- Modal pops up with a text box, creates an li element-->
+      <section id="grateful">
+        <article>
+          <div>
+            <h3>Things I Am Grateful For</h3>
+            <ul>
+              <li class="fas fa-plus-circle"></li>
+            </ul>
+          </div>
+        </article>
+      </section>
+
+      <!--Big 3 Overview + Meetings Section-->
+      <!--Notes: plus icon is listening and modal pops up with input title, meeting or task selector, and time selector
+        sign changes to an open circle for meeting (<i class="far fa-circle"></i>) drops into meetings tab and into specified time, 
+            closed for task (<i class="fas fa-circle"></i>) drops into "big 3 section" and into time area -->
+      <section id="big3">
+        <!-- Article tag below needs to be a card -->
+        <article>
+          <!-- Div below needs to be card body-->
+          <div>
+            <!--Card title-->
+            <h3>Meetings</h3>
+            <!--Notes: List needs to have open circle bullets-->
+            <ul>
+              <li class="fas fa-plus-circle"></li>
+            </ul>
+          </div>
+          <!--Card Body-->
+          <div>
+            <!--Card title-->
+            <h3>Big 3</h3>
+            <!--Notes: List needs to have closed circle bullets when you click on task, you can edit-->
+            <ul>
+              <li class="fas fa-plus-circle"></li>
+            </ul>
+          </div>
+        </article>
+      </section>
+
+      <!--Day Section-->
+      <section id="daySchedule">
+        <div>
+          <!-- View drop-down menu for schedule view, radar items view,  -->
+          <select name="view" id="view">
+            <option value="scheduleView">Schedule</option>
+            <option value="radarView">Radar Items</option>
+            <option value="studyView">Study Materials</option>
+            <option value="personalView">Personal Development</option>
+          </select>
+        </div>
+        <!--Time block container-->
+        <div class="timeblocks">
+          <!--Notes: Script on time blocks starting from 5:00am - 10:00pm -->
+        </div>
+      </section>
+
+      <!-- Add Task Section-->
+      <section>
+        <!--Notes: Add task section, fixed, sticky on scroll,
+        above the footer tool bar at the bottom right of the page, 
+        think of easy access to the right thumb
+        Task Modal (from) pops up with title, type (meeting or task), and time selector -->
+        <div id="add-task">
+          <h2>
+            Add Task
+            <i class="fas fa-plus-circle"></i>
+          </h2>
+        </div>
+      </section>
+    </main>
+    <!--Footer Section-->
+    <footer id="footer-toolbar">
+      <!--Notes: This is where we will add tasks - setup in a row with 4 columns
+        Icon on top and words on bottom-->
+      <ul>
+        <li>
+          <a href="#">
+            <i class="fas fa-home"> </i>
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="far fa-check-circle"></i>
+            Day
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fas fa-calendar-week"></i>
+            Week
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="far fa-calendar-alt"></i>
+            Month
+          </a>
+        </li>
+      </ul>
+    </footer>
+
+    <!--Font Awesome Script-->
+    <script
+      src="https://kit.fontawesome.com/6ae9d1af5f.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!--Our Script File-->
+    <script src="./assets/js/script.js"></script>
+  </body>
 </html>
