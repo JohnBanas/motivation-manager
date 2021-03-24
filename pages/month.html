@@ -47,9 +47,9 @@
       <!--Navigation Bar-->
       <nav>
         <ul>
-          <li><a href="#">Daily</a></li>
-          <li><a href="./pages/week.html">Weekly</a></li>
-          <li><a href="./pages/month.html">Monthly</a></li>
+          <li><a href="../index.html">Daily</a></li>
+          <li><a href="./week.html">Weekly</a></li>
+          <li><a href="#">Monthly</a></li>
         </ul>
       </nav>
     </header>
@@ -114,37 +114,22 @@
       </section>
 
       <!--Day Section-->
-      <section id="daySchedule">
+      <section id="monthSchedule">
         <div>
-          <!-- Notes: Need help with this... It may be something we have to create an eventListener for..
-            I believe there is a jQuery select dropdown menu that should be an easy fix
-            View drop-down menu for schedule view(#daySchedule), 
-            radar items view(./pages/view/radar.html#radarView), 
-            study items goes to (./pages/view/radar.html#studyView), 
-            and personal development(./pages/view/development.html#developmentView) 
-            goes to page when selected -->
+          <!-- View drop-down menu for schedule view, radar items view, and personal development goes to page when selected -->
           <select name="view" id="view">
-            <option value="scheduleView">
-              <a href="#daySchedule"> Schedule </a>
-            </option>
-            <option value="radarView">
-              <a href="./pages/view/radar.html#radarView"> Radar Items </a>
-            </option>
-            <option value="studyView">
-              <a href="./pages/view/study.html#studyView"> Study Materials </a>
-            </option>
-            <option value="personalView">
-              <a href="./pages/view/development.html#developmentView">
-                Personal Development
-              </a>
-            </option>
+            <option value="scheduleView">Schedule</option>
+            <option value="radarView">Radar Items</option>
+            <option value="studyView">Study Materials</option>
+            <option value="personalView">Personal Development</option>
           </select>
         </div>
-        <!--Time block container-->
-        <div class="timeblocks" id="day">
-          <!--Notes: Script on time blocks starting from 5:00am - 10:00pm -->
-        </div>
-      </section>
+        <!--Time block container for the month-->
+        <h4 id="monthTitle"></h4>
+        <div class="timeblocks-month" id="month">
+            <!--Notes: Have month similar to day list view, except it is 1-31 instead of times
+            what get's listed are essentially  -->
+          </div>
 
       <!-- Notes Section-->
       <section id="notes">
@@ -187,23 +172,18 @@
           </a>
         </li>
         <li>
-          <a href="./pages/week.html#weekSchedule">
+          <a href="#">
             <i class="fas fa-calendar-week"></i>
-            Week <span>(coming soon)</span>
+            Week
           </a>
         </li>
         <li>
-          <a href="/pages/month.html#monthSchedule">
+          <a href="#">
             <i class="far fa-calendar-alt"></i>
-            Month <span>(coming soon)</span>
+            Month
           </a>
         </li>
       </ul>
-      <p>
-        © 2021 Team Bobcat
-        <br />
-        Vanderbilt University, Owen Graduate School of Business and Engineering
-      </p>
     </footer>
 
     <!--Font Awesome Script-->
