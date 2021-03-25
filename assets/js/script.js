@@ -9,10 +9,14 @@ const getQuote = function() {
     fetch("https://type.fit/api/quotes")
       //then if ok parse response
       .then(function(response) {
-          return response.json();
+          if (response.ok) {
+            return response.json();
+          } else {
+              return;
+            }
       }).then(function(data) {
           displayQuote(data);
-      } )
+      })
 }
 
 const displayQuote = function (dataArr) {
