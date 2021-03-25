@@ -33,7 +33,7 @@
 
     <title>Motivation Manager</title>
     <link rel="shortcut icon" type="image/jpg"
-    href="assets/images/bobcat-favicon.png"
+    href="assets/images/bobcat-favicon.png" />
   </head>
   <body>
     <!--Header-->
@@ -57,10 +57,11 @@
     <main>
       <!--Quote API Section-->
       <section id="quoteAPI">
-        <article>
-          <h3>Quote of the day</h3>
-          <p>"To Be or...Not to be... - William Shakespeare</p>
-        </article>
+        <!-- !!! I (Casey) deleted <article> here. I don't see why we need a container just to hold a 
+          2nd container -->
+        <h3>Quote of the day</h3>
+        <!-- Added id to p to make it easier to find-->
+        <p id="quoteOfTheDay">"To Be or...Not to be... -William Shakespeare</p>
       </section>
 
       <!--Weather API Section-->
@@ -211,6 +212,12 @@
       src="https://kit.fontawesome.com/6ae9d1af5f.js"
       crossorigin="anonymous"
     ></script>
+
+    <!-- day.js(time) script file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/dayjs.min.js" integrity="sha512-0fcCRl828lBlrSCa8QJY51mtNqTcHxabaXVLPgw/jPA5Nutujh6CbTdDgRzl9aSPYW/uuE7c4SffFUQFBAy6lg==" crossorigin="anonymous"></script>
+
+    <!-- jquery script file-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
 
     <!--Our Script File-->
     <script src="./assets/js/script.js"></script>
