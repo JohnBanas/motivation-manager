@@ -30,4 +30,17 @@ const displayQuote = function (dataArr) {
     $(quoteOfDayEl).html(randomIndexQuote.text + "<span> -" + randomIndexQuote.author + "</span>");
 }
 
+// function for user date using Day.js
+const currentDay = function () {
+  // declare var now = current time for user
+  let now = dayjs();
+  // change format for display
+  let displayNow = now.format('dddd, MMMM D').toString();
+  console.log(displayNow);
+
+  // for hour... similar syntax for other time measurements: minutes, seconds 
+  //var x = dayjs().get('hour')
+}
+
 getQuote();
+currentDay();
