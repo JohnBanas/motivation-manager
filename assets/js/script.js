@@ -21,13 +21,13 @@ const getQuote = function() {
 
 const displayQuote = function (dataArr) {
     // find <p> by id
-    let quoteOfDayEl = $('#quoteOfTheDay');
+    let $quoteOfDayEl = $('#quoteOfTheDay');
 
     // Choose a random index from data Arr
     let randomIndexQuote = dataArr[Math.floor(Math.random() * dataArr.length)];
 
     // change quoteOfDayEl text value to 
-    $(quoteOfDayEl).html(randomIndexQuote.text + "<span> -" + randomIndexQuote.author + "</span>");
+    $($quoteOfDayEl).html(randomIndexQuote.text + "<span> -" + randomIndexQuote.author + "</span>");
 }
 
 // function for user date using Day.js
