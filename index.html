@@ -50,29 +50,29 @@
           <ul id="dropDownItems" class="dropdown menu" data-dropdown-menu>
             <li class=""><a href="#">Daily</a>
               <!-- Submenu daily -->
-              <ul class="menu">
-                <li><a href="#">Schedule</a></li>
-                <li><a href="#">Radar</a></li>
-                <li><a href="#">Study</a></li>
-                <li><a href="#">Develop</a></li>
+              <ul id="subMenuDaily" class="menu">
+                <li class="subMenuListItem"><a href="#">Schedule</a></li>
+                <li class="subMenuListItem"><a href="#">Radar</a></li>
+                <li class="subMenuListItem"><a href="#">Study</a></li>
+                <li class="subMenuListItem"><a href="#">Develop</a></li>
               </ul>
             </li>
             <!-- Submenu Weekly -->
             <li><a href="#">Weekly</a>
-              <ul class="menu">
-                <li><a href="#">Schedule</a></li>
-                <li><a href="#">Radar</a></li>
-                <li><a href="#">Study</a></li>
-                <li><a href="#">Develop</a></li>
+              <ul id="subMenuWeekly" class="menu">
+                <li class="subMenuListItem"><a href="#">Schedule</a></li>
+                <li class="subMenuListItem"><a href="#">Radar</a></li>
+                <li class="subMenuListItem"><a href="#">Study</a></li>
+                <li class="subMenuListItem"><a href="#">Develop</a></li>
               </ul>
             </li>
             <!-- Submenu Monthly -->
             <li><a href="#">Monthly</a>
-              <ul class="menu">
-                <li><a href="#">Schedule</a></li>
-                <li><a href="#">Radar</a></li>
-                <li><a href="#">Study</a></li>
-                <li><a href="#">Develop</a></li>
+              <ul id="subMenuMonthly" class="menu">
+                <li class="subMenuListItem"><a href="#">Schedule</a></li>
+                <li class="subMenuListItem"><a href="#">Radar</a></li>
+                <li class="subMenuListItem"><a href="#">Study</a></li>
+                <li class="subMenuListItem"><a href="#">Develop</a></li>
               </ul>
             </li>
           </ul>
@@ -220,18 +220,17 @@
       <div class="grid-container">
         <div class="cell">
           <!-- button to activate modal -->
-          <h2><a data-open="exampleModal1"><i class="fas fa-plus-circle"></i></a></h2>
-          <div class="reveal" id="exampleModal1" data-reveal>
+          <h2><a data-open="taskModal"><i class="fas fa-plus-circle"></i></a></h2>
+          <div class="reveal grid-container" id="taskModal" data-reveal>
             <!-- modal button options -->
-            <button id="modalTaskButton" class="modalButton">Task</button>
-            <button id="modalMeetingButton" class="modalButton">Meeting</button>
-            <button id="modalGratefulButton" class="modalButton">Grateful</button>
-            <button id="modalRadarButton" class="modalButton">Radar</button>
-            <button id="modalStudyButton" class="modalButton">Study</button>
-            <button id="modalDevelopButton" class="modalButton">Develop</button>
+            <button id="modalTaskButton" class="cell modalButton">Task</button>
+            <button id="modalMeetingButton" class="cell modalButton">Meeting</button>
+            <button id="modalGratefulButton" class="cell modalButton">Grateful</button>
+            <button id="modalRadarButton" class="cell modalButton">Radar</button>
+            <button id="modalStudyButton" class="cell modalButton">Study</button>
+            <button id="modalDevelopButton" class="cell modalButton">Develop</button>
             <!-- modal task input area -->
-            <textarea id="modalTextInput"></textarea>
-            <h3 class="lead">Title/Description</h3>
+            <textarea id="modalTextInput" placeholder="Title/Description"></textarea>
             <!-- Create a date selection method -->
             <div id="taskDate">Select the task's date from a calendar here.</div>
             <!-- create time start selection method here -->

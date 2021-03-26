@@ -89,9 +89,49 @@ header {
     background-color: $colorSecondary--light;
   }
   #dropDownItems{
-    background-color: $colorSecondary--dark;
+    background-color: $colorSecondary--light;
   }
+
+  .subMenuListItem > a:hover {
+    background-color: $colorSecondary--light;
+  }
+
   img {
     color: $colorSecondary;
   }
+}
+
+#subMenuDaily, #subMenuWeekly, #subMenuMonthly, #example-tabs {
+  background-color: $colorSecondary--dark;
+}
+
+.tabs-title > a[aria-selected=true]{
+  background-color: $colorSecondary--light;
+  border: none;
+}
+
+.tabs-title > a:hover {
+  background-color: $colorSecondary--light;
+}
+
+
+textarea {
+  background-color: $colorSecondary--light;
+}
+
+#taskModal {
+  background-color: $colorSecondary;
+}
+
+#taskModal > textarea {
+  background-color: $colorSecondary--light;
+}
+
+#taskModal > .modalButton {
+  font-size: 2rem;
+  background-color: $colorPrimary;
+  border-color: $colorSecondary--dark;
+  padding: .5rem;
+  margin: .5rem;
+  border-radius: .5rem;
 }
