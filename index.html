@@ -1,218 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="title" content="Motivation Manager" />
-    <meta
-      name="description"
-      content="Fully Responsive, interactive daily motivation scheduler application
-    that includes that allows you to accomplishment more with less"
-    />
-    <meta
-      name="keywords"
-      content="motivation, scheduler, responsive, interactive"
-    />
-    <meta name="author" content="Vanderbilt Bootcamp Team" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!--Google Fonts-->
-    <link
-      href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap"
-      rel="stylesheet"
-    />
-    <!--Open Iconic Stylesheet-->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic.min.css"
-      integrity="sha512-LeCmts7kEi09nKc+DwGJqDV+dNQi/W8/qb0oUSsBLzTYiBwxj0KBlAow2//jV7jwEHwSCPShRN2+IWwWcn1x7Q=="
-      crossorigin="anonymous"
-    />
-    <!--Style Sheets-->
-    <link rel="stylesheet" href="./assets/css/style.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="title" content="Motivation Manager" />
+  <meta name="description" content="Fully Responsive, interactive daily motivation scheduler application
+    that includes that allows you to accomplishment more with less" />
+  <meta name="keywords" content="motivation, scheduler, responsive, interactive" />
+  <meta name="author" content="Vanderbilt Bootcamp Team" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Motivation Manager</title>
-    <link rel="shortcut icon" type="image/jpg"
-    href="assets/images/bobcat-favicon.png"
-  </head>
-  <body>
-    <!--Header-->
-    <header>
-      <!--Logo-->
-      <div>
-        <img src="assets/images/bobcat.png" />
-        <!--Header style is Bold for Motivation, then lightest for Manager span-->
-        <h1>Motivation <span>Manager</span></h1>
+  <!--Google Fonts-->
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet" />
+  <!--Open Iconic Stylesheet-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic.min.css"
+    integrity="sha512-LeCmts7kEi09nKc+DwGJqDV+dNQi/W8/qb0oUSsBLzTYiBwxj0KBlAow2//jV7jwEHwSCPShRN2+IWwWcn1x7Q=="
+    crossorigin="anonymous" />
+  <!--Compressed CSS with Foundation -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
+    integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+  <!--Style Sheets-->
+  <link rel="stylesheet" href="./assets/css/style.css" />
+
+  <title>Motivation Manager</title>
+  <link rel="shortcut icon" type="image/jpg" href="assets/images/bobcat-favicon.png" </head>
+
+<body class="grid-container">
+  <!--Header-->
+  <header class="grid-container full">
+    <!--Navigation Bar is connected to Header (for styling purposes)-->
+    <nav class="cell">
+      <!-- This is for mobile responsive view in Foundation -->
+      <div class="title-bar" data-responsive-toggle="navMenu" data-hide-for="medium">
+        <button class="menu-icon" type="button" data-toggle="navMenu"></button>
+        <div class="title-bar-title">Menu</div>
       </div>
-      <!--Navigation Bar-->
-      <nav>
-        <ul>
-          <li><a href="#">Daily</a></li>
-          <li><a href="./pages/week.html">Weekly</a></li>
-          <li><a href="./pages/month.html">Monthly</a></li>
-        </ul>
-      </nav>
-    </header>
-    <!--Main-->
-    <main>
-      <!--Quote API Section-->
-      <section id="quoteAPI">
-        <article>
-          <h3>Quote of the day</h3>
-          <p>"To Be or...Not to be... - William Shakespeare</p>
-        </article>
-      </section>
+      <!-- Responsive view and all Header content -->
+      <div class="top-bar" id="navMenu">
+        <!-- Bobcat Image -->
+        <img class="align-center" src="assets/images/bobcat.png" alt="bobcat icon">
+        <!-- Site title -->
+        <h1>Motivation <span>Manager</span></h1>
+        <div class="top-bar-right">
+          <!-- Dropdown Menu -->
+          <ul id="dropDownItems" class="dropdown menu" data-dropdown-menu>
+            <li class=""><a href="#">Daily</a>
+              <!-- Submenu daily -->
+              <ul class="menu">
+                <li><a href="#">Schedule</a></li>
+                <li><a href="#">Radar</a></li>
+                <li><a href="#">Study</a></li>
+                <li><a href="#">Develop</a></li>
+              </ul>
+            </li>
+            <!-- Submenu Weekly -->
+            <li><a href="#">Weekly</a>
+              <ul class="menu">
+                <li><a href="#">Schedule</a></li>
+                <li><a href="#">Radar</a></li>
+                <li><a href="#">Study</a></li>
+                <li><a href="#">Develop</a></li>
+              </ul>
+            </li>
+            <!-- Submenu Monthly -->
+            <li><a href="#">Monthly</a>
+              <ul class="menu">
+                <li><a href="#">Schedule</a></li>
+                <li><a href="#">Radar</a></li>
+                <li><a href="#">Study</a></li>
+                <li><a href="#">Develop</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    </div>
+  </header>
+  <!-- End of Header, Nav Menu -->
 
-      <!--Weather API Section-->
-      <section id="weatherAPI">
-        <article>
-          <h3>Daily Forecast</h3>
-          <!--Notes, simple weather icon with tempurature-->
-          <div></div>
-        </article>
-      </section>
+  <!--Main-->
+  <main>
+    <!--Quote API Section-->
+    <section id="quoteAPI">
+      <h3>Quote of the day</h3>
+      <p id="quoteElement"></p>
+    </section>
 
-      <!-- Grateful Section-->
-      <!-- Modal pops up with a text box, creates an li element-->
-      <section id="grateful">
-        <article>
-          <div>
-            <h3>Things I Am Grateful For</h3>
-            <ul>
-              <li class="fas fa-plus-circle"></li>
-            </ul>
-          </div>
-        </article>
-      </section>
+    <!--Weather API Section-->
+    <section id="weatherAPI">
+      <article>
+        <h3>Daily Forecast</h3>
+        <!--weather icon with tempurature, (that dynamically affects the page?) -->
+        <div id="weatherContainer"></div>
+      </article>
+    </section>
 
-      <!--Big 3 Overview + Meetings Section-->
-      <!--Notes: plus icon is listening and modal pops up with input title, meeting or task selector, and time selector
+    <!-- Grateful Section-->
+    <section id="grateful">
+      <article>
+        <h3>Things I Am Grateful For</h3>
+        <div>
+          <ul id="gratefulListItems">
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <!--Big 3 Overview + Meetings Section-->
+    <!--Notes: plus icon is listening and modal pops up with input title, meeting or task selector, and time selector
         sign changes to an open circle for meeting (<i class="far fa-circle"></i>) drops into meetings tab and into specified time, 
             closed for task (<i class="fas fa-circle"></i>) drops into "big 3 section" and into time area -->
-      <section id="big3">
-        <!-- Article tag below needs to be a card -->
-        <article>
-          <!-- Div below needs to be card body-->
-          <div>
-            <!--Card title-->
-            <h3>Meetings</h3>
-            <!--Notes: List needs to have open circle bullets-->
-            <ul>
-              <li class="fas fa-plus-circle"></li>
-            </ul>
-          </div>
-          <!--Card Body-->
-          <div>
-            <!--Card title-->
-            <h3>Big 3</h3>
-            <!--Notes: List needs to have closed circle bullets when you click on task, you can edit-->
-            <ul>
-              <li class="fas fa-plus-circle"></li>
-            </ul>
-          </div>
-        </article>
-      </section>
-
-      <!--Day Section-->
-      <section id="daySchedule">
+    <section id="tasks">
+      <!-- Article tag below needs to be a card -->
+      <article>
+        <!-- Div below needs to be card body-->
+        <div id="meetingsContainer">
+          <!--Card title-->
+          <h3>Meetings</h3>
+          <!--Notes: List needs to have open circle bullets-->
+          <ul>
+          </ul>
+        </div>
+        <!--Card Body-->
         <div>
-          <!-- Notes: Need help with this... It may be something we have to create an eventListener for..
-            I believe there is a jQuery select dropdown menu that should be an easy fix
-            View drop-down menu for schedule view(#daySchedule), 
-            radar items view(./pages/view/radar.html#radarView), 
-            study items goes to (./pages/view/radar.html#studyView), 
-            and personal development(./pages/view/development.html#developmentView) 
-            goes to page when selected -->
-          <select name="view" id="view">
-            <option value="scheduleView">
-              <a href="#daySchedule"> Schedule </a>
-            </option>
-            <option value="radarView">
-              <a href="./pages/view/radar.html#radarView"> Radar Items </a>
-            </option>
-            <option value="studyView">
-              <a href="./pages/view/study.html#studyView"> Study Materials </a>
-            </option>
-            <option value="personalView">
-              <a href="./pages/view/development.html#developmentView">
-                Personal Development
-              </a>
-            </option>
-          </select>
+          <!--Card title-->
+          <h3>Main Tasks</h3>
+          <!--Notes: List needs to have closed circle bullets when you click on task, you can edit-->
+          <ul>
+          </ul>
         </div>
-        <!--Time block container-->
-        <div class="timeblocks" id="day">
-          <!--Notes: Script on time blocks starting from 5:00am - 10:00pm -->
-        </div>
-      </section>
+      </article>
+    </section>
 
-      <!-- Notes Section-->
-      <section id="notes">
-        <!--Notes: TextArea on click allows you to insert text and saves text when you tap outside-->
-        <article>
-          <h3>Notes</h3>
-          <textarea id="textarea"></textarea>
-        </article>
-      </section>
+    <section class="grid-container">
+      <article class="cell">
+        <ul class="tabs" data-tabs id="example-tabs">
+          <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Schedule</a></li>
+          <li class="tabs-title"><a href="#panel2">Radar Items</a></li>
+          <li class="tabs-title"><a href="#panel3">Study Materials</a></li>
+          <li class="tabs-title"><a href="#panel4">Personal Development</a></li>
+        </ul>
 
-      <!-- Add Task Section-->
-      <section>
-        <!--Notes: Add task section, fixed, sticky on scroll,
+        <section class="tabs-content" data-tabs-content="example-tabs">
+          <div class="tabs-panel is-active" id="panel1">
+            <h3>Schedule</h3>
+            <div>
+              <ul>
+              </ul>
+            </div>
+          </div>
+          <div class="tabs-panel" id="panel2">
+            <h3>Radar Items</h3>
+            <div>
+              <ul>
+              </ul>
+            </div>
+          </div>
+          <div class="tabs-panel" id="panel3">
+            <h3>Study Materials</h3>
+            <div>
+              <ul>
+              </ul>
+            </div>
+          </div>
+          <div class="tabs-panel" id="panel4">
+            <h3>Personal Development</h3>
+            <div>
+              <ul>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </article>
+      <!--Time block container-->
+      <div class="timeblocks" id="day">
+        <!--Notes: Script on time blocks starting from 5:00am - 10:00pm -->
+      </div>
+    </section>
+
+    <!-- Notes Section-->
+    <section id="notes">
+      <!--Notes: TextArea on click allows you to insert text and saves text when you tap outside-->
+      <article>
+        <h3>Notes</h3>
+        <textarea id="textarea"></textarea>
+      </article>
+    </section>
+
+    <!-- Add Task Section-->
+    <section>
+      <!--Notes: Add task section, fixed, sticky on scroll,
         above the footer tool bar at the bottom right of the page, 
         think of easy access to the right thumb
         Task Modal (from) pops up with title, type (meeting or task), and time selector -->
-        <div id="add-task">
-          <h2>
-            Add Task
-            <i class="fas fa-plus-circle"></i>
-          </h2>
+      <div id="addTaskHeading">
+        <h2>
+          Add Task
+        </h2>
+      </div>
+    </section>
+    <!-- Task Modal -->
+    <div class="grid-container">
+      <div class="cell">
+        <h2><a data-open="exampleModal1"><i class="fas fa-plus-circle"></i></a></h2>
+        <div class="reveal" id="exampleModal1" data-reveal>
+          <button id="modalTaskButton" class="modalButton">Task</button>
+          <button id="modalMeetingButton" class="modalButton">Meeting</button>
+          <button id="modalGratefulButton" class="modalButton">Grateful</button>
+          <button id="modalRadarButton" class="modalButton">Radar</button>
+          <button id="modalStudyButton" class="modalButton">Study</button>
+          <button id="modalDevelopButton" class="modalButton">Develop</button>
+          <textarea id="modalTextInput"></textarea>
+          <h3 class="lead">Title/Description</h3>
+          <div id="taskDate">Select the task's date from a calendar here.</div>
+          <div id="startTime">The start time will go in here.</div>
+          <div id="endTime">The end time will go in here.</div>
+          <button class="close-button" data-close aria-label="Close reveal" type="button">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-      </section>
-    </main>
-    <!--Footer Section-->
-    <footer id="footer-toolbar">
-      <!--Notes: This is where we will add tasks - setup in a row with 4 columns
-        Icon on top and words on bottom-->
-      <ul>
-        <li>
-          <a href="#">
-            <i class="fas fa-home"> </i>
-            Home
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="far fa-check-circle"></i>
-            Day
-          </a>
-        </li>
-        <li>
-          <a href="./pages/week.html#weekSchedule">
-            <i class="fas fa-calendar-week"></i>
-            Week <span>(coming soon)</span>
-          </a>
-        </li>
-        <li>
-          <a href="/pages/month.html#monthSchedule">
-            <i class="far fa-calendar-alt"></i>
-            Month <span>(coming soon)</span>
-          </a>
-        </li>
-      </ul>
-      <p>
-        © 2021 Team Bobcat
-        <br />
-        Vanderbilt University, Owen Graduate School of Business and Engineering
-      </p>
-    </footer>
+      </div>
+    </div>
+  </main>
+  <!--Footer Section-->
+  <footer id="footer-toolbar">
+    <p>
+      © 2021 Team Bobcat
+      <br />
+      Vanderbilt University, Owen Graduate School of Business and Engineering
+    </p>
+  </footer>
+  <!--jQuery-->
+  <script src="./assets/js/jquery.min.js"></script>
+  <!--Foundation JavaScript CDN-->
+  <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
+    integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+  <!--Font Awesome Script-->
+  <script src="https://kit.fontawesome.com/6ae9d1af5f.js" crossorigin="anonymous"></script>
 
-    <!--Font Awesome Script-->
-    <script
-      src="https://kit.fontawesome.com/6ae9d1af5f.js"
-      crossorigin="anonymous"
-    ></script>
+  <!--Our Script File-->
+  <script src="./assets/js/script.js"></script>
+</body>
 
-    <!--Our Script File-->
-    <script src="./assets/js/script.js"></script>
-  </body>
 </html>

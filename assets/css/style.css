@@ -1,0 +1,39 @@
+/** color primary broken into hue saturation lightness **/
+/** percentages to lighten and darken colors **/
+/** color primary light --colorPrimary--light **/
+/** --colorPrimary--dark **/
+/** --colorPrimary--complement  **/
+/** --colorPrimary--triad1 **/
+/** --colorPrimary--triad2 **/
+/** color secondary **/
+/** color secondary broken into hue saturation lightness **/
+/** color secondary light --colorSecondary--light **/
+/** --colorSecondary--dark **/
+/** --colorSecondary--complement  **/
+/** --colorSecondary--triad1 **/
+/** --colorSecondary--triad2 **/
+/** responsive img in Foundation **/
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  font: 100%;
+  background-color: #ffe45c;
+}
+
+header {
+  background-color: #fff5c2;
+}
+header #navMenu {
+  background-color: #fff5c2;
+}
+header #dropDownItems {
+  background-color: #f5cc00;
+}
+header img {
+  color: #ffe45c;
+}
+
+/*# sourceMappingURL=style.css.map */
