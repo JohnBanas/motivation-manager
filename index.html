@@ -43,7 +43,10 @@
         <!-- Site title -->
         <h1>Motivation <span>Manager</span></h1>
         <div class="top-bar-right">
-          <!-- Dropdown Menu -->
+          <!-- Dropdown Menu (John) side note: do we need daily/weekly/monthly? Or should we have a calendar that
+          drops down and lets you select the date? then it would automatically display/save information based on that.
+          Then you can access the schedule/radar/study/develop from the tabs section on that particular date chosen from the 
+          calendar. Let me know -->
           <ul id="dropDownItems" class="dropdown menu" data-dropdown-menu>
             <li class=""><a href="#">Daily</a>
               <!-- Submenu daily -->
@@ -108,12 +111,15 @@
       </article>
     </section>
 
-    <!--Big 3 Overview + Meetings Section-->
+    <!--Big 3 Overview(Tasks) + Meetings Section-->
     <!--Notes: plus icon is listening and modal pops up with input title, meeting or task selector, and time selector
         sign changes to an open circle for meeting (<i class="far fa-circle"></i>) drops into meetings tab and into specified time, 
             closed for task (<i class="fas fa-circle"></i>) drops into "big 3 section" and into time area -->
     <section id="tasks">
       <!-- Article tag below needs to be a card -->
+      <!-- (John) I don't think we need cards we can style lists?
+      on the list item in these, we could create a button dynamically with jQuery/JavaScript. That button could 
+      pull up the task modal and put all the info in to allow for edits. Let me know what you guys think.-->
       <article>
         <!-- Div below needs to be card body-->
         <div id="meetingsContainer">
@@ -134,6 +140,7 @@
       </article>
     </section>
 
+    <!--(JOhn) tabs section display for current day's schedule etc. -->
     <section class="grid-container">
       <article class="cell">
         <ul class="tabs" data-tabs id="example-tabs">
@@ -147,6 +154,7 @@
           <div class="tabs-panel is-active" id="panel1">
             <h3>Schedule</h3>
             <div>
+              <!-- schedule tasks content saved here from modal -->
               <ul>
               </ul>
             </div>
@@ -154,6 +162,7 @@
           <div class="tabs-panel" id="panel2">
             <h3>Radar Items</h3>
             <div>
+              <!-- Radar tasks content saved here from modal -->
               <ul>
               </ul>
             </div>
@@ -161,6 +170,7 @@
           <div class="tabs-panel" id="panel3">
             <h3>Study Materials</h3>
             <div>
+              <!-- Study modal content here -->
               <ul>
               </ul>
             </div>
@@ -168,12 +178,15 @@
           <div class="tabs-panel" id="panel4">
             <h3>Personal Development</h3>
             <div>
+              <!-- modal personal development content here -->
               <ul>
               </ul>
             </div>
           </div>
         </section>
       </article>
+      <!-- (John) Any modal item created needs to be saved to local storage with the Date & Time so that we can 
+      display the correct items on the requested day -->
       <!--Time block container-->
       <div class="timeblocks" id="day">
         <!--Notes: Script on time blocks starting from 5:00am - 10:00pm -->
@@ -183,6 +196,8 @@
     <!-- Notes Section-->
     <section id="notes">
       <!--Notes: TextArea on click allows you to insert text and saves text when you tap outside-->
+      <!-- (John) Should this be something else? If you click into it by accident, wouldn't it delete the content 
+      when you clicked out again? Also with all the different options, do we need a notes section at this stage? -->
       <article>
         <h3>Notes</h3>
         <textarea id="textarea"></textarea>
@@ -195,34 +210,41 @@
         above the footer tool bar at the bottom right of the page, 
         think of easy access to the right thumb
         Task Modal (from) pops up with title, type (meeting or task), and time selector -->
+      <!-- (john) I will make a sticky bar for this later -->
       <div id="addTaskHeading">
         <h2>
           Add Task
         </h2>
       </div>
-    </section>
-    <!-- Task Modal -->
-    <div class="grid-container">
-      <div class="cell">
-        <h2><a data-open="exampleModal1"><i class="fas fa-plus-circle"></i></a></h2>
-        <div class="reveal" id="exampleModal1" data-reveal>
-          <button id="modalTaskButton" class="modalButton">Task</button>
-          <button id="modalMeetingButton" class="modalButton">Meeting</button>
-          <button id="modalGratefulButton" class="modalButton">Grateful</button>
-          <button id="modalRadarButton" class="modalButton">Radar</button>
-          <button id="modalStudyButton" class="modalButton">Study</button>
-          <button id="modalDevelopButton" class="modalButton">Develop</button>
-          <textarea id="modalTextInput"></textarea>
-          <h3 class="lead">Title/Description</h3>
-          <div id="taskDate">Select the task's date from a calendar here.</div>
-          <div id="startTime">The start time will go in here.</div>
-          <div id="endTime">The end time will go in here.</div>
-          <button class="close-button" data-close aria-label="Close reveal" type="button">
-            <span aria-hidden="true">&times;</span>
-          </button>
+      <!-- Task Modal -->
+      <div class="grid-container">
+        <div class="cell">
+          <!-- button to activate modal -->
+          <h2><a data-open="exampleModal1"><i class="fas fa-plus-circle"></i></a></h2>
+          <div class="reveal" id="exampleModal1" data-reveal>
+            <!-- modal button options -->
+            <button id="modalTaskButton" class="modalButton">Task</button>
+            <button id="modalMeetingButton" class="modalButton">Meeting</button>
+            <button id="modalGratefulButton" class="modalButton">Grateful</button>
+            <button id="modalRadarButton" class="modalButton">Radar</button>
+            <button id="modalStudyButton" class="modalButton">Study</button>
+            <button id="modalDevelopButton" class="modalButton">Develop</button>
+            <!-- modal task input area -->
+            <textarea id="modalTextInput"></textarea>
+            <h3 class="lead">Title/Description</h3>
+            <!-- Create a date selection method -->
+            <div id="taskDate">Select the task's date from a calendar here.</div>
+            <!-- create time start selection method here -->
+            <div id="startTime">The start time will go in here.</div>
+            <!-- create end time selection method here -->
+            <div id="endTime">The end time will go in here.</div>
+            <button class="close-button" data-close aria-label="Close reveal" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   </main>
   <!--Footer Section-->
   <footer id="footer-toolbar">
