@@ -1,10 +1,13 @@
   $fontPrimary: 100%;
+
+  $font-familyQuote: 'Sacramento', cursive;
+  $font-familyMain: 'IBM Plex Serif', serif;
   
-  $colorPrimary: hsl(180,99%,36%);
+  $colorPrimary:hsl(230,100%,68%);
   /** color primary broken into hue saturation lightness **/
-  $colorPrimary-h: 180;
-  $colorPrimary-s: 99%;
-  $colorPrimary-l: 36%;
+  $colorPrimary-h: 230;
+  $colorPrimary-s: 100%;
+  $colorPrimary-l: 68%;
   $colorPrimary: hsl($colorPrimary-h, $colorPrimary-s, $colorPrimary-l);
   
   /** percentages to lighten and darken colors **/
@@ -70,20 +73,8 @@
   $colorSecondary-l);
 
 
- 
-
-/** responsive img in Foundation **/
-img {
-max-width: 100%;
-height: auto;
-}
-
-body {
-  font: $fontPrimary;
-  background-color: $colorSecondary;
-}
 header {
-  background-color: $colorSecondary--light;
+
 
   #navMenu {
     background-color: $colorSecondary--light;
@@ -92,16 +83,58 @@ header {
     background-color: $colorSecondary--light;
   }
 
-  .subMenuListItem > a:hover {
-    background-color: $colorSecondary--light;
-  }
-
   img {
     color: $colorSecondary;
+    max-width: 100%;
+    height: auto; 
+  }
+
+  #listHeadingDaily > a, 
+  #listHeadingWeekly > a, 
+  #listHeadingMonthly > a {
+    background-color: $colorSecondary--dark;
   }
 }
 
-#subMenuDaily, #subMenuWeekly, #subMenuMonthly, #example-tabs {
+body {
+  font: $fontPrimary;
+  font-family: $font-familyMain;
+  background-color: $colorSecondary;
+  color: $colorPrimary--dark;
+
+  a:hover {
+    background-color: $colorSecondary--light;
+  }
+}
+
+#quoteHeading{
+  font-size: 3rem;
+  background-color: $colorSecondary--dark;
+  color: $colorPrimary--dark;
+  font-weight: 500;
+}
+
+#quoteElement {
+  font-family: $font-familyQuote;
+  font-size: 4rem;
+  color: $colorSecondary--complement;
+}
+
+#panel1, #panel2, #panel3, #panel4 {
+  background-color: $colorSecondary--light;
+  color: $colorPrimary;
+}
+
+
+.modalToggle {
+  display: none;
+}
+
+#menuTitle {
+  margin: 1rem;
+}
+
+#subMenuContainer, #subMenuDaily, #subMenuWeekly, #subMenuMonthly, #example-tabs {
   background-color: $colorSecondary--dark;
 }
 
@@ -124,14 +157,29 @@ textarea {
 }
 
 #taskModal > textarea {
+  margin-top: 2rem;
   background-color: $colorSecondary--light;
 }
 
-#taskModal > .modalButton {
+#btnListOne > .modalButton, #btnListTwo > .modalButton {
   font-size: 2rem;
   background-color: $colorPrimary;
   border-color: $colorSecondary--dark;
   padding: .5rem;
   margin: .5rem;
   border-radius: .5rem;
+  width: 100%;
+}
+
+#taskModal > #saveTasksBtn {
+  font-size: 1.5rem;
+  background-color: $colorPrimary;
+  border-color: $colorSecondary--dark;
+  padding: 1rem;
+  margin-top: 2rem;
+  border-radius: .5rem;
+}
+
+#taskModal > #modalHeading {
+  text-align: center;
 }

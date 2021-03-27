@@ -12,34 +12,60 @@
 /** --colorSecondary--complement  **/
 /** --colorSecondary--triad1 **/
 /** --colorSecondary--triad2 **/
-/** responsive img in Foundation **/
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-body {
-  font: 100%;
-  background-color: #ffe45c;
-}
-
-header {
-  background-color: #fff5c2;
-}
 header #navMenu {
   background-color: #fff5c2;
 }
 header #dropDownItems {
   background-color: #fff5c2;
 }
-header .subMenuListItem > a:hover {
-  background-color: #fff5c2;
-}
 header img {
   color: #ffe45c;
+  max-width: 100%;
+  height: auto;
+}
+header #listHeadingDaily > a,
+header #listHeadingWeekly > a,
+header #listHeadingMonthly > a {
+  background-color: #f5cc00;
 }
 
-#subMenuDaily, #subMenuWeekly, #subMenuMonthly, #example-tabs {
+body {
+  font: 100%;
+  font-family: "IBM Plex Serif", serif;
+  background-color: #ffe45c;
+  color: #0029f5;
+}
+body a:hover {
+  background-color: #fff5c2;
+}
+
+#quoteHeading {
+  font-size: 3rem;
+  background-color: #f5cc00;
+  color: #0029f5;
+  font-weight: 500;
+}
+
+#quoteElement {
+  font-family: "Sacramento", cursive;
+  font-size: 4rem;
+  color: #5c77ff;
+}
+
+#panel1, #panel2, #panel3, #panel4 {
+  background-color: #fff5c2;
+  color: #5c77ff;
+}
+
+.modalToggle {
+  display: none;
+}
+
+#menuTitle {
+  margin: 1rem;
+}
+
+#subMenuContainer, #subMenuDaily, #subMenuWeekly, #subMenuMonthly, #example-tabs {
   background-color: #f5cc00;
 }
 
@@ -61,16 +87,31 @@ textarea {
 }
 
 #taskModal > textarea {
+  margin-top: 2rem;
   background-color: #fff5c2;
 }
 
-#taskModal > .modalButton {
+#btnListOne > .modalButton, #btnListTwo > .modalButton {
   font-size: 2rem;
-  background-color: #01b7b7;
+  background-color: #5c77ff;
   border-color: #f5cc00;
   padding: 0.5rem;
   margin: 0.5rem;
   border-radius: 0.5rem;
+  width: 100%;
+}
+
+#taskModal > #saveTasksBtn {
+  font-size: 1.5rem;
+  background-color: #5c77ff;
+  border-color: #f5cc00;
+  padding: 1rem;
+  margin-top: 2rem;
+  border-radius: 0.5rem;
+}
+
+#taskModal > #modalHeading {
+  text-align: center;
 }
 
 /*# sourceMappingURL=style.css.map */
