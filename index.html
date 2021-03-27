@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- Test comment -->
 
 <head>
   <meta charset="UTF-8" />
@@ -12,7 +13,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!--Google Fonts-->
-  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@300&family=Sacramento&display=swap"
+    rel="stylesheet">
   <!--Open Iconic Stylesheet-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic.min.css"
     integrity="sha512-LeCmts7kEi09nKc+DwGJqDV+dNQi/W8/qb0oUSsBLzTYiBwxj0KBlAow2//jV7jwEHwSCPShRN2+IWwWcn1x7Q=="
@@ -22,9 +26,12 @@
     integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
   <!--Style Sheets-->
   <link rel="stylesheet" href="./assets/css/style.css" />
-
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
   <title>Motivation Manager</title>
-  <link rel="shortcut icon" type="image/jpg" href="assets/images/bobcat-favicon.png" </head>
+  <link rel="shortcut icon" type="image/jpg" href="assets/images/bobcat-favicon.png" />
+  <script src="https://kit.fontawesome.com/2723252070.js" crossorigin="anonymous"></script>
+</head>
 
 <body class="grid-container">
   <!--Header-->
@@ -32,7 +39,7 @@
     <!--Navigation Bar is connected to Header (for styling purposes)-->
     <nav class="cell">
       <!-- This is for mobile responsive view in Foundation -->
-      <div class="title-bar" data-responsive-toggle="navMenu" data-hide-for="medium">
+      <div id="titleBar" class="title-bar" data-responsive-toggle="navMenu" data-hide-for="medium">
         <button class="menu-icon" type="button" data-toggle="navMenu"></button>
         <div class="title-bar-title">Menu</div>
       </div>
@@ -48,31 +55,35 @@
           Then you can access the schedule/radar/study/develop from the tabs section on that particular date chosen from the 
           calendar. Let me know -->
           <ul id="dropDownItems" class="dropdown menu" data-dropdown-menu>
-            <li class=""><a href="#">Daily</a>
-              <!-- Submenu daily -->
-              <ul id="subMenuDaily" class="menu">
-                <li class="subMenuListItem"><a href="#">Schedule</a></li>
-                <li class="subMenuListItem"><a href="#">Radar</a></li>
-                <li class="subMenuListItem"><a href="#">Study</a></li>
-                <li class="subMenuListItem"><a href="#">Develop</a></li>
-              </ul>
-            </li>
-            <!-- Submenu Weekly -->
-            <li><a href="#">Weekly</a>
-              <ul id="subMenuWeekly" class="menu">
-                <li class="subMenuListItem"><a href="#">Schedule</a></li>
-                <li class="subMenuListItem"><a href="#">Radar</a></li>
-                <li class="subMenuListItem"><a href="#">Study</a></li>
-                <li class="subMenuListItem"><a href="#">Develop</a></li>
-              </ul>
-            </li>
-            <!-- Submenu Monthly -->
-            <li><a href="#">Monthly</a>
-              <ul id="subMenuMonthly" class="menu">
-                <li class="subMenuListItem"><a href="#">Schedule</a></li>
-                <li class="subMenuListItem"><a href="#">Radar</a></li>
-                <li class="subMenuListItem"><a href="#">Study</a></li>
-                <li class="subMenuListItem"><a href="#">Develop</a></li>
+            <li><h2><i class="fad fa-compass"></i></h2>
+              <ul id="subMenuContainer" class="menu">
+                <li><a href="#">Daily</a>
+                  <!-- Submenu daily -->
+                  <ul id="subMenuDaily" class="menu">
+                    <li class="subMenuListItem"><a href="#">Schedule</a></li>
+                    <li class="subMenuListItem"><a href="#">Radar</a></li>
+                    <li class="subMenuListItem"><a href="#">Study</a></li>
+                    <li class="subMenuListItem"><a href="#">Develop</a></li>
+                  </ul>
+                </li>
+                <!-- Submenu Weekly -->
+                <li><a href="#">Weekly</a>
+                  <ul id="subMenuWeekly" class="menu">
+                    <li class="subMenuListItem"><a href="#">Schedule</a></li>
+                    <li class="subMenuListItem"><a href="#">Radar</a></li>
+                    <li class="subMenuListItem"><a href="#">Study</a></li>
+                    <li class="subMenuListItem"><a href="#">Develop</a></li>
+                  </ul>
+                </li>
+                <!-- Submenu Monthly -->
+                <li><a href="#">Monthly</a>
+                  <ul id="subMenuMonthly" class="menu">
+                    <li class="subMenuListItem"><a href="#">Schedule</a></li>
+                    <li class="subMenuListItem"><a href="#">Radar</a></li>
+                    <li class="subMenuListItem"><a href="#">Study</a></li>
+                    <li class="subMenuListItem"><a href="#">Develop</a></li>
+                  </ul>
+                </li>
               </ul>
             </li>
           </ul>
@@ -87,7 +98,7 @@
   <main>
     <!--Quote API Section-->
     <section id="quoteAPI">
-      <h3>Quote of the day</h3>
+      <h3 id="quoteHeading">Quote of the day</h3>
       <p id="quoteElement"></p>
     </section>
 
@@ -221,22 +232,40 @@
         <div class="cell">
           <!-- button to activate modal -->
           <h2><a data-open="taskModal"><i class="fas fa-plus-circle"></i></a></h2>
-          <div class="reveal grid-container" id="taskModal" data-reveal>
+          <div class="reveal grid-container fluid" id="taskModal" data-reveal data-tasktype="task">
             <!-- modal button options -->
-            <button id="modalTaskButton" class="cell modalButton">Task</button>
-            <button id="modalMeetingButton" class="cell modalButton">Meeting</button>
-            <button id="modalGratefulButton" class="cell modalButton">Grateful</button>
-            <button id="modalRadarButton" class="cell modalButton">Radar</button>
-            <button id="modalStudyButton" class="cell modalButton">Study</button>
-            <button id="modalDevelopButton" class="cell modalButton">Develop</button>
+            <div class="grid-x grid-margin-x grid-padding-x">
+              <h1 class="cell" id="modalHeading">What can we manage for you today?</h1>
+              <div id="btnListOne" class="grid-container full">
+                <button id="modalTaskButton" class="grid-x grid-margin-x grid-padding-x modalButton">Task</button>
+                <button id="modalMeetingButton" class="grid-x grid-margin-x grid-padding-x modalButton">Meeting</button>
+                <button id="modalGratefulButton"
+                  class="grid-x grid-margin-x grid-padding-x modalButton">Grateful</button>
+              </div>
+              <div id="btnListTwo" class="grid-container full">
+                <button id="modalRadarButton" class="grid-x grid-margin-x grid-padding-x modalButton">Radar</button>
+                <button id="modalStudyButton" class="grid-x grid-margin-x grid-padding-x modalButton">Study</button>
+                <button id="modalDevelopButton" class="grid-x grid-margin-x grid-padding-x modalButton">Develop</button>
+              </div>
+            </div>
             <!-- modal task input area -->
-            <textarea id="modalTextInput" placeholder="Title/Description"></textarea>
+            <textarea class="cell" id="modalTextInput" placeholder="Title/Description"></textarea>
             <!-- Create a date selection method -->
-            <div id="taskDate">Select the task's date from a calendar here.</div>
+            <div class="cell" id="taskDateContainer">
+              <label for="taskDate">Please choose a date</label>
+              <input type="date" id="taskDate" name="taskDate"></input>
+            </div>
             <!-- create time start selection method here -->
-            <div id="startTime">The start time will go in here.</div>
+            <div class="cell" id="startTimeContainer">
+              <label for="startTime">Start Time</label>
+              <input type="time" id="startTime" name="startTime">
+            </div>
             <!-- create end time selection method here -->
-            <div id="endTime">The end time will go in here.</div>
+            <div class="cell" id="endTimeContainer">
+              <label for="endTime">End Time</label>
+              <input type="time" id="endTime" name="endTime">
+            </div>
+            <button class="cell" id="saveTasksBtn">Save</button>
             <button class="close-button" data-close aria-label="Close reveal" type="button">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -255,6 +284,12 @@
   </footer>
   <!--jQuery-->
   <script src="./assets/js/jquery.min.js"></script>
+  <!-- jQuery UI CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <!-- Day.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/dayjs.min.js"
+    integrity="sha512-0fcCRl828lBlrSCa8QJY51mtNqTcHxabaXVLPgw/jPA5Nutujh6CbTdDgRzl9aSPYW/uuE7c4SffFUQFBAy6lg=="
+    crossorigin="anonymous"></script>
   <!--Foundation JavaScript CDN-->
   <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
     integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>

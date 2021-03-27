@@ -5,52 +5,84 @@ $(window).on('changed.zf.mediaquery', function () {
   $('.is-dropdown-submenu.invisible').removeClass('invisible');
 });
 
-// Casey's JS
-
 // Global Var
 let quoteArr = [];
+let tasksObj = {};
+
+// load tasks function
+const loadTasks = function() {
+  // !!! names are editable, key needs to be updated to true value
+  // add loaded tasks to tasksObj
+  tasksObj = JSON.parse(localStorage.getItem("tasksObj"))
+
+  // if tasksObj is empty/null after loading....
+  if (!tasksObj) {
+    tasksObj = {
+      radar: [],
+      daily: [],
+      grateful: [],
+      meetings: [],
+      develop: []
+    };
+  }
+  
+}
+
+const saveTasks = function () {
+  localStorage.setItems("tasksObj", JSON.stringify(tasksObj));
+}
+
+// function for user date using Day.js
+const currentDay = function () {
+  // declare var now = current time for user
+  let now = dayjs();
+  // change format for display
+  let displayNow = now.format('dddd, MMMM D').toString();
+  console.log(displayNow);
+}
+currentDay();
 
 
-// TODO
-// add modal function
-  // sort by start time
-  // 
-// function for time (unsure of desired outcome as of now)
-  // if approach time, color changes
 
-// function for quote fetch
-// NOT USING QUOTES.rest here....
+
+// !!!important!!! NOT USING QUOTES.rest here....
+// fetch to get quotes
 const getQuote = function() {
   // send fetch request
   fetch("https://type.fit/api/quotes")
-    //then if ok parse response
+    //then ....
     .then(function(response) {
-        if (response.ok) {
-          return response.json();
-        } else {
-            return;
-          }
+      // if response is ok  
+      if (response.ok) {
+        // return .json()-ified response
+        return response.json();
+    } else {
+        // Currently stop function...maybe add error display?
+        return;
+      }
     }).then(function(data) {
-        // run for loop 
+        // run for loop  
         for (let i = 0; i < 20; i++) {
           // randomQuote equals random value of data[index]
           let randomQuote = data[Math.floor(Math.random() * data.length)];
-          // push to quoteArr for cycling through quotes per session
+          // push to quoteArr for cycling through random quotes per session
           quoteArr.push(randomQuote);
         }
         quoteRefreshTimer();
     })
 }
 
+// Display quote randomly selected from quote Arr function()
 const displayQuote = function () {
-  console.log("started")
+  // for functionality check
+  console.log("started");
+  
   // find <p> by id
   let $quoteEl = $('#quoteElement');
-
   // Choose a random index from quoteArr
   let randomIndexQuote = quoteArr[Math.floor(Math.random() * quoteArr.length)];
 
-  // change quoteOfDayEl text value to 
+  // change quoteOfDayEl text value to value of quoteArr[randNum].properties 
   $quoteEl.html(randomIndexQuote.text + "<span> -" + randomIndexQuote.author + "</span>");
 }
 
@@ -60,54 +92,129 @@ const quoteRefreshTimer =  function() {
   displayQuote();
   // re-run displayQuote every 30 minutes to cycle through quotes
   setInterval(function() {
+    // call displayQuote
     displayQuote();
+    // every 30 minutes
   }, (1000 * 60) * 30);
 }
-// Commented out because index in this branch does not have day.js sourced
-// function for user date using Day.js
-// const currentDay = function () {
-// // declare var now = current time for user
-// let now = dayjs();
-// // change format for display
-// let displayNow = now.format('dddd, MMMM D').toString();
-// console.log(displayNow);
 
-// for hour... similar syntax for other time measurements: minutes, seconds 
-//var x = dayjs().get('hour')
-//}
-
-// TODO 
-// MAKE MODAL LOGIC
-const taskSelection = function(buttonClicked) {
-  // get clicked button's id
-  let buttonId = buttonClicked.getAttribute('id');
-  
-  // run switch-case to match id...
-  switch (buttonId) {
-    case 'modalTaskButton':
-      console.log(buttonId);
-      break;
-    case 'modalMeetingButton':
-      console.log(buttonId);
-      break;
-    case 'modalGratefulButton':
-      console.log(buttonId);
-      break;
-    case 'modalRadarButton':
-      console.log(buttonId);
-      break;
-    case 'modalStudyButton':
-      console.log(buttonId);
-      break;
-    case 'modalDevelopButton':
-      console.log(buttonId);
-      break;
-  }
- 
-}
-
+// Call getquote function on load
 getQuote();
 
+// create tasks from input
+const createTask = function(type, text, date, timeStart, timeEnd) {
+  // in case null values effect it
+  if (type === 'task' || type === 'meeting') {
+    //TODO
+    // Get info from all parameters
+  } else if (type === 'radar' || type === 'grateful') {
+    // Get only text and type
+  } else if (type === 'study') {
+    // get text and timeStart and timeEnd
+  } else if (type === 'develop') {
+    // get text and date
+  }
+}
+
+// event listener for buttons on modal
 $('#taskModal').on('click', 'button', function (event) {
-  taskSelection(event.target);
+  console.log(event.target);
+  // will send target to different modal function 
+  let btnId = event.target.getAttribute('id');
+  let $taskDateContainer = $('#taskDateContainer');
+  let $startTimeContainer = $('#startTimeContainer');
+  let $endTimeContainer = $('#endTimeContainer');
+  let $taskModal = $('#taskModal');
+  // change taskModal data-listtype to send to proper parent upon creation
+  switch (btnId) {
+    case "modalTaskButton": 
+      $taskModal.data('tasktype', 'task');
+      break;
+      case "modalRadarButton": 
+        $taskModal.data('tasktype', 'radar');
+        break;
+      case "modalGratefulButton": 
+        $taskModal.data('tasktype', 'grateful');
+        break;
+      case "modalDevelopButton": 
+        $taskModal.data('tasktype', 'develop');
+        break;
+      case "modalStudyButton": 
+        $taskModal.data('tasktype', 'study');
+        break;
+      case "modalMeetingButton": 
+        $taskModal.data('tasktype', 'meeting');
+        break;
+    }
+  // modal manipulation via target
+  // if button's id = task or meeting
+  if (btnId === "modalTaskButton" || btnId === "modalMeetingButton" ) {
+    // display original or recreate original
+    $taskDateContainer.removeClass("modalToggle");
+    $startTimeContainer.removeClass("modalToggle");
+    $endTimeContainer.removeClass("modalToggle");
+
+    // if button's Id = radar or grateful
+  } else if (btnId === "modalGratefulButton" || btnId === "modalRadarButton") {
+    // change modal to accept only text input
+    $taskDateContainer.addClass("modalToggle");
+    $startTimeContainer.addClass("modalToggle");
+    $endTimeContainer.addClass("modalToggle");
+  
+  
+  // if button id = study
+  } else if (btnId === "modalStudyButton") {
+    // change modal to accept text and time value only
+    $startTimeContainer.removeClass("modalToggle");
+    $endTimeContainer.removeClass("modalToggle");
+    $taskDateContainer.addClass("modalToggle");
+  
+  } else if (btnId === "modalDevelopButton") {
+    // change modal to accept only text and date choice
+    $startTimeContainer.addClass("modalToggle");
+    $endTimeContainer.addClass("modalToggle");
+    $taskDateContainer.removeClass("modalToggle");
+    
+
+  }
+})
+
+// when save btn is clicked in modal...
+$('#saveTasksBtn').on('click', function () {
+  // capture and cache input-text value
+  let inputText = $('#modalTextInput').val();
+  // log it for functionality check.
+  console.log(inputText);
+  // same with date input
+  let inputDate = $('#taskDate').val();
+  console.log(inputDate);
+  
+  let startTime = $('#startTime').val();
+  let endTime = $('#endTime').val();
+  console.log(endTime);
+  console.log(startTime);
+  let taskType = $('#taskModal').data('tasktype')
+  
+  
+  // CONSIDER SOME TYPE OF ALERT FOR INVALID INPUTS BASED ON TYPE REQUIREMENTS
+  // based on type, make null/undefined values = "" to pass
+  if (taskType === 'radar' || taskType === 'grateful') {
+    endTime = ""
+    startTime = "";
+    inputDate = "";
+  } else if (taskType === 'study') {
+    // get text and timeStart and timeEnd
+    inputDate = ""
+  } else if (taskType === 'develop') {
+    // get text and date
+    startTime = "";
+    endTime = "";
+
+  }
+  console.log(endTime);
+  console.log(startTime);
+  console.log(inputText);
+  console.log(inputDate);
+  console.log(taskType);
+  //createTask(taskType, inputText, inputDate, startTime, endTime)
 })

@@ -39,6 +39,10 @@ header img {
   color: #ffe45c;
 }
 
+#menuTitle {
+  background-color: #ffe45c;
+}
+
 #subMenuDaily, #subMenuWeekly, #subMenuMonthly, #example-tabs {
   background-color: #f5cc00;
 }
@@ -61,16 +65,35 @@ textarea {
 }
 
 #taskModal > textarea {
+  margin-top: 2rem;
   background-color: #fff5c2;
 }
 
-#taskModal > .modalButton {
+#btnListOne > .modalButton, #btnListTwo > .modalButton {
   font-size: 2rem;
   background-color: #01b7b7;
   border-color: #f5cc00;
   padding: 0.5rem;
   margin: 0.5rem;
   border-radius: 0.5rem;
+  width: 100%;
+}
+
+#taskModal > #saveTasksBtn {
+  font-size: 1.5rem;
+  background-color: #01b7b7;
+  border-color: #f5cc00;
+  padding: 1rem;
+  margin-top: 2rem;
+  border-radius: 0.5rem;
+}
+
+#taskModal > #modalHeading {
+  text-align: center;
+}
+
+.display-test-toggle {
+  display: none;
 }
 
 /*# sourceMappingURL=style.css.map */
