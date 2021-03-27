@@ -181,9 +181,9 @@ $('#saveTasksBtn').on('click', function () {
   let endTime = $('#endTime').val();
   console.log(endTime);
   console.log(startTime);
-
+  let taskType =$('#taskModal').data('tasktype')
   console.log($('#taskModal').data('tasktype'));
   // create task function call
-  //createTask()
+  //createTask($('#taskModal))
 })
 
