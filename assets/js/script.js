@@ -5,6 +5,7 @@ $(window).on('changed.zf.mediaquery', function () {
   $('.is-dropdown-submenu.invisible').removeClass('invisible');
 });
 
+
 // Global Var
 let quoteArr = [];
 let tasksObj = {};
