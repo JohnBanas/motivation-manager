@@ -5,6 +5,22 @@ $(window).on('changed.zf.mediaquery', function () {
   $('.is-dropdown-submenu.invisible').removeClass('invisible');
 });
 
+var cityNameEl = 'nashville'; // either grab input to register user city or figure out how to use GPS data
+
+var getWeatherData = function () {
+  // format "open weather map" api url
+  var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityNameEl + '&appid=882d7b151f3175e892df45d1e68ea9dd';
+
+
+  // make a request to the url
+  fetch(apiUrl).then(function (response) {
+    response.json().then(function (data) {
+      console.log(data);
+    });
+  });
+};
+
+getWeatherData();
 
 // Global Var
 let quoteArr = [];
