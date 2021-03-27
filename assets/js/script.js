@@ -5,6 +5,23 @@ $(window).on('changed.zf.mediaquery', function () {
   $('.is-dropdown-submenu.invisible').removeClass('invisible');
 });
 
+var cityNameEl = 'nashville'; // either grab input to register user city or figure out how to use GPS data
+
+var getWeatherData = function () {
+  // format "open weather map" api url
+  var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityNameEl + '&appid=882d7b151f3175e892df45d1e68ea9dd';
+
+
+  // make a request to the url
+  fetch(apiUrl).then(function (response) {
+    response.json().then(function (data) {
+      console.log(data);
+    });
+  });
+};
+
+getWeatherData();
+
 // Global Var
 let quoteArr = [];
 let tasksObj = {};
@@ -102,29 +119,17 @@ const quoteRefreshTimer =  function() {
 getQuote();
 
 // create tasks from input
-const createTask = function(type, text, date, timeStart, timeEnd) {
-  // in case null values effect it
-  if (type === 'task' || type === 'meeting') {
-    //TODO
-    // Get info from all parameters
-  } else if (type === 'radar' || type === 'grateful') {
-    // Get only text and type
-  } else if (type === 'study') {
-    // get text and timeStart and timeEnd
-  } else if (type === 'develop') {
-    // get text and date
-  }
-}
+// const createTask = function(modalId, text, date, time) {}
 
 // event listener for buttons on modal
 $('#taskModal').on('click', 'button', function (event) {
-  console.log(event.target);
   // will send target to different modal function 
   let btnId = event.target.getAttribute('id');
   let $taskDateContainer = $('#taskDateContainer');
   let $startTimeContainer = $('#startTimeContainer');
   let $endTimeContainer = $('#endTimeContainer');
   let $taskModal = $('#taskModal');
+
   // change taskModal data-listtype to send to proper parent upon creation
   switch (btnId) {
     case "modalTaskButton": 
@@ -193,28 +198,9 @@ $('#saveTasksBtn').on('click', function () {
   let endTime = $('#endTime').val();
   console.log(endTime);
   console.log(startTime);
-  let taskType = $('#taskModal').data('tasktype')
-  
-  
-  // CONSIDER SOME TYPE OF ALERT FOR INVALID INPUTS BASED ON TYPE REQUIREMENTS
-  // based on type, make null/undefined values = "" to pass
-  if (taskType === 'radar' || taskType === 'grateful') {
-    endTime = ""
-    startTime = "";
-    inputDate = "";
-  } else if (taskType === 'study') {
-    // get text and timeStart and timeEnd
-    inputDate = ""
-  } else if (taskType === 'develop') {
-    // get text and date
-    startTime = "";
-    endTime = "";
-
-  }
-  console.log(endTime);
-  console.log(startTime);
-  console.log(inputText);
-  console.log(inputDate);
-  console.log(taskType);
-  //createTask(taskType, inputText, inputDate, startTime, endTime)
+  let taskType =$('#taskModal').data('tasktype')
+  console.log($('#taskModal').data('tasktype'));
+  // create task function call
+  //createTask($('#taskModal))
 })
+

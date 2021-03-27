@@ -1,100 +1,80 @@
-$fontPrimary: 100%;
+  $fontPrimary: 100%;
 
-$font-familyQuote: 'Sacramento', cursive;
-$font-familyMain: 'IBM Plex Serif', serif;
+  $font-familyQuote: 'Sacramento', cursive;
+  $font-familyMain: 'IBM Plex Serif', serif;
+  
+  $colorPrimary:hsl(230,100%,68%);
+  /** color primary broken into hue saturation lightness **/
+  $colorPrimary-h: 230;
+  $colorPrimary-s: 100%;
+  $colorPrimary-l: 68%;
+  $colorPrimary: hsl($colorPrimary-h, $colorPrimary-s, $colorPrimary-l);
+  
+  /** percentages to lighten and darken colors **/
+  $lighten-percentage: 20%;
+  $darken-percentage: 20%;
 
-$colorPrimary:hsl(230,100%,68%);
-/** color primary broken into hue saturation lightness **/
-$colorPrimary-h: 230;
-$colorPrimary-s: 100%;
-$colorPrimary-l: 68%;
-$colorPrimary: hsl($colorPrimary-h, $colorPrimary-s, $colorPrimary-l);
+  /** color primary light --colorPrimary--light **/
+  $colorPrimary--light: hsl($colorPrimary-h, 
+  $colorPrimary-s, 
+  $colorPrimary-l + $lighten-percentage);
 
-/** percentages to lighten and darken colors **/
-$lighten-percentage: 20%;
-$darken-percentage: 20%;
+  /** --colorPrimary--dark **/
+  $colorPrimary--dark: hsl($colorPrimary-h, 
+  $colorPrimary-s, 
+  $colorPrimary-l - $darken-percentage);
 
-/** color primary light --colorPrimary--light **/
-$colorPrimary--light: hsl($colorPrimary-h, 
-$colorPrimary-s, 
-$colorPrimary-l + $lighten-percentage);
+  /** --colorPrimary--complement  **/
+  $colorPrimary--complement: hsl($colorPrimary-h + 180, 
+  $colorPrimary-s, 
+  $colorPrimary-l);
 
-/** --colorPrimary--dark **/
-$colorPrimary--dark: hsl($colorPrimary-h, 
-$colorPrimary-s, 
-$colorPrimary-l - $darken-percentage);
+  /** --colorPrimary--triad1 **/
+  $colorPrimary--triad1: hsl($colorPrimary-h + 120, 
+  $colorPrimary-s, 
+  $colorPrimary-l);
 
-/** --colorPrimary--complement  **/
-$colorPrimary--complement: hsl($colorPrimary-h + 180, 
-$colorPrimary-s, 
-$colorPrimary-l);
+  /** --colorPrimary--triad2 **/
+  $colorPrimary--triad2: hsl($colorPrimary-h + 240, 
+  $colorPrimary-s, 
+  $colorPrimary-l);
 
-/** --colorPrimary--triad1 **/
-$colorPrimary--triad1: hsl($colorPrimary-h + 120, 
-$colorPrimary-s, 
-$colorPrimary-l);
+  /** color secondary **/
+  $colorSecondary: hsl(50, 100%, 68%);
+  /** color secondary broken into hue saturation lightness **/
+  $colorSecondary-h: 50;
+  $colorSecondary-s: 100%;
+  $colorSecondary-l: 68%;
+  $colorSecondary: hsl($colorSecondary-h, $colorSecondary-s, $colorSecondary-l);
 
-/** --colorPrimary--triad2 **/
-$colorPrimary--triad2: hsl($colorPrimary-h + 240, 
-$colorPrimary-s, 
-$colorPrimary-l);
+  /** color secondary light --colorSecondary--light **/
+  $colorSecondary--light: hsl($colorSecondary-h, 
+  $colorSecondary-s, 
+  $colorSecondary-l + $lighten-percentage);
 
-/** color secondary **/
-$colorSecondary: hsl(50, 100%, 68%);
-/** color secondary broken into hue saturation lightness **/
-$colorSecondary-h: 50;
-$colorSecondary-s: 100%;
-$colorSecondary-l: 68%;
-$colorSecondary: hsl($colorSecondary-h, $colorSecondary-s, $colorSecondary-l);
+  /** --colorSecondary--dark **/
+  $colorSecondary--dark: hsl($colorSecondary-h, 
+  $colorSecondary-s, 
+  $colorSecondary-l - $darken-percentage);
 
-/** color secondary light --colorSecondary--light **/
-$colorSecondary--light: hsl($colorSecondary-h, 
-$colorSecondary-s, 
-$colorSecondary-l + $lighten-percentage);
+  /** --colorSecondary--complement  **/
+  $colorSecondary--complement: hsl($colorSecondary-h + 180, 
+  $colorSecondary-s, 
+  $colorSecondary-l);
 
-/** --colorSecondary--dark **/
-$colorSecondary--dark: hsl($colorSecondary-h, 
-$colorSecondary-s, 
-$colorSecondary-l - $darken-percentage);
+  /** --colorSecondary--triad1 **/
+  $colorSecondary--triad1: hsl($colorSecondary-h + 120, 
+  $colorSecondary-s, 
+  $colorSecondary-l);
 
-/** --colorSecondary--complement  **/
-$colorSecondary--complement: hsl($colorSecondary-h + 180, 
-$colorSecondary-s, 
-$colorSecondary-l);
-
-/** --colorSecondary--triad1 **/
-$colorSecondary--triad1: hsl($colorSecondary-h + 120, 
-$colorSecondary-s, 
-$colorSecondary-l);
-
-/** --colorSecondary--triad2 **/
-$colorSecondary--triad2: hsl($colorSecondary-h + 240, 
-$colorSecondary-s, 
-$colorSecondary-l);
+  /** --colorSecondary--triad2 **/
+  $colorSecondary--triad2: hsl($colorSecondary-h + 240, 
+  $colorSecondary-s, 
+  $colorSecondary-l);
 
 
 header {
-background-color: $colorSecondary--light;
 
-#navMenu {
-  background-color: $colorPrimary--triad2;
-}
-#dropDownItems{
-  background-color: $colorSecondary--dark;
-}
-
-img {
-  color: $colorSecondary;
-  max-width: 100%;
-  height: auto; 
-}
-}
-
-body {
-font: $fontPrimary;
-font-family: $font-familyMain;
-background-color: $colorSecondary;
-}
 
 #quoteHeading{
 font-size: 3rem;
@@ -109,17 +89,59 @@ font-size: 4rem;
 color: $colorSecondary--complement;
 }
 
+  img {
+    color: $colorSecondary;
+    max-width: 100%;
+    height: auto; 
+  }
+
+  #listHeadingDaily > a, 
+  #listHeadingWeekly > a, 
+  #listHeadingMonthly > a {
+    background-color: $colorSecondary--dark;
+  }
+}
+
+body {
+  font: $fontPrimary;
+  font-family: $font-familyMain;
+  background-color: $colorSecondary;
+  color: $colorPrimary--dark;
+
+  a:hover {
+    background-color: $colorSecondary--light;
+  }
+}
+
+#quoteHeading{
+  font-size: 3rem;
+  background-color: $colorSecondary--dark;
+  color: $colorPrimary--dark;
+  font-weight: 500;
+}
+
+#quoteElement {
+  font-family: $font-familyQuote;
+  font-size: 4rem;
+  color: $colorSecondary--complement;
+}
+
+#panel1, #panel2, #panel3, #panel4 {
+  background-color: $colorSecondary--light;
+  color: $colorPrimary;
+}
+
 
 .modalToggle {
-display: none;
+  display: none;
 }
 
 #menuTitle {
-margin: 1rem;
+  margin: 1rem;
 }
 
 #subMenuContainer, #subMenuDaily, #subMenuWeekly, #subMenuMonthly, #example-tabs {
-background-color: $colorSecondary--dark;
+  background-color: $colorSecondary--dark;
 }
 
 .tabs-title > a[aria-selected=true]{
@@ -141,29 +163,29 @@ background-color: $colorSecondary;
 }
 
 #taskModal > textarea {
-margin-top: 2rem;
-background-color: $colorSecondary--light;
+  margin-top: 2rem;
+  background-color: $colorSecondary--light;
 }
 
 #btnListOne > .modalButton, #btnListTwo > .modalButton {
-font-size: 2rem;
-background-color: $colorPrimary;
-border-color: $colorSecondary--dark;
-padding: .5rem;
-margin: .5rem;
-border-radius: .5rem;
-width: 100%;
+  font-size: 2rem;
+  background-color: $colorPrimary;
+  border-color: $colorSecondary--dark;
+  padding: .5rem;
+  margin: .5rem;
+  border-radius: .5rem;
+  width: 100%;
 }
 
 #taskModal > #saveTasksBtn {
-font-size: 1.5rem;
-background-color: $colorPrimary;
-border-color: $colorSecondary--dark;
-padding: 1rem;
-margin-top: 2rem;
-border-radius: .5rem;
+  font-size: 1.5rem;
+  background-color: $colorPrimary;
+  border-color: $colorSecondary--dark;
+  padding: 1rem;
+  margin-top: 2rem;
+  border-radius: .5rem;
 }
 
 #taskModal > #modalHeading {
-text-align: center;
+  text-align: center;
 }
