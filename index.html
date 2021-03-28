@@ -56,7 +56,7 @@
             <li><h2><!-- Bobcat Image -->
             <img class="align-center" src="assets/images/bobcat.png" alt="bobcat icon"></h2>
               <ul id="subMenuContainer" class="menu">
-                <li id="listHeadingDaily" class="subMenuListItem"><a href="#">Daily</a>
+                <li><a href="#">Daily</a>
                   <!-- Submenu daily -->
                   <ul id="subMenuDaily" class="menu">
                     <li class="subMenuListItem"><a href="#">Schedule</a></li>
@@ -66,7 +66,7 @@
                   </ul>
                 </li>
                 <!-- Submenu Weekly -->
-                <li id="listHeadingWeekly" class="subMenuListItem"><a href="#">Weekly</a>
+                <li><a href="#">Weekly</a>
                   <ul id="subMenuWeekly" class="menu">
                     <li class="subMenuListItem"><a href="#">Schedule</a></li>
                     <li class="subMenuListItem"><a href="#">Radar</a></li>
@@ -75,7 +75,7 @@
                   </ul>
                 </li>
                 <!-- Submenu Monthly -->
-                <li id="listHeadingMonthly" class="subMenuListItem"><a href="#">Monthly</a>
+                <li><a href="#">Monthly</a>
                   <ul id="subMenuMonthly" class="menu">
                     <li class="subMenuListItem"><a href="#">Schedule</a></li>
                     <li class="subMenuListItem"><a href="#">Radar</a></li>
@@ -115,7 +115,7 @@
       <article>
         <h3 id="gratefulThings">Things I Am Grateful For</h3>
         <div>
-          <ul id="gratefulListItems">
+          <ul id="gratefulList">
           </ul>
         </div>
       </article>
@@ -136,7 +136,7 @@
           <!--Card title-->
           <h3 id="myMeetings">Meetings</h3>
           <!--Notes: List needs to have open circle bullets-->
-          <ul>
+          <ul id="meetingList">
           </ul>
         </div>
         <!--Card Body-->
@@ -164,28 +164,28 @@
           <div class="tabs-panel is-active" id="panel1">
             <div>
               <!-- schedule tasks content saved here from modal -->
-              <ul>
+              <ul id="taskList">
               </ul>
             </div>
           </div>
           <div class="tabs-panel" id="panel2">
             <div>
               <!-- Radar tasks content saved here from modal -->
-              <ul>
+              <ul id="radarList">
               </ul>
             </div>
           </div>
           <div class="tabs-panel" id="panel3">
             <div>
               <!-- Study modal content here -->
-              <ul>
+              <ul id="studyList">
               </ul>
             </div>
           </div>
           <div class="tabs-panel" id="panel4">
             <div>
               <!-- modal personal development content here -->
-              <ul>
+              <ul id="developList">
               </ul>
             </div>
           </div>
@@ -292,7 +292,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/dayjs.min.js"
     integrity="sha512-0fcCRl828lBlrSCa8QJY51mtNqTcHxabaXVLPgw/jPA5Nutujh6CbTdDgRzl9aSPYW/uuE7c4SffFUQFBAy6lg=="
     crossorigin="anonymous"></script>
-  <!--Foundation JavaScript CDN-->
+      <!--Foundation JavaScript CDN-->
   <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
     integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
   <!--Font Awesome Script-->

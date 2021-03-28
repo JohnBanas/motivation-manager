@@ -76,12 +76,18 @@
 header {
 
 
-  #navMenu {
-    background-color: $colorSecondary--light;
-  }
-  #dropDownItems{
-    background-color: $colorSecondary--light;
-  }
+#quoteHeading{
+font-size: 3rem;
+background-color: $colorSecondary--dark;
+color: $colorPrimary--dark;
+font-weight: 500;
+}
+
+#quoteElement {
+font-family: $font-familyQuote;
+font-size: 4rem;
+color: $colorSecondary--complement;
+}
 
   img {
     color: $colorSecondary;
@@ -154,21 +160,21 @@ body {
 }
 
 .tabs-title > a[aria-selected=true]{
-  background-color: $colorSecondary--light;
-  border: none;
+background-color: $colorSecondary--light;
+border: none;
 }
 
 .tabs-title > a:hover {
-  background-color: $colorSecondary--light;
+background-color: $colorSecondary--light;
 }
 
 
 textarea {
-  background-color: $colorSecondary--light;
+background-color: $colorSecondary--light;
 }
 
 #taskModal {
-  background-color: $colorSecondary;
+background-color: $colorSecondary;
 }
 
 #taskModal > textarea {

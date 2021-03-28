@@ -124,7 +124,52 @@ const quoteRefreshTimer =  function() {
 getQuote();
 
 // create tasks from input
-// const createTask = function(modalId, text, date, time) {}
+const createTask = function(type, text, date, timeStart, timeEnd) {
+  console.log(type, text, date, timeEnd, timeStart);
+  let listItem = document.createElement("li");
+  let listContainer = document.querySelector("#" + type + "List")
+
+  // if (type === 'task' || type === 'meeting') {
+  //   $listItem.text(`[${timeStart} - ${timeEnd}]  ${text}`);
+  // } else if (type === 'radar' || type === 'grateful') {
+  //   $listItem.text(text)
+    
+  // } else if (type === 'study') {
+  //   // get text and timeStart and timeEnd
+  //   $listItem.text(`[${timeStart} - ${timeEnd}] ${text}`);
+
+  // } else if (type === 'develop') {
+  //   // get text and date
+  //   $listItem.text(`${text} To be complete by: ${date}`);
+  // }  
+    switch (type) {
+      case "task": 
+        listItem.textContent = "[" + timeStart + "-" + timeEnd + "] " + text;
+        break;
+        case "meeting": 
+          listItem.textContent = "[" + timeStart + "] " + text;
+          break;
+        case "grateful": 
+          listItem.textContent = text;
+          break;
+        case "study": 
+          listItem.textContent = "[" + timeStart + "] " + text;
+          break;
+        case "radar": 
+          listItem.textContent = text;
+          break;
+        case "develop": 
+          listItem.textContent = text + " To be completed by : " + date;
+          break;
+      }
+
+  console.log(listContainer);
+  console.log(listItem.value);
+  // append child list item to parent ul container
+  listContainer.appendChild(listItem);
+
+  
+}
 
 // event listener for buttons on modal
 $('#taskModal').on('click', 'button', function (event) {
@@ -191,21 +236,19 @@ $('#taskModal').on('click', 'button', function (event) {
 
 // when save btn is clicked in modal...
 $('#saveTasksBtn').on('click', function () {
+  console.log('click');
   // capture and cache input-text value
   let inputText = $('#modalTextInput').val();
-  // log it for functionality check.
-  console.log(inputText);
   // same with date input
   let inputDate = $('#taskDate').val();
-  console.log(inputDate);
-  
+  // start time data input
   let startTime = $('#startTime').val();
+  // end time data input
   let endTime = $('#endTime').val();
-  console.log(endTime);
-  console.log(startTime);
-  let taskType =$('#taskModal').data('tasktype')
-  console.log($('#taskModal').data('tasktype'));
+  // task type input
+  let taskType = $('#taskModal').data('tasktype')
+  
   // create task function call
-  //createTask($('#taskModal))
+  createTask(taskType, inputText, inputDate, startTime, endTime);
 })
 
