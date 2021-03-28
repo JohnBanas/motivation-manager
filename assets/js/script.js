@@ -55,9 +55,14 @@ const currentDay = function () {
   let now = dayjs();
   // change format for display
   let displayNow = now.format('dddd, MMMM D').toString();
+  //Display date next to quote
+  $('#dateDisplay').append(displayNow);
   console.log(displayNow);
 }
 currentDay();
+
+
+
 
 
 
