@@ -1,17 +1,6 @@
-/** color primary broken into hue saturation lightness **/
-/** percentages to lighten and darken colors **/
-/** color primary light --colorPrimary--light **/
-/** --colorPrimary--dark **/
-/** --colorPrimary--complement  **/
-/** --colorPrimary--triad1 **/
-/** --colorPrimary--triad2 **/
-/** color secondary **/
-/** color secondary broken into hue saturation lightness **/
-/** color secondary light --colorSecondary--light **/
-/** --colorSecondary--dark **/
-/** --colorSecondary--complement  **/
-/** --colorSecondary--triad1 **/
-/** --colorSecondary--triad2 **/
+
+
+/** header start **/
 header #navMenu {
   background-color: #fff5c2;
 }
@@ -29,6 +18,10 @@ header #listHeadingMonthly > a {
   background-color: #f5cc00;
 }
 
+/** header end **/
+
+/** body start **/
+
 body {
   font: 100%;
   font-family: "IBM Plex Serif", serif;
@@ -38,7 +31,9 @@ body {
 body a:hover {
   background-color: #fff5c2;
 }
+/** body end **/
 
+/** quote start **/
 #quoteAPI {
   margin-top: 2rem;
 }
@@ -57,10 +52,6 @@ body a:hover {
   font-weight: 500;
 }
 
-#plusIcon {
-  text-align: center;
-}
-
 #quoteElement {
   margin-top: 2rem;
   font-family: "Sacramento", cursive;
@@ -68,15 +59,20 @@ body a:hover {
   color: #5c77ff;
 }
 
+/** end quote **/
+
+/** weather **/
+#weatherContainer {
+  border: 0.1rem solid black;
+  border-radius: 0.5rem;
+}
+
+
+/** tabs for schedule section **/
 #panel1, #panel2, #panel3, #panel4 {
   background-color: #fff5c2;
   color: #5c77ff;
 }
-
-.modalToggle {
-  display: none;
-}
-
 #menuTitle {
   margin: 1rem;
 }
@@ -93,6 +89,18 @@ body a:hover {
 .tabs-title > a:hover {
   background-color: #fff5c2;
 }
+
+
+/** modal **/
+#plusIcon,
+.statement {
+  text-align: center;
+}
+
+.modalToggle {
+  display: none;
+}
+
 
 textarea {
   background-color: #fff5c2;
@@ -130,4 +138,9 @@ textarea {
   text-align: center;
 }
 
-/*# sourceMappingURL=style.css.map */
+/** Weather animations code from https://codemyui.com/animated-weather-icons-in-css/ 
+Code My UI in an article by Hima Vincent who based on 
+dribbble shot https://dribbble.com/shots/2097042-Widget-Weather by kylor **/
+
+
+

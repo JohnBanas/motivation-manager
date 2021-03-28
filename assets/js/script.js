@@ -1,26 +1,78 @@
 $(document).foundation();
 
+
 // Patch for a Bug in v6.3.1
 $(window).on('changed.zf.mediaquery', function () {
   $('.is-dropdown-submenu.invisible').removeClass('invisible');
 });
 
-var cityNameEl = 'nashville'; // either grab input to register user city or figure out how to use GPS data
 
-var getWeatherData = function () {
+let currentWeather;
+let cityNameEl = 'nashville'; // either grab input to register user city or figure out how to use GPS data
+
+getWeatherData = () => {
   // format "open weather map" api url
-  var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityNameEl + '&appid=882d7b151f3175e892df45d1e68ea9dd';
+  let apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityNameEl + '&appid=882d7b151f3175e892df45d1e68ea9dd';
 
-
+  
   // make a request to the url
   fetch(apiUrl).then(function (response) {
     response.json().then(function (data) {
-      console.log(data.weather[0].icon);
+      console.log(data.weather[0].icon)
+      let weatherIcon = data.weather[0].icon;
+      animatedIcon(weatherIcon);
     });
   });
 };
-
 getWeatherData();
+
+animatedIcon = (weatherIcon) => {
+  /* hide html elements */
+  $('#weatherContainer').hide();
+  $('#sunShower').hide();
+  $('.sunShowerStatement').hide();
+  $('#thunderStorm').hide();
+  $('.thunderStormStatement').hide();
+  $('#cloudy').hide();
+  $('.cloudyStatement').hide();
+  $('#snow').hide();
+  $('.snowStatement').hide();
+  $('#sunny').hide();
+  $('.sunnyStatement').hide();
+  $('#rainy').hide();
+  $('.rainyStatement').hide();
+  /*  */
+  if (weatherIcon === '10n' || weatherIcon === '10d' ||
+    weatherIcon === '09d' || weatherIcon === '90n') {
+    $('#weatherContainer').show();
+    $('#rainy').show();
+    $('.rainyStatement').show();
+    return;
+  } if (weatherIcon === '50d' || weatherIcon === '50n' ||
+    weatherIcon === '02n' || weatherIcon === '02d' || weatherIcon === '03n' ||
+    weatherIcon === '03d' || weatherIcon === '04n' || weatherIcon === '04d') {
+    $('#weatherContainer').show();
+    $('#cloudy').show();
+    $('.cloudyStatement').show();
+    return;
+  } if (weatherIcon === '01d' || weatherIcon === '01n') {
+    $('#weatherContainer').show();
+    $('#sunny').show();
+    $('.sunnyStatement').show();
+    return;
+  } if (weatherIcon === '13d' || weatherIcon === '13n') {
+    $('#weatherContainer').show();
+    $('#snow').show();
+    $('.snowStatement').show();
+    return;
+  } if (weatherIcon === '11d' || weatherIcon === '11n') {
+    $('#weatherContainer').show();
+    $('#thunderStorm').show();
+    $('.thunderStormStatement').show();
+    return;
+  }
+  
+}
 
 // Global Var
 let quoteArr = [];
@@ -60,12 +112,6 @@ const currentDay = function () {
   console.log(displayNow);
 }
 currentDay();
-
-
-
-
-
-
 
 // !!!important!!! NOT USING QUOTES.rest here....
 // fetch to get quotes
