@@ -2,20 +2,20 @@
 
 /** header start **/
 header #navMenu {
-  background-color: #fff5c2;
+  background-color: #fffbe6;
 }
 header #dropDownItems {
-  background-color: #fff5c2;
+  background-color: #fffbe6;
 }
 header img {
-  color: #ffe45c;
+  color: #faea9c;
   max-width: 100%;
   height: auto;
 }
 header #listHeadingDaily > a,
 header #listHeadingWeekly > a,
 header #listHeadingMonthly > a {
-  background-color: #f5cc00;
+  background-color: #faea9c;
 }
 
 /** header end **/
@@ -29,7 +29,7 @@ body {
   color: #ff9100;
 }
 body a:hover {
-  background-color: #fff5c2;
+  background-color: #fffbe6;
 }
 /** body end **/
 
@@ -80,16 +80,16 @@ body a:hover {
 }
 
 #subMenuContainer, #subMenuDaily, #subMenuWeekly, #subMenuMonthly, #example-tabs {
-  background-color: #f5cc00;
+  background-color: #faea9c;
 }
 
 .tabs-title > a[aria-selected=true] {
-  background-color: #fff5c2;
+  background-color: #fffbe6;
   border: none;
 }
 
 .tabs-title > a:hover {
-  background-color: #fff5c2;
+  background-color: #fffbe6;
 }
 
 
@@ -114,16 +114,16 @@ body a:hover {
 }
 
 textarea {
-  background-color: #fff5c2;
+  background-color: #fffbe6;
 }
 
 #taskModal {
-  background-color: #ffe45c;
+  background-color: #faea9c;
 }
 
 #taskModal > textarea {
   margin-top: 2rem;
-  background-color: #fff5c2;
+  background-color: #fffbe6;
 }
 
 #btnListOne > .modalButton, #btnListTwo > .modalButton {
