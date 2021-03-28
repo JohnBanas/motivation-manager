@@ -106,15 +106,30 @@ body {
     background-color: $colorSecondary--light;
   }
 }
+#quoteAPI {
+  margin-top: 2rem;
+}
 
-#quoteHeading{
-  font-size: 3rem;
+#quoteHeading, 
+#forecast, 
+#gratefulThings, 
+#myMeetings, 
+#mainTasks, 
+#myNotes,
+#addMyTask {
+  text-align: center;
+  font-size: 2rem;
   background-color: $colorSecondary--dark;
   color: $colorPrimary--dark;
   font-weight: 500;
 }
 
+#plusIcon {
+  text-align: center;
+}
+
 #quoteElement {
+  margin-top: 2rem;
   font-family: $font-familyQuote;
   font-size: 4rem;
   color: $colorSecondary--complement;

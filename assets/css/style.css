@@ -39,14 +39,30 @@ body a:hover {
   background-color: #fff5c2;
 }
 
-#quoteHeading {
-  font-size: 3rem;
+#quoteAPI {
+  margin-top: 2rem;
+}
+
+#quoteHeading,
+#forecast,
+#gratefulThings,
+#myMeetings,
+#mainTasks,
+#myNotes,
+#addMyTask {
+  text-align: center;
+  font-size: 2rem;
   background-color: #f5cc00;
   color: #0029f5;
   font-weight: 500;
 }
 
+#plusIcon {
+  text-align: center;
+}
+
 #quoteElement {
+  margin-top: 2rem;
   font-family: "Sacramento", cursive;
   font-size: 4rem;
   color: #5c77ff;

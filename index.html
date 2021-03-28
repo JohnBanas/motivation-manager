@@ -98,14 +98,14 @@
   <main>
     <!--Quote API Section-->
     <section id="quoteAPI">
-      <h3 id="quoteHeading">Quote of the day</h3>
+      <h3 id="quoteHeading">Quote of the day ~ <span id="dateDisplay"></span></h3>
       <p id="quoteElement"></p>
     </section>
 
     <!--Weather API Section-->
     <section id="weatherAPI">
       <article>
-        <h3>Daily Forecast</h3>
+        <h3 id="forecast">Daily Forecast</h3>
         <!--weather icon with tempurature, (that dynamically affects the page?) -->
         <div id="weatherContainer"></div>
       </article>
@@ -114,7 +114,7 @@
     <!-- Grateful Section-->
     <section id="grateful">
       <article>
-        <h3>Things I Am Grateful For</h3>
+        <h3 id="gratefulThings">Things I Am Grateful For</h3>
         <div>
           <ul id="gratefulListItems">
           </ul>
@@ -135,7 +135,7 @@
         <!-- Div below needs to be card body-->
         <div id="meetingsContainer">
           <!--Card title-->
-          <h3>Meetings</h3>
+          <h3 id="myMeetings">Meetings</h3>
           <!--Notes: List needs to have open circle bullets-->
           <ul>
           </ul>
@@ -143,7 +143,7 @@
         <!--Card Body-->
         <div>
           <!--Card title-->
-          <h3>Main Tasks</h3>
+          <h3 id="mainTasks">Main Tasks</h3>
           <!--Notes: List needs to have closed circle bullets when you click on task, you can edit-->
           <ul>
           </ul>
@@ -210,7 +210,7 @@
       <!-- (John) Should this be something else? If you click into it by accident, wouldn't it delete the content 
       when you clicked out again? Also with all the different options, do we need a notes section at this stage? -->
       <article>
-        <h3>Notes</h3>
+        <h3 id="myNotes">Notes</h3>
         <textarea id="textarea"></textarea>
       </article>
     </section>
@@ -223,7 +223,7 @@
         Task Modal (from) pops up with title, type (meeting or task), and time selector -->
       <!-- (john) I will make a sticky bar for this later -->
       <div id="addTaskHeading">
-        <h2>
+        <h2 id="addMyTask">
           Add Task
         </h2>
       </div>
@@ -231,7 +231,7 @@
       <div class="grid-container">
         <div class="cell">
           <!-- button to activate modal -->
-          <h2><a data-open="taskModal"><i class="fas fa-plus-circle"></i></a></h2>
+          <h2 id="plusIcon"><a data-open="taskModal"><i class="fas fa-plus-circle"></i></a></h2>
           <div class="reveal grid-container fluid" id="taskModal" data-reveal data-tasktype="task">
             <!-- modal button options -->
             <div class="grid-x grid-margin-x grid-padding-x">
@@ -264,6 +264,13 @@
             <div class="cell" id="endTimeContainer">
               <label for="endTime">End Time</label>
               <input type="time" id="endTime" name="endTime">
+            </div>
+            <h3>Would you like to add this to your MAIN tasks?</h3>
+            <div class="switch">
+              <input class="switch-input" id="mainTaskCheckbox" type="checkbox" name="mainTaskCheckbox">
+              <label class="switch-paddle" for="mainTaskCheckbox">
+                <span class="show-for-sr">Is this a main task?</span>
+              </label>
             </div>
             <button class="cell" id="saveTasksBtn">Save</button>
             <button class="close-button" data-close aria-label="Close reveal" type="button">
