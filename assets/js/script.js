@@ -26,6 +26,8 @@ getWeatherData = () => {
 };
 getWeatherData();
 
+//show animated icon with positive statement based on OpenWeather API icon
+
 animatedIcon = (weatherIcon) => {
   /* hide html elements */
   $('#weatherContainer').hide();

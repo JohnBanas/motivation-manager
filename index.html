@@ -54,35 +54,14 @@
           Then you can access the schedule/radar/study/develop from the tabs section on that particular date chosen from the 
           calendar. Let me know -->
           <ul id="dropDownItems" class="dropdown menu" data-dropdown-menu>
-            <li><h2><!-- Bobcat Image -->
-            <img class="align-center" src="assets/images/bobcat.png" alt="bobcat icon"></h2>
+            <li>
+              <h2>
+                <!-- Bobcat Image -->
+                <img class="align-center" src="assets/images/bobcat.png" alt="bobcat icon">
+              </h2>
               <ul id="subMenuContainer" class="menu">
-                <li><a href="#">Daily</a>
-                  <!-- Submenu daily -->
-                  <ul id="subMenuDaily" class="menu">
-                    <li class="subMenuListItem"><a href="#">Schedule</a></li>
-                    <li class="subMenuListItem"><a href="#">Radar</a></li>
-                    <li class="subMenuListItem"><a href="#">Study</a></li>
-                    <li class="subMenuListItem"><a href="#">Develop</a></li>
-                  </ul>
-                </li>
-                <!-- Submenu Weekly -->
-                <li><a href="#">Weekly</a>
-                  <ul id="subMenuWeekly" class="menu">
-                    <li class="subMenuListItem"><a href="#">Schedule</a></li>
-                    <li class="subMenuListItem"><a href="#">Radar</a></li>
-                    <li class="subMenuListItem"><a href="#">Study</a></li>
-                    <li class="subMenuListItem"><a href="#">Develop</a></li>
-                  </ul>
-                </li>
-                <!-- Submenu Monthly -->
-                <li><a href="#">Monthly</a>
-                  <ul id="subMenuMonthly" class="menu">
-                    <li class="subMenuListItem"><a href="#">Schedule</a></li>
-                    <li class="subMenuListItem"><a href="#">Radar</a></li>
-                    <li class="subMenuListItem"><a href="#">Study</a></li>
-                    <li class="subMenuListItem"><a href="#">Develop</a></li>
-                  </ul>
+                <li><label for="headerDate">What date would you like to manage?</label>
+                  <input type="date" id="headerDate" name="headerDate"></input>
                 </li>
               </ul>
             </li>
@@ -115,7 +94,7 @@
             </div>
             <div class="rain"></div>
           </div>
-          
+
           <div id="thunderStorm" class="icon thunder-storm">
             <div class="cloud"></div>
             <div class="lightning">
@@ -123,12 +102,12 @@
               <div class="bolt"></div>
             </div>
           </div>
-          
+
           <div id="cloudy" class="icon cloudy">
             <div class="cloud"></div>
             <div class="cloud"></div>
           </div>
-          
+
           <div id="snow" class="icon flurries">
             <div class="cloud"></div>
             <div class="snow">
@@ -136,13 +115,13 @@
               <div class="flake"></div>
             </div>
           </div>
-          
+
           <div id="sunny" class="icon sunny">
             <div class="sun">
               <div class="rays"></div>
             </div>
           </div>
-          
+
           <div id="rainy" class="icon rainy">
             <div class="cloud"></div>
             <div class="rain"></div>
@@ -331,8 +310,10 @@
       <br />
       Vanderbilt University, Owen Graduate School of Business and Engineering
     </p>
-    <p>Weather animations provided by: <a href="https://codemyui.com/animated-weather-icons-in-css/" target="_blank">Code My UI</a> by
-    Hima Vincent who based her code on <a href="https://dribbble.com/shots/2097042-Widget-Weather" target="_blank">Dribbble</a> by kylor</p>
+    <p>Weather animations provided by: <a href="https://codemyui.com/animated-weather-icons-in-css/"
+        target="_blank">Code My UI</a> by
+      Hima Vincent who based her code on <a href="https://dribbble.com/shots/2097042-Widget-Weather"
+        target="_blank">Dribbble</a> by kylor</p>
   </footer>
   <!--jQuery-->
   <script src="./assets/js/jquery.min.js"></script>
@@ -342,7 +323,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/dayjs.min.js"
     integrity="sha512-0fcCRl828lBlrSCa8QJY51mtNqTcHxabaXVLPgw/jPA5Nutujh6CbTdDgRzl9aSPYW/uuE7c4SffFUQFBAy6lg=="
     crossorigin="anonymous"></script>
-      <!--Foundation JavaScript CDN-->
+  <!--Foundation JavaScript CDN-->
   <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
     integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
   <!--Font Awesome Script-->
