@@ -25,6 +25,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
     integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
   <!--Style Sheets-->
+  <link rel="stylesheet" href="assets/css/weather-icon.css">
   <link rel="stylesheet" href="./assets/css/style.css" />
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
@@ -45,8 +46,6 @@
       </div>
       <!-- Responsive view and all Header content -->
       <div class="top-bar" id="navMenu">
-        <!-- Bobcat Image -->
-        <img class="align-center" src="assets/images/bobcat.png" alt="bobcat icon">
         <!-- Site title -->
         <h1>Motivation <span>Manager</span></h1>
         <div class="top-bar-right">
@@ -55,34 +54,14 @@
           Then you can access the schedule/radar/study/develop from the tabs section on that particular date chosen from the 
           calendar. Let me know -->
           <ul id="dropDownItems" class="dropdown menu" data-dropdown-menu>
-            <li><h2><i class="fad fa-compass"></i></h2>
+            <li>
+              <h2>
+                <!-- Bobcat Image -->
+                <img class="align-center" src="assets/images/bobcat.png" alt="bobcat icon">
+              </h2>
               <ul id="subMenuContainer" class="menu">
-                <li><a href="#">Daily</a>
-                  <!-- Submenu daily -->
-                  <ul id="subMenuDaily" class="menu">
-                    <li class="subMenuListItem"><a href="#">Schedule</a></li>
-                    <li class="subMenuListItem"><a href="#">Radar</a></li>
-                    <li class="subMenuListItem"><a href="#">Study</a></li>
-                    <li class="subMenuListItem"><a href="#">Develop</a></li>
-                  </ul>
-                </li>
-                <!-- Submenu Weekly -->
-                <li><a href="#">Weekly</a>
-                  <ul id="subMenuWeekly" class="menu">
-                    <li class="subMenuListItem"><a href="#">Schedule</a></li>
-                    <li class="subMenuListItem"><a href="#">Radar</a></li>
-                    <li class="subMenuListItem"><a href="#">Study</a></li>
-                    <li class="subMenuListItem"><a href="#">Develop</a></li>
-                  </ul>
-                </li>
-                <!-- Submenu Monthly -->
-                <li><a href="#">Monthly</a>
-                  <ul id="subMenuMonthly" class="menu">
-                    <li class="subMenuListItem"><a href="#">Schedule</a></li>
-                    <li class="subMenuListItem"><a href="#">Radar</a></li>
-                    <li class="subMenuListItem"><a href="#">Study</a></li>
-                    <li class="subMenuListItem"><a href="#">Develop</a></li>
-                  </ul>
+                <li><label for="headerDate">What date would you like to manage?</label>
+                  <input type="date" id="headerDate" name="headerDate"></input>
                 </li>
               </ul>
             </li>
@@ -106,8 +85,55 @@
     <section id="weatherAPI">
       <article>
         <h3 id="forecast">Daily Forecast</h3>
-        <!--weather icon with tempurature, (that dynamically affects the page?) -->
-        <div id="weatherContainer"></div>
+        <!--weather icon with temperature, (that dynamically affects the page?) -->
+        <div id="weatherContainer">
+          <div id="sunShower" class="icon sun-shower">
+            <div class="cloud"></div>
+            <div class="sun">
+              <div class="rays"></div>
+            </div>
+            <div class="rain"></div>
+          </div>
+
+          <div id="thunderStorm" class="icon thunder-storm">
+            <div class="cloud"></div>
+            <div class="lightning">
+              <div class="bolt"></div>
+              <div class="bolt"></div>
+            </div>
+          </div>
+
+          <div id="cloudy" class="icon cloudy">
+            <div class="cloud"></div>
+            <div class="cloud"></div>
+          </div>
+
+          <div id="snow" class="icon flurries">
+            <div class="cloud"></div>
+            <div class="snow">
+              <div class="flake"></div>
+              <div class="flake"></div>
+            </div>
+          </div>
+
+          <div id="sunny" class="icon sunny">
+            <div class="sun">
+              <div class="rays"></div>
+            </div>
+          </div>
+
+          <div id="rainy" class="icon rainy">
+            <div class="cloud"></div>
+            <div class="rain"></div>
+          </div>
+
+        </div>
+        <h3 class="statement sunShowerStatement">Scattered showers today, take an umbrella with you.</h3>
+        <h3 class="statement thunderStormStatement">Severe thunderstorms, stay inside and stay safe.</h3>
+        <h3 class="statement cloudyStatement">It's going to be cloudy, but you always brighten up my day!</h3>
+        <h3 class="statement snowStatement">Dress warm and wear good boots, it may snow today.</h3>
+        <h3 class="statement sunnyStatement">Perfect day to be outside, be sure to enjoy it.</h3>
+        <h3 class="statement rainyStatement">Rain expected today, maybe time to work on some indoor projects.</h3>
       </article>
     </section>
 
@@ -163,7 +189,6 @@
 
         <section class="tabs-content" data-tabs-content="example-tabs">
           <div class="tabs-panel is-active" id="panel1">
-            <h3>Schedule</h3>
             <div>
               <!-- schedule tasks content saved here from modal -->
               <ul id="taskList">
@@ -171,7 +196,6 @@
             </div>
           </div>
           <div class="tabs-panel" id="panel2">
-            <h3>Radar Items</h3>
             <div>
               <!-- Radar tasks content saved here from modal -->
               <ul id="radarList">
@@ -179,7 +203,6 @@
             </div>
           </div>
           <div class="tabs-panel" id="panel3">
-            <h3>Study Materials</h3>
             <div>
               <!-- Study modal content here -->
               <ul id="studyList">
@@ -187,7 +210,6 @@
             </div>
           </div>
           <div class="tabs-panel" id="panel4">
-            <h3>Personal Development</h3>
             <div>
               <!-- modal personal development content here -->
               <ul id="developList">
@@ -288,6 +310,10 @@
       <br />
       Vanderbilt University, Owen Graduate School of Business and Engineering
     </p>
+    <p>Weather animations provided by: <a href="https://codemyui.com/animated-weather-icons-in-css/"
+        target="_blank">Code My UI</a> by
+      Hima Vincent who based her code on <a href="https://dribbble.com/shots/2097042-Widget-Weather"
+        target="_blank">Dribbble</a> by kylor</p>
   </footer>
   <!--jQuery-->
   <script src="./assets/js/jquery.min.js"></script>
@@ -297,7 +323,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/dayjs.min.js"
     integrity="sha512-0fcCRl828lBlrSCa8QJY51mtNqTcHxabaXVLPgw/jPA5Nutujh6CbTdDgRzl9aSPYW/uuE7c4SffFUQFBAy6lg=="
     crossorigin="anonymous"></script>
-      <!--Foundation JavaScript CDN-->
+  <!--Foundation JavaScript CDN-->
   <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
     integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
   <!--Font Awesome Script-->
