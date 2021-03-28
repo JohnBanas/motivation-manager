@@ -124,7 +124,7 @@ const quoteRefreshTimer =  function() {
 getQuote();
 
 // create tasks from input
-const createTask = function(type, text, date, timeStart, timeEnd) {
+const createTask = function(type, text, date, timeStart, timeEnd, mainOnOrOff) {
   console.log(type, text, date, timeEnd, timeStart);
   let listItem = document.createElement("li");
   let listContainer = document.querySelector("#" + type + "List")
@@ -179,7 +179,7 @@ $('#taskModal').on('click', 'button', function (event) {
   let $startTimeContainer = $('#startTimeContainer');
   let $endTimeContainer = $('#endTimeContainer');
   let $taskModal = $('#taskModal');
-
+  
   // change taskModal data-listtype to send to proper parent upon creation
   switch (btnId) {
     case "modalTaskButton": 
@@ -234,6 +234,12 @@ $('#taskModal').on('click', 'button', function (event) {
   }
 })
 
+// EVENT HANDLER TO RESET INPUTS ON MODAL OPEN->REVEAL. DOESNT QUITE WORK.
+// $("#taskModal").on("open.zf.reveal", function() {
+//   debugger;
+//   $("#modalTaskInput, #taskDate, #endTime, #startTime").val("");
+//})
+
 // when save btn is clicked in modal...
 $('#saveTasksBtn').on('click', function () {
   console.log('click');
@@ -247,8 +253,10 @@ $('#saveTasksBtn').on('click', function () {
   let endTime = $('#endTime').val();
   // task type input
   let taskType = $('#taskModal').data('tasktype')
+  debugger;
+  let $mainTask = $('#mainTaskCheckbox').val();
   
   // create task function call
-  createTask(taskType, inputText, inputDate, startTime, endTime);
+  createTask(taskType, inputText, inputDate, startTime, endTime, $mainTask);
 })
 
