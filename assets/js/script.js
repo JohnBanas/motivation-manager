@@ -96,6 +96,8 @@ const loadTasks = function() {
       develop: []
     };
   }
+
+  $.each
   
 }
 
@@ -283,10 +285,17 @@ $('#taskModal').on('click', 'button', function (event) {
 })
 
 // EVENT HANDLER TO RESET INPUTS ON MODAL OPEN->REVEAL. DOESNT QUITE WORK.
-// $("#taskModal").on("open.zf.reveal", function() {
-//   debugger;
-//   $("#modalTaskInput, #taskDate, #endTime, #startTime").val("");
-//})
+$('#openBtn').on("click", function() {
+  console.log('clicked')
+  $("#modalTextInput").val("");
+  $('#taskDate').val("");
+  $('#startTime').val("");
+  $('#endTime').val("");
+  // Currently not working as desired
+  console.log($('#mainTaskCheckbox'));
+  // doesnt reset value to false
+  $('#mainTaskCheckbox').checked = false;
+})
 
 // when save btn is clicked in modal...
 $('#saveTasksBtn').on('click', function () {
@@ -301,8 +310,8 @@ $('#saveTasksBtn').on('click', function () {
   let endTime = $('#endTime').val();
   // task type input
   let taskType = $('#taskModal').data('tasktype')
-  debugger;
   let $mainTask = $('#mainTaskCheckbox').val();
+
   
   // create task function call
   createTask(taskType, inputText, inputDate, startTime, endTime, $mainTask);

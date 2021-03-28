@@ -253,7 +253,7 @@
       <div class="grid-container">
         <div class="cell">
           <!-- button to activate modal -->
-          <h2 id="plusIcon"><a data-open="taskModal"><i class="fas fa-plus-circle"></i></a></h2>
+          <h2 id="plusIcon"><a id="openBtn" data-open="taskModal"><i class="fas fa-plus-circle"></i></a></h2>
           <div class="reveal grid-container fluid" id="taskModal" data-reveal data-tasktype="task">
             <!-- modal button options -->
             <div class="grid-x grid-margin-x grid-padding-x">
@@ -294,7 +294,8 @@
                 <span class="show-for-sr">Is this a main task?</span>
               </label>
             </div>
-            <button class="cell" id="saveTasksBtn">Save</button>
+            <!-- ADD DATA-Close to save button to close modal on save -->
+            <button class="cell" id="saveTasksBtn" data-close>Save</button>
             <button class="close-button" data-close aria-label="Close reveal" type="button">
               <span aria-hidden="true">&times;</span>
             </button>
