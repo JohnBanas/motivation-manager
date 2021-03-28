@@ -109,6 +109,10 @@ body a:hover {
   background-color: #fff5c2;
 }
 
+.map {
+  height: 10rem;
+}
+
 textarea {
   background-color: #fff5c2;
 }

@@ -282,6 +282,13 @@ $('#taskModal').on('click', 'button', function (event) {
   }
 })
 
+
+//task meeting location
+
+
+
+
+
 // when save btn is clicked in modal...
 $('#saveTasksBtn').on('click', function () {
   console.log('click');
