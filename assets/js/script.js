@@ -80,14 +80,22 @@ animatedIcon = (weatherIcon) => {
 // Casey Code below. needs a lot of TLC
 
 // function for user date using Day.js
-const currentDay = function () {
+const currentDay = function (newDisplayNow) {
+  $('#dateDisplay').val('');
   // declare var now = current time for user
   let now = dayjs();
   // change format for display
   displayNow = now.format('dddd, MMMM D').toString();
   //Display date next to quote
-  $('#dateDisplay').append(displayNow);
-  console.log(displayNow)
+  if (newDisplayNow) {
+    $('#dateDisplay').append(newDisplayNow);
+    return;
+  } else 
+  if (displayNow) {
+    $('#dateDisplay').append(displayNow);
+    console.log(displayNow)
+  } 
+    
 }
 
 
@@ -155,7 +163,7 @@ let tasksArr = [];
 let now = dayjs();
 
 // load tasks function
-const loadTasks = function() {
+const loadTasks = function(newNow) {
 //   // !!! names are editable, key needs to be updated to true value
 //   // add loaded tasks to tasksObj
   newTasksObj = JSON.parse(localStorage.getItem("tasksArr"));
@@ -168,9 +176,9 @@ const loadTasks = function() {
 
   for (let i = 0; i < tasksArr.length; i++) {
     console.log(now.format("YYYY-MM-DD"));
-    if (tasksArr[i].date === now.format("YYYY-MM-DD")) {
+    if (tasksArr[i].date === newNow) {
       createTask(tasksArr[i].type, tasksArr[i].text, tasksArr[i].date, tasksArr[i].startTime, tasksArr[i].endTime,tasksArr[i].mainTask);
-    }
+    } 
   }
   
 }
@@ -221,8 +229,13 @@ const createTask = function(type, text, date, timeStart, timeEnd, mainOnOrOff) {
 
   
 }
+
+
 $('#headerDate').on('change', function (event) {
-  console.log(event.target.value);
+  let newNow = (event.target.value);
+  console.log(newNow);
+  loadTasks(newNow);
+  currentDay(newNow);
 })
 
 
@@ -313,7 +326,7 @@ $('#saveTasksBtn').on('click', function () {
   // task type input
   let taskType = $('#taskModal').data('tasktype')
   let mainTask = document.getElementById("mainTaskCheckbox").checked.toString();
-  console.log(mainTask);
+ 
 
   // push taskObj to correct list arr in tasksObj
   

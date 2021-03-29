@@ -80,16 +80,10 @@
 
   <!--Main-->
   <main>
-    <!--Quote API Section-->
-    <section id="quoteAPI">
-      <h3 id="quoteHeading">Quote of the day ~ <span id="dateDisplay"></span></h3>
-      <p id="quoteElement"></p>
-    </section>
-
     <!--Weather API Section-->
     <section id="weatherAPI">
       <article>
-        <h3 id="forecast">Daily Forecast</h3>
+        <h3 id="forecast">Daily Forecast ~ <span id="dateDisplay"></span></h3>
         <!--weather icon with temperature, (that dynamically affects the page?) -->
         <div id="weatherContainer">
           <div id="sunShower" class="icon sun-shower">
@@ -141,6 +135,13 @@
         <h3 class="statement rainyStatement">Rain expected today, maybe time to work on some indoor projects.</h3>
       </article>
     </section>
+
+    <!--Quote API Section-->
+    <section id="quoteAPI">
+      <h3 id="quoteHeading">Quote of the day</h3>
+      <p id="quoteElement"></p>
+    </section>
+
 
     <h3 id="dateManager">What date would you like to manage?</h3>
     <input type="date" id="headerDate" name="headerDate"></input>
