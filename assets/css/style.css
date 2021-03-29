@@ -149,9 +149,15 @@ textarea {
   text-align: center;
 }
 
-/** Weather animations code from https://codemyui.com/animated-weather-icons-in-css/ 
-Code My UI in an article by Hima Vincent who based on 
-dribbble shot https://dribbble.com/shots/2097042-Widget-Weather by kylor **/
+#mainTasksList {
+  background-color: #fffbe6;
+}
+
+ul {
+  list-style: none;
+  text-align: center;
+  font-size: 1.5rem;
+}
 
 
 

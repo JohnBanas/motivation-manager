@@ -46,7 +46,7 @@ animatedIcon = (weatherIcon) => {
   /*  */
   if (weatherIcon === '10n' || weatherIcon === '10d' ||
     // !!! JOHN, is 2nd icon supposed to be 09 or 90?
-    weatherIcon === '09d' || weatherIcon === '90n') {
+    weatherIcon === '09d' || weatherIcon === '09n') {
     $('#weatherContainer').show();
     $('#rainy').show();
     $('.rainyStatement').show();
@@ -167,6 +167,7 @@ const loadTasks = function() {
   }
 
   for (let i = 0; i < tasksArr.length; i++) {
+    console.log(tasksArr[i].date);
     if (tasksArr[i].date === now.format("YYYY-MM-DD")) {
       createTask(tasksArr[i].type, tasksArr[i].text, tasksArr[i].date, tasksArr[i].startTime, tasksArr[i].endTime,);
     }
@@ -180,9 +181,11 @@ const saveTasks = function () {
 
 // create tasks from input
 const createTask = function(type, text, date, timeStart, timeEnd, mainOnOrOff) {
-  console.log(type, text, date, timeEnd, timeStart);
+  console.log(type, text, date, timeEnd, timeStart, mainOnOrOff);
   let listItem = document.createElement("li");
+  
   let listContainer = document.querySelector("#" + type + "List")
+
  
 
     switch (type) {
@@ -204,7 +207,10 @@ const createTask = function(type, text, date, timeStart, timeEnd, mainOnOrOff) {
         case "develop": 
           listItem.textContent = text + " To be completed by : " + date;
           break;
-      }
+    }
+  if (mainOnOrOff === 'true') {
+    listContainer = document.querySelector("#mainTasksList")
+  }
   
   // append child list item to parent ul container
   listContainer.appendChild(listItem);
@@ -277,10 +283,11 @@ $('#openBtn').on("click", function() {
   $('#taskDate').val("");
   $('#startTime').val("");
   $('#endTime').val("");
-  // Currently not working as desired
-  console.log($('#mainTaskCheckbox'));
-  // doesnt reset value to false
-  $('#mainTaskCheckbox').checked = false;
+  // reset toggle value to false
+  uncheck = () => {
+    document.getElementById("mainTaskCheckbox").checked = false;
+  }
+  uncheck();
 })
 
 // when save btn is clicked in modal...
@@ -297,16 +304,17 @@ $('#saveTasksBtn').on('click', function () {
   let endTime = $('#endTime').val();
   // task type input
   let taskType = $('#taskModal').data('tasktype')
-  let $mainTask = $('#mainTaskCheckbox').val();
+  let mainTask = document.getElementById("mainTaskCheckbox").checked.toString();
+  console.log(mainTask);
 
   // push taskObj to correct list arr in tasksObj
   
-  let listObj = {type: taskType, text: inputText, startTime: startTime, endTime: endTime, date: inputDate,}
+  let listObj = {type: taskType, text: inputText, startTime: startTime, endTime: endTime, date: inputDate, mainTask: mainTask}
   tasksArr.push(listObj);
 
   saveTasks();
   // create task function call
-  createTask(taskType, inputText, inputDate, startTime, endTime, $mainTask);
+  createTask(taskType, inputText, inputDate, startTime, endTime, mainTask);
 })
 
 
