@@ -204,7 +204,7 @@
   left: 50%;
   margin: -1.025em 0 0 -1.0125em;
   color: #fff5c2;
-  list-height: 1em;
+  line-height: 1em;
   opacity: 0.2;
   animation: spin 8s linear infinite reverse;
 }
