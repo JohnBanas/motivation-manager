@@ -24,7 +24,7 @@ getWeatherData = () => {
     });
   });
 };
-getWeatherData();
+
 
 //show animated icon with positive statement based on OpenWeather API icon
 
@@ -45,6 +45,7 @@ animatedIcon = (weatherIcon) => {
   $('.rainyStatement').hide();
   /*  */
   if (weatherIcon === '10n' || weatherIcon === '10d' ||
+    // !!! JOHN, is 2nd icon supposed to be 09 or 90?
     weatherIcon === '09d' || weatherIcon === '90n') {
     $('#weatherContainer').show();
     $('#rainy').show();
@@ -76,46 +77,19 @@ animatedIcon = (weatherIcon) => {
   
 }
 
-// Global Var
-let quoteArr = [];
-let tasksObj = {};
-
-// load tasks function
-const loadTasks = function() {
-  // !!! names are editable, key needs to be updated to true value
-  // add loaded tasks to tasksObj
-  tasksObj = JSON.parse(localStorage.getItem("tasksObj"))
-
-  // if tasksObj is empty/null after loading....
-  if (!tasksObj) {
-    tasksObj = {
-      radar: [],
-      daily: [],
-      grateful: [],
-      meetings: [],
-      develop: []
-    };
-  }
-
-  $.each
-  
-}
-
-const saveTasks = function () {
-  localStorage.setItems("tasksObj", JSON.stringify(tasksObj));
-}
+// Casey Code below. needs a lot of TLC
 
 // function for user date using Day.js
 const currentDay = function () {
   // declare var now = current time for user
   let now = dayjs();
   // change format for display
-  let displayNow = now.format('dddd, MMMM D').toString();
+  displayNow = now.format('dddd, MMMM D').toString();
   //Display date next to quote
   $('#dateDisplay').append(displayNow);
-  console.log(displayNow);
+  console.log(displayNow)
 }
-currentDay();
+
 
 // !!!important!!! NOT USING QUOTES.rest here....
 // fetch to get quotes
@@ -148,12 +122,10 @@ const getQuote = function() {
 const displayQuote = function () {
   // for functionality check
   console.log("started");
-  
   // find <p> by id
   let $quoteEl = $('#quoteElement');
   // Choose a random index from quoteArr
   let randomIndexQuote = quoteArr[Math.floor(Math.random() * quoteArr.length)];
-
   // change quoteOfDayEl text value to value of quoteArr[randNum].properties 
   $quoteEl.html(randomIndexQuote.text + "<span> -" + randomIndexQuote.author + "</span>");
 }
@@ -170,30 +142,51 @@ const quoteRefreshTimer =  function() {
   }, (1000 * 60) * 30);
 }
 
-// Call getquote function on load
-getQuote();
+
+
+
+// LIST CREATION WITH SAVE AND LOAD BELOW
+// TODO FIGURE OUT HOW TO SAVE!
+
+
+// Global Var
+let quoteArr = [];
+let tasksArr = [];
+let now = dayjs();
+
+// load tasks function
+const loadTasks = function() {
+//   // !!! names are editable, key needs to be updated to true value
+//   // add loaded tasks to tasksObj
+  newTasksObj = JSON.parse(localStorage.getItem("tasksArr"));
+  
+  if (newTasksObj) {
+    tasksArr = newTasksObj;
+  } else {
+    return;
+  }
+
+  for (let i = 0; i < tasksArr.length; i++) {
+    if (tasksArr[i].date === now.format("YYYY-MM-DD")) {
+      createTask(tasksArr[i].type, tasksArr[i].text, tasksArr[i].date, tasksArr[i].startTime, tasksArr[i].endTime,);
+    }
+  }
+  
+}
+
+const saveTasks = function () {
+  localStorage.setItem("tasksArr", JSON.stringify(tasksArr));
+}
 
 // create tasks from input
 const createTask = function(type, text, date, timeStart, timeEnd, mainOnOrOff) {
   console.log(type, text, date, timeEnd, timeStart);
   let listItem = document.createElement("li");
   let listContainer = document.querySelector("#" + type + "List")
+ 
 
-  // if (type === 'task' || type === 'meeting') {
-  //   $listItem.text(`[${timeStart} - ${timeEnd}]  ${text}`);
-  // } else if (type === 'radar' || type === 'grateful') {
-  //   $listItem.text(text)
-    
-  // } else if (type === 'study') {
-  //   // get text and timeStart and timeEnd
-  //   $listItem.text(`[${timeStart} - ${timeEnd}] ${text}`);
-
-  // } else if (type === 'develop') {
-  //   // get text and date
-  //   $listItem.text(`${text} To be complete by: ${date}`);
-  // }  
     switch (type) {
-      case "task": 
+      case "task":
         listItem.textContent = "[" + timeStart + "-" + timeEnd + "] " + text;
         break;
         case "meeting": 
@@ -212,9 +205,7 @@ const createTask = function(type, text, date, timeStart, timeEnd, mainOnOrOff) {
           listItem.textContent = text + " To be completed by : " + date;
           break;
       }
-
-  console.log(listContainer);
-  console.log(listItem.value);
+  
   // append child list item to parent ul container
   listContainer.appendChild(listItem);
 
@@ -255,14 +246,13 @@ $('#taskModal').on('click', 'button', function (event) {
   // if button's id = task or meeting
   if (btnId === "modalTaskButton" || btnId === "modalMeetingButton" ) {
     // display original or recreate original
-    $taskDateContainer.removeClass("modalToggle");
+  
     $startTimeContainer.removeClass("modalToggle");
     $endTimeContainer.removeClass("modalToggle");
 
     // if button's Id = radar or grateful
   } else if (btnId === "modalGratefulButton" || btnId === "modalRadarButton") {
     // change modal to accept only text input
-    $taskDateContainer.addClass("modalToggle");
     $startTimeContainer.addClass("modalToggle");
     $endTimeContainer.addClass("modalToggle");
   
@@ -272,21 +262,17 @@ $('#taskModal').on('click', 'button', function (event) {
     // change modal to accept text and time value only
     $startTimeContainer.removeClass("modalToggle");
     $endTimeContainer.removeClass("modalToggle");
-    $taskDateContainer.addClass("modalToggle");
   
   } else if (btnId === "modalDevelopButton") {
     // change modal to accept only text and date choice
     $startTimeContainer.addClass("modalToggle");
     $endTimeContainer.addClass("modalToggle");
-    $taskDateContainer.removeClass("modalToggle");
     
-
   }
 })
 
 // EVENT HANDLER TO RESET INPUTS ON MODAL OPEN->REVEAL. DOESNT QUITE WORK.
 $('#openBtn').on("click", function() {
-  console.log('clicked')
   $("#modalTextInput").val("");
   $('#taskDate').val("");
   $('#startTime').val("");
@@ -304,6 +290,7 @@ $('#saveTasksBtn').on('click', function () {
   let inputText = $('#modalTextInput').val();
   // same with date input
   let inputDate = $('#taskDate').val();
+  console.log(inputDate);
   // start time data input
   let startTime = $('#startTime').val();
   // end time data input
@@ -312,8 +299,19 @@ $('#saveTasksBtn').on('click', function () {
   let taskType = $('#taskModal').data('tasktype')
   let $mainTask = $('#mainTaskCheckbox').val();
 
+  // push taskObj to correct list arr in tasksObj
   
+  let listObj = {type: taskType, text: inputText, startTime: startTime, endTime: endTime, date: inputDate,}
+  tasksArr.push(listObj);
+
+  saveTasks();
   // create task function call
   createTask(taskType, inputText, inputDate, startTime, endTime, $mainTask);
 })
 
+
+
+//getQuote();
+loadTasks();
+// currentDay();
+// getWeatherData();
