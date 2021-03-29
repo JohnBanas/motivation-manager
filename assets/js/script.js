@@ -167,9 +167,9 @@ const loadTasks = function() {
   }
 
   for (let i = 0; i < tasksArr.length; i++) {
-    console.log(tasksArr[i].date);
+    console.log(now.format("YYYY-MM-DD"));
     if (tasksArr[i].date === now.format("YYYY-MM-DD")) {
-      createTask(tasksArr[i].type, tasksArr[i].text, tasksArr[i].date, tasksArr[i].startTime, tasksArr[i].endTime,);
+      createTask(tasksArr[i].type, tasksArr[i].text, tasksArr[i].date, tasksArr[i].startTime, tasksArr[i].endTime,tasksArr[i].mainTask);
     }
   }
   
@@ -182,9 +182,10 @@ const saveTasks = function () {
 // create tasks from input
 const createTask = function(type, text, date, timeStart, timeEnd, mainOnOrOff) {
   console.log(type, text, date, timeEnd, timeStart, mainOnOrOff);
-  let listItem = document.createElement("li");
+  if (date === now.format("YYYY-MM-DD")) {
+    let listItem = document.createElement("li");
   
-  let listContainer = document.querySelector("#" + type + "List")
+    let listContainer = document.querySelector("#" + type + "List")
 
  
 
@@ -192,31 +193,38 @@ const createTask = function(type, text, date, timeStart, timeEnd, mainOnOrOff) {
       case "task":
         listItem.textContent = "[" + timeStart + "-" + timeEnd + "] " + text;
         break;
-        case "meeting": 
-          listItem.textContent = "[" + timeStart + "] " + text;
-          break;
-        case "grateful": 
-          listItem.textContent = text;
-          break;
-        case "study": 
-          listItem.textContent = "[" + timeStart + "] " + text;
-          break;
-        case "radar": 
-          listItem.textContent = text;
-          break;
-        case "develop": 
-          listItem.textContent = text + " To be completed by : " + date;
-          break;
+      case "meeting":
+        listItem.textContent = "[" + timeStart + "] " + text;
+        break;
+      case "grateful":
+        listItem.textContent = text;
+        break;
+      case "study":
+        listItem.textContent = "[" + timeStart + "] " + text;
+        break;
+      case "radar":
+        listItem.textContent = text;
+        break;
+      case "develop":
+        listItem.textContent = text + " To be completed by : " + date;
+        break;
     }
-  if (mainOnOrOff === 'true') {
-    listContainer = document.querySelector("#mainTasksList")
-  }
+    if (mainOnOrOff === 'true') {
+      listContainer = document.querySelector("#mainTasksList")
+    }
   
-  // append child list item to parent ul container
-  listContainer.appendChild(listItem);
+    // append child list item to parent ul container
+    listContainer.appendChild(listItem);
+  } else {
+    return;
+  }
 
   
 }
+$('#headerDate').on('change', function (event) {
+  console.log(event.target.value);
+})
+
 
 // event listener for buttons on modal
 $('#taskModal').on('click', 'button', function (event) {

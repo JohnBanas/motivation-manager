@@ -38,6 +38,7 @@ body a:hover {
   margin-top: 2rem;
 }
 
+#dateManager,
 #quoteHeading,
 #forecast,
 #gratefulThings,
@@ -71,7 +72,7 @@ body a:hover {
 
 
 /** tabs for schedule section **/
-#panel1, #panel2, #panel3, #panel4 {
+#headerDate, #panel1, #panel2, #panel3, #panel4 {
   background-color: #fff5c2;
   color: #ffb453;
 }
