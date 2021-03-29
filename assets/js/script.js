@@ -311,7 +311,7 @@ $('#saveTasksBtn').on('click', function () {
 
 
 
-//getQuote();
+getQuote();
 loadTasks();
-// currentDay();
-// getWeatherData();
+currentDay();
+getWeatherData();
