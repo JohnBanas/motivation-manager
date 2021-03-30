@@ -44,8 +44,7 @@ body a:hover {
 #gratefulThings,
 #myMeetings,
 #mainTasks,
-#myNotes,
-#addMyTask {
+#myNotes {
   text-align: center;
   font-size: 2rem;
   background-color: #f5cc00;
@@ -99,6 +98,21 @@ body a:hover {
 
 
 /** modal **/
+
+#addMyTask {
+  background-color: #ffb453;
+  color: #fff5c2;
+  padding: 1.5rem;
+  border-radius: .5rem;
+}
+
+#addMyTask:hover {
+  cursor: pointer;
+  box-shadow: 0 0.4rem 1.4rem 0 rgba(255, 180, 83, 0.616);
+  transform: translateY(-0.1rem);
+  transition: transform 150ms;
+}
+
 #plusIcon,
 .statement {
   text-align: center;
@@ -135,26 +149,44 @@ textarea {
   font-size: 2rem;
   background-color: #ffb453;
   border-color: #f5cc00;
+  color: #fffbe6;
   padding: 0.5rem;
   margin: 0.5rem;
   border-radius: 0.5rem;
   width: 100%;
 }
 
+#btnListOne > .modalButton:hover, #btnListTwo > .modalButton:hover {
+  cursor: pointer;
+  box-shadow: 0 0.4rem 1.4rem 0 rgba(255, 180, 83, 0.616);
+  transform: translateY(-0.1rem);
+  transition: transform 150ms;
+} 
+
 #taskModal > #saveTasksBtn {
   font-size: 1.5rem;
   background-color: #ffb453;
   border-color: #f5cc00;
+  color: #fffbe6;
   padding: 1rem;
   margin-top: 2rem;
   border-radius: 0.5rem;
+}
+
+#taskModal > #saveTasksBtn:hover {
+  cursor: pointer;
+  box-shadow: 0 0.4rem 1.4rem 0 rgba(255, 180, 83, 0.616);
+  transform: translateY(-0.1rem);
+  transition: transform 150ms;
 }
 
 #taskModal > #modalHeading {
   text-align: center;
 }
 
-#mainTasksList {
+#mainTasksList,
+#gratefulList,
+#meetingList {
   background-color: #fffbe6;
 }
 

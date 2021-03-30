@@ -84,9 +84,9 @@ $('#headerDate').on('change', function (event) {
   $('#taskList').empty();
   $('#meetingList').empty();
   $('#gratefulList').empty();
-  $('#study').empty();
-  $('#radar').empty();
-  $('#develop').empty();
+  $('#studyList').empty();
+  $('#radarList').empty();
+  $('#developList').empty();
   $('#mainTasksList').empty();
   loadTasks(newNow);
 })
@@ -325,6 +325,8 @@ $('#saveTasksBtn').on('click', function () {
   // create task function call
   createTask(taskType, inputText, inputDate, startTime, endTime, mainTask);
 })
+
+//notes save on blur next(John)
 
 
 
