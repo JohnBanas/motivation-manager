@@ -70,6 +70,10 @@ body a:hover {
   border-radius: 0.5rem;
 }
 
+#headerDate {
+  font-size: 1.5rem;
+}
+
 
 /** tabs for schedule section **/
 #headerDate, #panel1, #panel2, #panel3, #panel4 {

@@ -78,26 +78,28 @@ animatedIcon = (weatherIcon) => {
 }
 
 // Casey Code below. needs a lot of TLC
-
 // function for user date using Day.js
-const currentDay = function (newDisplayNow) {
-  $('#dateDisplay').val('');
+$('#headerDate').on('change', function (event) {
+  let newNow = event.target.value;
+  $('#taskList').empty();
+  $('#meetingList').empty();
+  $('#gratefulList').empty();
+  $('#study').empty();
+  $('#radar').empty();
+  $('#develop').empty();
+  $('#mainTasksList').empty();
+  loadTasks(newNow);
+})
+
+const currentDay = function () {
   // declare var now = current time for user
   let now = dayjs();
   // change format for display
-  displayNow = now.format('dddd, MMMM D').toString();
-  //Display date next to quote
-  if (newDisplayNow) {
-    $('#dateDisplay').append(newDisplayNow);
-    return;
-  } else 
-  if (displayNow) {
+  displayNow = now.format('MM/DD/YYYY').toString();
+  
     $('#dateDisplay').append(displayNow);
-    console.log(displayNow)
-  } 
-    
+    console.log(displayNow)   
 }
-
 
 // !!!important!!! NOT USING QUOTES.rest here....
 // fetch to get quotes
@@ -150,12 +152,8 @@ const quoteRefreshTimer =  function() {
   }, (1000 * 60) * 30);
 }
 
-
-
-
 // LIST CREATION WITH SAVE AND LOAD BELOW
 // TODO FIGURE OUT HOW TO SAVE!
-
 
 // Global Var
 let quoteArr = [];
@@ -173,11 +171,10 @@ const loadTasks = function(newNow) {
   } else {
     return;
   }
-
+  console.log(newNow)
   for (let i = 0; i < tasksArr.length; i++) {
-    console.log(now.format("YYYY-MM-DD"));
     if (tasksArr[i].date === newNow) {
-      createTask(tasksArr[i].type, tasksArr[i].text, tasksArr[i].date, tasksArr[i].startTime, tasksArr[i].endTime,tasksArr[i].mainTask);
+      createTask(tasksArr[i].type, tasksArr[i].text, tasksArr[i].date, tasksArr[i].startTime, tasksArr[i].endTime,tasksArr[i].mainTask, newNow);
     } 
   }
   
@@ -188,9 +185,9 @@ const saveTasks = function () {
 }
 
 // create tasks from input
-const createTask = function(type, text, date, timeStart, timeEnd, mainOnOrOff) {
+const createTask = function(type, text, date, timeStart, timeEnd, mainOnOrOff, newNow) {
   console.log(type, text, date, timeEnd, timeStart, mainOnOrOff);
-  if (date === now.format("YYYY-MM-DD")) {
+  if (date === now.format("YYYY-MM-DD") || date === newNow) {
     let listItem = document.createElement("li");
   
     let listContainer = document.querySelector("#" + type + "List")
@@ -229,15 +226,6 @@ const createTask = function(type, text, date, timeStart, timeEnd, mainOnOrOff) {
 
   
 }
-
-
-$('#headerDate').on('change', function (event) {
-  let newNow = (event.target.value);
-  console.log(newNow);
-  loadTasks(newNow);
-  currentDay(newNow);
-})
-
 
 // event listener for buttons on modal
 $('#taskModal').on('click', 'button', function (event) {
