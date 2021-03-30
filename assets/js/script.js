@@ -185,6 +185,7 @@ const saveTasks = function () {
 }
 
 // create tasks from input
+//(john comment) we need to add delete/edit buttons here later
 const createTask = function(type, text, date, timeStart, timeEnd, mainOnOrOff, newNow) {
   console.log(type, text, date, timeEnd, timeStart, mainOnOrOff);
   if (date === now.format("YYYY-MM-DD") || date === newNow) {
@@ -299,6 +300,7 @@ $('#openBtn').on("click", function() {
   uncheck();
 })
 
+//(john comment) we need to make sure we don't allow saving empty tasks
 // when save btn is clicked in modal...
 $('#saveTasksBtn').on('click', function () {
   console.log('click');
@@ -326,7 +328,8 @@ $('#saveTasksBtn').on('click', function () {
   createTask(taskType, inputText, inputDate, startTime, endTime, mainTask);
 })
 
-//notes save on blur next(John)
+//notes save on blur next with date as the key (John comment)
+//meeting location directions if there is time
 
 
 
