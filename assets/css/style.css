@@ -158,7 +158,7 @@ textarea {
   font-size: 2rem;
   background-color: var(--mainYellow);
   border-color: #f5cc00;
-  color: #fffbe6;
+  color: var(--teal);
   padding: 0.5rem;
   margin: 0.5rem;
   border-radius: 0.5rem;
