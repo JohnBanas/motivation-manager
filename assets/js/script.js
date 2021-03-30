@@ -90,16 +90,22 @@ $('#headerDate').on('change', function (event) {
   $('#mainTasksList').empty();
   $('#textarea').val('');
   loadTasks(newNow);
+  currentDay(newNow);
 })
 
-const currentDay = function () {
+const currentDay = function (newNow) {
+  $('#dateDisplay').empty();
   // declare var now = current time for user
-  let now = dayjs();
-  // change format for display
-  displayNow = now.format('MM/DD/YYYY').toString();
-  
+  if (newNow) {
+    $('#dateDisplay').append(newNow);
+  } else {
+    let now = dayjs();
+
+    // change format for display
+    displayNow = now.format('YYYY/MM/DD').toString();
+
     $('#dateDisplay').append(displayNow);
-    console.log(displayNow)   
+  }
 }
 
 // !!!important!!! NOT USING QUOTES.rest here....
@@ -162,7 +168,7 @@ let tasksArr = [];
 let now = dayjs();
 let notes;
 // load tasks function
-const loadTasks = function(newNow) {
+const loadTasks = function(newNow, loadNewNotes) {
 //   // !!! names are editable, key needs to be updated to true value
 //   // add loaded tasks to tasksObj
   newTasksObj = JSON.parse(localStorage.getItem("tasksArr"));
@@ -174,9 +180,12 @@ const loadTasks = function(newNow) {
   }
   console.log(newNow)
   for (let i = 0; i < tasksArr.length; i++) {
-    if (tasksArr[i].date === newNow) {
+    if (tasksArr[i].date === newNow && !loadNewNotes) {
       createTask(tasksArr[i].type, tasksArr[i].text, tasksArr[i].date, tasksArr[i].startTime, tasksArr[i].endTime,tasksArr[i].mainTask, newNow, tasksArr[i].notes);
-    } 
+    }
+    if (loadNewNotes && tasksArr[i].date === newNow) {
+      createTask(tasksArr[i].type, tasksArr[i].text, tasksArr[i].date, tasksArr[i].startTime, tasksArr[i].endTime, tasksArr[i].mainTask, newNow, loadNewNotes);
+    }
   }
   
 }
@@ -227,11 +236,8 @@ const createTask = function(type, text, date, timeStart, timeEnd, mainOnOrOff, n
 }
 
 //notes save on blur next with date as the key (John comment)
-$('#textarea').on('blur', function (event) {
-  notes = event.target.value;
-
-
-})
+ 
+  
 
 // event listener for buttons on modal
 $('#taskModal').on('click', 'button', function (event) {
@@ -292,7 +298,7 @@ $('#taskModal').on('click', 'button', function (event) {
   }
 })
 
-// EVENT HANDLER TO RESET INPUTS ON MODAL OPEN->REVEAL. DOESNT QUITE WORK.
+// EVENT HANDLER TO RESET INPUTS ON MODAL OPEN->REVEAL. 
 $('#openBtn').on("click", function() {
   $("#modalTextInput").val("");
   $('#taskDate').val("");
@@ -321,7 +327,7 @@ $('#saveTasksBtn').on('click', function () {
   // task type input
   let taskType = $('#taskModal').data('tasktype')
   let mainTask = document.getElementById("mainTaskCheckbox").checked.toString();
-  let savedNotes = notes;
+  let savedNotes = $('textarea').val();
 
   // push taskObj to correct list arr in tasksObj
   
@@ -333,7 +339,20 @@ $('#saveTasksBtn').on('click', function () {
   createTask(taskType, inputText, inputDate, startTime, endTime, mainTask, savedNotes);
 })
 
+$('#textarea').on('change', function (event) {
+  newNotes = event.target.value;
+  /*newTasksObj = JSON.parse(localStorage.getItem("tasksArr"));
 
+  if (newTasksObj) {
+    tasksArr = newTasksObj;
+  } else {
+    return;
+  }
+  //need to change the saved notes to the new notes?
+  for (let i = 0; i < tasksArr.length; i++)
+    tasksArr[i].notes = newNotes;*/
+  
+})
 
 //meeting location directions if there is time
 
