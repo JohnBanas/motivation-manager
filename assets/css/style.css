@@ -1,3 +1,12 @@
+/* color pallet */
+:root {
+  --lightYellow: #fffbe6;
+  --mainYellow: #faea9c;
+  --orange: #ff9100;
+  --teal: #2596be;
+}
+
+
 
 
 /** header start **/
@@ -25,7 +34,7 @@ header #listHeadingMonthly > a {
 body {
   font: 100%;
   font-family: "IBM Plex Serif", serif;
-  background-color: #ffe45c;
+  background-color: var(--lightYellow);
   color: #ff9100;
 }
 body a:hover {
@@ -47,8 +56,8 @@ body a:hover {
 #myNotes {
   text-align: center;
   font-size: 2rem;
-  background-color: #f5cc00;
-  color: #ff9100;
+  background-color: var(--mainYellow);
+  color: var(--orange);
   font-weight: 500;
   margin-top: 3rem;
   padding: 1rem;
@@ -58,7 +67,7 @@ body a:hover {
   margin-top: 2rem;
   font-family: "Sacramento", cursive;
   font-size: 4rem;
-  color: #ff9100;
+  color: var(--orange);
 }
 
 /** end quote **/
@@ -77,7 +86,7 @@ body a:hover {
 /** tabs for schedule section **/
 #headerDate, #panel1, #panel2, #panel3, #panel4 {
   background-color: #fff5c2;
-  color: #ffb453;
+  color: var(--mainYellow);
 }
 #menuTitle {
   margin: 1rem;
@@ -147,7 +156,7 @@ textarea {
 
 #btnListOne > .modalButton, #btnListTwo > .modalButton {
   font-size: 2rem;
-  background-color: #ffb453;
+  background-color: var(--mainYellow);
   border-color: #f5cc00;
   color: #fffbe6;
   padding: 0.5rem;
