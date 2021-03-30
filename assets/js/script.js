@@ -88,6 +88,7 @@ $('#headerDate').on('change', function (event) {
   $('#radarList').empty();
   $('#developList').empty();
   $('#mainTasksList').empty();
+  $('#textarea').val('');
   loadTasks(newNow);
 })
 
@@ -159,7 +160,7 @@ const quoteRefreshTimer =  function() {
 let quoteArr = [];
 let tasksArr = [];
 let now = dayjs();
-
+let notes;
 // load tasks function
 const loadTasks = function(newNow) {
 //   // !!! names are editable, key needs to be updated to true value
@@ -174,7 +175,7 @@ const loadTasks = function(newNow) {
   console.log(newNow)
   for (let i = 0; i < tasksArr.length; i++) {
     if (tasksArr[i].date === newNow) {
-      createTask(tasksArr[i].type, tasksArr[i].text, tasksArr[i].date, tasksArr[i].startTime, tasksArr[i].endTime,tasksArr[i].mainTask, newNow);
+      createTask(tasksArr[i].type, tasksArr[i].text, tasksArr[i].date, tasksArr[i].startTime, tasksArr[i].endTime,tasksArr[i].mainTask, newNow, tasksArr[i].notes);
     } 
   }
   
@@ -186,15 +187,12 @@ const saveTasks = function () {
 
 // create tasks from input
 //(john comment) we need to add delete/edit buttons here later
-const createTask = function(type, text, date, timeStart, timeEnd, mainOnOrOff, newNow) {
-  console.log(type, text, date, timeEnd, timeStart, mainOnOrOff);
+const createTask = function(type, text, date, timeStart, timeEnd, mainOnOrOff, newNow, savedNotes) {
+  console.log(type, text, date, timeEnd, timeStart, mainOnOrOff, newNow, savedNotes);
   if (date === now.format("YYYY-MM-DD") || date === newNow) {
     let listItem = document.createElement("li");
-  
-    let listContainer = document.querySelector("#" + type + "List")
-
- 
-
+    let listContainer = document.querySelector("#" + type + "List");
+    
     switch (type) {
       case "task":
         listItem.textContent = "[" + timeStart + "-" + timeEnd + "] " + text;
@@ -216,17 +214,24 @@ const createTask = function(type, text, date, timeStart, timeEnd, mainOnOrOff, n
         break;
     }
     if (mainOnOrOff === 'true') {
-      listContainer = document.querySelector("#mainTasksList")
+      listContainer = document.querySelector("#mainTasksList");
     }
-  
-    // append child list item to parent ul container
+    if (savedNotes) {
+      $('#textarea').val(savedNotes);
+    }
+    
     listContainer.appendChild(listItem);
   } else {
     return;
   }
-
-  
 }
+
+//notes save on blur next with date as the key (John comment)
+$('#textarea').on('blur', function (event) {
+  notes = event.target.value;
+
+
+})
 
 // event listener for buttons on modal
 $('#taskModal').on('click', 'button', function (event) {
@@ -316,19 +321,20 @@ $('#saveTasksBtn').on('click', function () {
   // task type input
   let taskType = $('#taskModal').data('tasktype')
   let mainTask = document.getElementById("mainTaskCheckbox").checked.toString();
- 
+  let savedNotes = notes;
 
   // push taskObj to correct list arr in tasksObj
   
-  let listObj = {type: taskType, text: inputText, startTime: startTime, endTime: endTime, date: inputDate, mainTask: mainTask}
+  let listObj = { type: taskType, text: inputText, startTime: startTime, endTime: endTime, date: inputDate, mainTask: mainTask, notes: savedNotes };
   tasksArr.push(listObj);
 
   saveTasks();
   // create task function call
-  createTask(taskType, inputText, inputDate, startTime, endTime, mainTask);
+  createTask(taskType, inputText, inputDate, startTime, endTime, mainTask, savedNotes);
 })
 
-//notes save on blur next with date as the key (John comment)
+
+
 //meeting location directions if there is time
 
 

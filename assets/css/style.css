@@ -86,7 +86,7 @@ body a:hover {
 /** tabs for schedule section **/
 #headerDate, #panel1, #panel2, #panel3, #panel4 {
   background-color: #fff5c2;
-  color: var(--mainYellow);
+  color: var(--teal);
 }
 #menuTitle {
   margin: 1rem;
@@ -112,7 +112,7 @@ body a:hover {
   background-color: #ffb453;
   color: #fff5c2;
   padding: 1.5rem;
-  border-radius: .5rem;
+  border-radius: 1rem;
 }
 
 #addMyTask:hover {
@@ -143,6 +143,7 @@ body a:hover {
 
 textarea {
   background-color: #fffbe6;
+  color: var(--teal);
 }
 
 #taskModal {
@@ -203,6 +204,7 @@ ul {
   list-style: none;
   text-align: center;
   font-size: 1.5rem;
+  color: var(--teal);
 }
 
 
