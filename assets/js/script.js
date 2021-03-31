@@ -2,7 +2,7 @@
 let quoteArr = [];
 let tasksArr = [];
 // current date on load
-let now = dayjs().format('YYYY/MM/DD');
+let now = dayjs().format('YYYY-MM-DD');
 
 
 $(document).foundation();
@@ -414,31 +414,40 @@ $('#saveTasksBtn').on('click', function () {
   }
 })
 
+// const checkNotes = function () {
+//   if(tasksArr.some(object => object.type === "notes") && tasksArr.some(object => object.date === now)) {
+//     for (let i = 0; i < tasksArr.length; i++) {
+//       if (tasksArr[i].type === "notes" && tasksArr[i].date === now) {
+//         taskArr[i].notes = notes;
+//       }
+//     }
+
+//    } else {
+//      let notesObj = {type: noteType, notes: notes, date: now};
+//      tasksArr.push(notesObj);
+//    }
+// }
+
 // notes event handler
 // SAMPLE CHANGE for text area
-$('#textarea').on('change', function (event) {
+$('#textarea').on('blur', function (event) {
   let notes = event.target.value;
   let noteType = "notes"
   
   
-  // loop through taskArr
-  for (let i = 0; i < tasksArr.length; i++) {
-    // check task type for "notes" and if date = chosenDate
-    
-    // if type = noteType or "notes" and date = now
-    if (tasksArr[i].type === noteType && tasksArr[i].date === now) {
-      // change value of object to current 'notes' value
-      tasksArr[i].notes = notes;
-    } else {
-      
-      // create new taskObj
-      let notesObj = {type: noteType, notes: notes, date: now}
-      // send(push) it to taskArr
-      tasksArr.push(notesObj);
+  if(tasksArr.some(object => object.type === "notes") && tasksArr.some(object => object.date === now)) {
+    for (let i = 0; i < tasksArr.length; i++) {
+      if (tasksArr[i].type === "notes" && tasksArr[i].date === now) {
+        tasksArr[i].notes = notes;
+      }
     }
-  }
-  //if(tasksArr.some(object => object.type === "notes")) 
-  // saveTasks on event no matter what
+
+   } else {
+     let notesObj = {type: noteType, notes: notes, date: now};
+     tasksArr.push(notesObj);
+   }
+
+ 
   saveTasks();
 }) 
 
