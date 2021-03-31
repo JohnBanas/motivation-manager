@@ -1,4 +1,6 @@
 // Global Var
+let listID;
+let previousStart = 0;
 let quoteArr = [];
 let tasksArr = [];
 // current date on load
@@ -25,7 +27,6 @@ getWeatherData = () => {
   // make a request to the url
   fetch(apiUrl).then(function (response) {
     response.json().then(function (data) {
-      console.log(data.weather[0].icon)
       let weatherIcon = data.weather[0].icon;
       animatedIcon(weatherIcon);
     });
@@ -194,7 +195,6 @@ const loadTasks = function () {
   } else {
     return;
   }
-
   for (let i = 0; i < tasksArr.length; i++) {
     if (tasksArr[i].date === now) {
       //createTask(tasksArr[i].type, tasksArr[i].text, tasksArr[i].date, tasksArr[i].startTime, tasksArr[i].endTime, tasksArr[i].mainTask, tasksArr[i].notes)
@@ -209,24 +209,20 @@ const saveTasks = function () {
   localStorage.setItem("tasksArr", JSON.stringify(tasksArr));
 }
 
-
-let previousStart = 0;
 // create function, object = object with data entries
 //(john comment) we need to add delete/edit buttons here later
 const createTask = function (object) {
-  console.log(object);
   // if date = now
   //if (object.date === now)  {
   //commented this out as it has an effect on the modal display
   let start = parseInt(object.startTime);
-  console.log(start);
-  
+
   let listItem = document.createElement("li");
-  
+  $(listItem).attr({ id: 'x' + object.id });
   let listContainer = document.querySelector("#" + object.type + "List");
   
   let mainListContainer = document.querySelector('#mainTasksList');
-  
+
   if (object.type !== "notes") {
     switch (object.type) {
       case "task":
@@ -256,12 +252,12 @@ const createTask = function (object) {
     } else {
       listContainer.appendChild(listItem);
     }
-    
+
   }
-  /*if (object.mainTask === 'true') {
-    let mainItem = $('.listItem').cloneNode(true);
-    mainListContainer.appendChild(mainItem);
-  }*/
+  if (object.mainTask === 'true') {
+    console.log($('#mainTasksList'));
+    $(`#x` + object.id).clone().appendTo('#mainTasksList');
+  }
 
   // if type is notes
   if (object.notes) {
@@ -348,11 +344,16 @@ $('#openBtn').on("click", function () {
 // when save btn is clicked in modal...
 $('#saveTasksBtn').on('click', function () {
 
+  let checkId = JSON.parse(localStorage.getItem("tasksArr"));
+  if (checkId) {
+    listID++;
+  } else {
+    listID = 0;
+  }
   // capture and cache input-text value
   let inputText = $('#modalTextInput').val();
   // same with date input
   let inputDate = $('#taskDate').val();
-  console.log(inputDate);
   // start time data input
   let startTime = $('#startTime').val();
   // end time data input
@@ -371,7 +372,7 @@ $('#saveTasksBtn').on('click', function () {
   } else {
     // Only save and create tasks if inputText and inputDate has values
     // consolidate all data into object
-    let listObj = { type: taskType, text: inputText, startTime: startTime, endTime: endTime, date: inputDate, mainTask: mainTask };
+    let listObj = { type: taskType, text: inputText, startTime: startTime, endTime: endTime, date: inputDate, mainTask: mainTask, id:listID };
     // push listObj to tasksArr
     tasksArr.push(listObj);
 
@@ -390,7 +391,6 @@ $('#saveTasksBtn').on('click', function () {
 //Casey text with original code John helped comment & code => Auto delete function for past tasks
 const dateAudit = function (tasksArr) {
   let past = dayjs().subtract(2, 'day').format('YYYY-MM-DD');
-  console.log(past);
 
   for (let i = 0; i < tasksArr.length; i++) {
 
