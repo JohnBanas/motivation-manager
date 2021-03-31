@@ -222,8 +222,10 @@ const createTask = function (object) {
   console.log(start);
   
   let listItem = document.createElement("li");
+  
   let listContainer = document.querySelector("#" + object.type + "List");
   
+  let mainListContainer = document.querySelector('#mainTasksList');
   
   if (object.type !== "notes") {
     switch (object.type) {
@@ -256,9 +258,10 @@ const createTask = function (object) {
     }
     
   }
-  if (object.mainTask === 'true') {
-    listContainer = document.querySelector('#mainTasksList')
-  }
+  /*if (object.mainTask === 'true') {
+    let mainItem = $('.listItem').cloneNode(true);
+    mainListContainer.appendChild(mainItem);
+  }*/
 
   // if type is notes
   if (object.notes) {
@@ -423,7 +426,6 @@ $('#textarea').on('blur', function (event) {
     }
 
   } else {
-    console.log('there is not a notes object.type, is it saving?')
     // if conditionals are false
     // push values as property to new object
     let notesObj = { type: noteType, notes: notes, date: now };
