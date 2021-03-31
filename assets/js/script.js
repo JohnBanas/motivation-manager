@@ -194,18 +194,6 @@ const loadTasks = function() {
     }
   }
 }
-//   console.log(newNow)
-//   for (let i = 0; i < tasksArr.length; i++) {
-//     if (tasksArr[i].date === newNow && !loadNewNotes) {
-//       createTask(tasksArr[i].type, tasksArr[i].text, tasksArr[i].date, tasksArr[i].startTime, tasksArr[i].endTime,tasksArr[i].mainTask, newNow, tasksArr[i].notes);
-//     }
-//     if (loadNewNotes && tasksArr[i].date === newNow) {
-//       createTask(tasksArr[i].type, tasksArr[i].text, tasksArr[i].date, tasksArr[i].startTime, tasksArr[i].endTime, tasksArr[i].mainTask, newNow, loadNewNotes);
-//     }
-//   }
-  
-// }
-
 const saveTasks = function () {
   // save all items in tasks array
   localStorage.setItem("tasksArr", JSON.stringify(tasksArr));
@@ -254,50 +242,6 @@ const createTask = function(object) {
     }
   }
 }
-
-// Original create function Below
-
-// const createTask = function(type, text, date, timeStart, timeEnd, mainOnOrOff, newNow, savedNotes) {
-//   console.log(type, text, date, timeEnd, timeStart, mainOnOrOff, newNow, savedNotes);
-//   if (date === now.format("YYYY-MM-DD") || date === newNow) {
-//     let listItem = document.createElement("li");
-//     let listContainer = document.querySelector("#" + type + "List");
-    
-//     switch (type) {
-//       case "task":
-//         listItem.textContent = "[" + timeStart + "-" + timeEnd + "] " + text;
-//         break;
-//       case "meeting":
-//         listItem.textContent = "[" + timeStart + "] " + text;
-//         break;
-//       case "grateful":
-//         listItem.textContent = text;
-//         break;
-//       case "study":
-//         listItem.textContent = "[" + timeStart + "] " + text;
-//         break;
-//       case "radar":
-//         listItem.textContent = text;
-//         break;
-//       case "develop":
-//         listItem.textContent = text + " To be completed by : " + date;
-//         break;
-//     }
-//     if (mainOnOrOff === 'true') {
-//       listContainer = document.querySelector("#mainTasksList");
-//     }
-//     if (savedNotes) {
-//       $('#textarea').val(savedNotes);
-//     }
-    
-//     listContainer.appendChild(listItem);
-//   } else {
-//     return;
-//   }
-// }
-
-//notes save on blur next with date as the key (John comment)
- 
   
 
 // event listener for buttons on modal
@@ -414,19 +358,7 @@ $('#saveTasksBtn').on('click', function () {
   }
 })
 
-// const checkNotes = function () {
-//   if(tasksArr.some(object => object.type === "notes") && tasksArr.some(object => object.date === now)) {
-//     for (let i = 0; i < tasksArr.length; i++) {
-//       if (tasksArr[i].type === "notes" && tasksArr[i].date === now) {
-//         taskArr[i].notes = notes;
-//       }
-//     }
 
-//    } else {
-//      let notesObj = {type: noteType, notes: notes, date: now};
-//      tasksArr.push(notesObj);
-//    }
-// }
 
 // notes event handler
 // SAMPLE CHANGE for text area
@@ -434,16 +366,22 @@ $('#textarea').on('blur', function (event) {
   let notes = event.target.value;
   let noteType = "notes"
   
-  
+  // check if there in at least ONE object that fits conditions in some() method
   if(tasksArr.some(object => object.type === "notes") && tasksArr.some(object => object.date === now)) {
+    // loop the task Arr
     for (let i = 0; i < tasksArr.length; i++) {
+      // find the object that matches...
       if (tasksArr[i].type === "notes" && tasksArr[i].date === now) {
+        // change property value to new value
         tasksArr[i].notes = notes;
       }
     }
 
    } else {
+     // if conditionals are false
+     // push values as property to new object
      let notesObj = {type: noteType, notes: notes, date: now};
+     // push new object to tasks Array
      tasksArr.push(notesObj);
    }
 
