@@ -35,58 +35,68 @@
 </head>
 
 <body class="grid-container">
-  <!--Header-->
-  <header class="grid-container full">
-    <!--Navigation Bar is connected to Header (for styling purposes)-->
-    <nav class="cell">
-      <!-- This is for mobile responsive view in Foundation -->
-      <div id="titleBar" class="title-bar" data-responsive-toggle="navMenu" data-hide-for="medium">
-        <button class="menu-icon" type="button" data-toggle="navMenu"></button>
-        <div class="title-bar-title">Menu</div>
+  <header class="grid-container full text-center">
+
+    <!-- Mobile Navigation Menu -->
+    <div id="titleBar" class="title-bar" data-responsive-toggle="navMenu" data-hide-for="medium">
+      <button class="menu-icon" type="button" data-toggle="navMenu"></button>
+    <div class="title-bar-title">Menu</div>
+    </div>
+    <div class="top-bar" id="navMenu">
+      <div class="top-bar-right">
+        <ul id="dropDownItems" class="dropdown menu" data-dropdown-menu>
+          <li>
+            <ul id="mobileMenuContainer" class="menu">
+              <li><a href="#">Home</a></li>
+              <li><a href="#myMeetings">Meetings</a></li>
+              <li><a href="#mainTasks">Main Tasks</a></li>
+              <li><a href="#panel1">Schedule</a></li>
+              <li><a href="#notes">Notes</a></li>
+              <li><a href="#addMyTask" data-open="taskModal">Create Tasks</a></li>          </ul>
+          </li>
+        </ul>
       </div>
-      <!-- Responsive view and all Header content -->
-      <div class="top-bar" id="navMenu">
-        <!-- Site title -->
-        <h1>Motivation <span>Manager</span></h1>
-        <div class="top-bar-right">
-          <!-- Dropdown Menu (John) side note: do we need daily/weekly/monthly? Or should we have a calendar that
-          drops down and lets you select the date? then it would automatically display/save information based on that.
-          Then you can access the schedule/radar/study/develop from the tabs section on that particular date chosen from the 
-          calendar. Let me know -->
-          <ul id="dropDownItems" class="dropdown menu" data-dropdown-menu>
-            <li>
-              <h2>
-                <!-- Bobcat Image -->
-                <img class="align-center" src="assets/images/bobcat.png" alt="bobcat icon">
-              </h2>
-              <ul id="subMenuContainer" class="menu">
-                <li><a href="#quoteAPI">Inspiring Quote</a></li>
-                <li><a href="#forecast">Weather Today</a></li>
-                <li><a href="#gratefulThings">Gratitude</a></li>
-                <li><a href="#myMeetings">Meetings</a></li>
-                <li><a href="#mainTasks">Main Goals</a></li>
-                <li><a href="#panel1">Schedule</a></li>
-                <li><a href="#notes">Notes</a></li>
-                <li><a href="#addMyTask">Create Tasks</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
+  </div>
+
+  <!-- Desktop Navigation Menu -->
+    <nav class="cell">
+        <ul>
+          <li>
+            <ul id="subMenuContainer" class="menu align-center">
+              <li><a href="#myMeetings">Meetings</a></li>
+              <li><a href="#mainTasks">Main Tasks</a></li>
+              <li><a href="#panel1">Schedule</a></li>
+              <li><a href="#notes">Notes</a></li>
+              <li><a href="#addMyTask" data-open="taskModal">Create Tasks</a></li>
+            </ul>
+          </li>
+        </ul>
       </div>
     </nav>
+    <!-- Site Title -->
+    <div>
+      <!--Bob Cat Image-->
+      <a href="#">
+        <img class="align-center" src="assets/images/bobcat.png" alt="bobcat icon">
+      </a>
+      <!-- Title -->
+      <h4><em>Welcome To</em></h4>
+      <h1>Motivation Manager</h1>
     </div>
   </header>
   <!-- End of Header, Nav Menu -->
-
   <!--Main-->
   <main>
+    <section id="date">
+      <h1 id="dateDisplay" class="text-center"></h1>
+      <h4 class="text-center"><em>Do more with less!!</em></h4>
+    </section>
     <!--Weather API Section-->
     <section id="weatherAPI">
       <article>
-        <h3 id="forecast">Current Forecast ~ <span id="dateDisplay"></span></h3>
+        <h3 id="forecast">Current Forecast</h3>
         <!--weather icon with temperature, (that dynamically affects the page?) -->
         <div id="weatherContainer">
-          <div id="temp"></div>
           <div id="sunShower" class="icon sun-shower">
             <div class="cloud"></div>
             <div class="sun">
@@ -259,10 +269,14 @@
       <div class="grid-container">
         <div class="cell">
           <!-- button to activate modal -->
-          <h2 id="plusIcon"><a id="openBtn" data-open="taskModal">
-            <button id="addMyTask">
-            Add Task
-          </button></a></h2>
+          <!-- <div class= "cell small-6 right" data-sticky-container>
+            <div class= "sticky" data-sticky data-margin-right> -->
+              <h2 id="plusIcon"><a id="openBtn" data-open="taskModal">
+                <button id="addMyTask">
+                Add Task
+              </button></a></h2>
+            <!-- </div>
+          </div> -->
           <div class="reveal grid-container fluid" id="taskModal" data-reveal data-tasktype="task">
             <!-- modal button options -->
             <div class="grid-x grid-margin-x grid-padding-x">
@@ -327,6 +341,7 @@
       Hima Vincent who based her code on <a href="https://dribbble.com/shots/2097042-Widget-Weather"
         target="_blank">Dribbble</a> by kylor</p>
   </footer>
+  
   <!--jQuery-->
   <script src="./assets/js/jquery.min.js"></script>
   <!-- jQuery UI CDN -->

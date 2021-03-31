@@ -135,7 +135,7 @@ modalOnSavePage = () => {
 // if we dont update now global, we can add a parameter "date" to replace 
 
 const currentDay = function () {
-  $('#dateDisplay').empty();
+  $('#dateDisplay').empty()
   displayNow = dayjs().format("dddd, MMMM D, YYYY"); //... no format required, now is formatted and all new dates will be formatted as well
   $('#dateDisplay').append(displayNow)
 } 
