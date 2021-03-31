@@ -112,7 +112,7 @@ $('#headerDate').on('change', function (event) {
 
 const currentDay = function () {
   $('#dateDisplay').empty();
-  displayNow = now //... no format required, now is formatted and all new dates will be formatted as well
+  displayNow = dayjs().format("dddd, MMMM D, YYYY") //... no format required, now is formatted and all new dates will be formatted as well
   $('#dateDisplay').append(displayNow)
 } 
 
