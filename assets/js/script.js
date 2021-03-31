@@ -89,6 +89,7 @@ $('#headerDate').on('change', function (event) {
   $('#developList').empty();
   $('#mainTasksList').empty();
   $('#textarea').val('');
+  console.log(newNow);
   loadTasks(newNow);
   currentDay(newNow);
 })
@@ -103,7 +104,6 @@ const currentDay = function (newNow) {
 
     // change format for display
     displayNow = now.format('YYYY/MM/DD').toString();
-
     $('#dateDisplay').append(displayNow);
   }
 }
@@ -167,18 +167,19 @@ let quoteArr = [];
 let tasksArr = [];
 let now = dayjs();
 let notes;
+
 // load tasks function
 const loadTasks = function(newNow, loadNewNotes) {
 //   // !!! names are editable, key needs to be updated to true value
 //   // add loaded tasks to tasksObj
   newTasksObj = JSON.parse(localStorage.getItem("tasksArr"));
-  
   if (newTasksObj) {
     tasksArr = newTasksObj;
   } else {
     return;
   }
-  console.log(newNow)
+  console.log(loadNewNotes);
+  
   for (let i = 0; i < tasksArr.length; i++) {
     if (tasksArr[i].date === newNow && !loadNewNotes) {
       createTask(tasksArr[i].type, tasksArr[i].text, tasksArr[i].date, tasksArr[i].startTime, tasksArr[i].endTime,tasksArr[i].mainTask, newNow, tasksArr[i].notes);
@@ -198,6 +199,9 @@ const saveTasks = function () {
 //(john comment) we need to add delete/edit buttons here later
 const createTask = function(type, text, date, timeStart, timeEnd, mainOnOrOff, newNow, savedNotes) {
   console.log(type, text, date, timeEnd, timeStart, mainOnOrOff, newNow, savedNotes);
+  
+  replaceNotes = JSON.parse(localStorage.getItem(newNow));
+  console.log(replaceNotes);
   if (date === now.format("YYYY-MM-DD") || date === newNow) {
     let listItem = document.createElement("li");
     let listContainer = document.querySelector("#" + type + "List");
@@ -225,7 +229,12 @@ const createTask = function(type, text, date, timeStart, timeEnd, mainOnOrOff, n
     if (mainOnOrOff === 'true') {
       listContainer = document.querySelector("#mainTasksList");
     }
-    if (savedNotes) {
+    
+    if (replaceNotes) {
+      
+      $('#textarea').val(replaceNotes);
+    } else
+      if (!replaceNotes) {
       $('#textarea').val(savedNotes);
     }
     
@@ -328,7 +337,7 @@ $('#saveTasksBtn').on('click', function () {
   let taskType = $('#taskModal').data('tasktype')
   let mainTask = document.getElementById("mainTaskCheckbox").checked.toString();
   let savedNotes = $('textarea').val();
-
+  
   // push taskObj to correct list arr in tasksObj
   
   let listObj = { type: taskType, text: inputText, startTime: startTime, endTime: endTime, date: inputDate, mainTask: mainTask, notes: savedNotes };
@@ -336,22 +345,13 @@ $('#saveTasksBtn').on('click', function () {
 
   saveTasks();
   // create task function call
-  createTask(taskType, inputText, inputDate, startTime, endTime, mainTask, savedNotes);
+  createTask(taskType, inputText, inputDate, startTime, endTime, mainTask);
 })
 
 $('#textarea').on('change', function (event) {
+  let notesArray = $('#dateDisplay').text();
   newNotes = event.target.value;
-  /*newTasksObj = JSON.parse(localStorage.getItem("tasksArr"));
-
-  if (newTasksObj) {
-    tasksArr = newTasksObj;
-  } else {
-    return;
-  }
-  //need to change the saved notes to the new notes?
-  for (let i = 0; i < tasksArr.length; i++)
-    tasksArr[i].notes = newNotes;*/
-  
+  localStorage.setItem(`${notesArray}`, JSON.stringify(newNotes));
 })
 
 //meeting location directions if there is time
