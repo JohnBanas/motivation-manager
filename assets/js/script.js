@@ -381,6 +381,7 @@ $('#textarea').on('blur', function (event) {
   let noteType = "notes"
   
   // check if there in at least ONE object that fits conditions in some() method
+  //John updated via Casey text instructions
   if(tasksArr.some(object => object.type === "notes" && object.date === now)) {
     // loop the task Arr 
     console.log('if you see this then there is an object in local storage with notes')
