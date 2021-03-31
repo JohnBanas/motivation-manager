@@ -4,7 +4,6 @@ let tasksArr = [];
 // current date on load
 let now = dayjs().format('YYYY-MM-DD');
 
-
 $(document).foundation();
 
 
@@ -19,18 +18,34 @@ let cityNameEl = 'nashville'; // either grab input to register user city or figu
 
 getWeatherData = () => {
   // format "open weather map" api url
-  let apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityNameEl + '&appid=882d7b151f3175e892df45d1e68ea9dd';
+  let apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityNameEl + '&appid=882d7b151f3175e892df45d1e68ea9dd' + '&units=imperial';
 
   
   // make a request to the url
   fetch(apiUrl).then(function (response) {
     response.json().then(function (data) {
-      console.log(data.weather[0].icon)
+      console.log(data.weather[0].icon, data.main.temp);
       let weatherIcon = data.weather[0].icon;
       animatedIcon(weatherIcon);
+      // // a variable to hold temperature
+      // let temperatureEl = data.main.temp;
+      // // pass variable to function
+      // showTemp(temperatureEl);
     });
   });
 };
+
+// var showTemp = (temperatureEl) => {
+//   // create an h6 element
+//   var tempEl = $("h6")
+//   //add text content
+//   .text("The current temperature is " + temp + "˚F")
+//   // center text to page
+//   .addClass("text-center");
+//   //append to div
+//   $("#temp").append(tempEl);
+// };
+
 
 
 //show animated icon with positive statement based on OpenWeather API icon
@@ -406,7 +421,14 @@ $('#textarea').on('blur', function (event) {
   saveTasks();
 }) 
 
+/* 1.) Add Edit and Delete buttons to Modal
+  2.) Copy Modal and create a new event handler 
+  3.) Hold data from Modal in an object array
+  4.) Add information in
 
+Copy Modal and create a new button for Edit and Delete Tasks 
+
+*/
 
 //meeting location directions if there is time
 
@@ -416,3 +438,34 @@ getQuote();
 loadTasks();
 currentDay();
 getWeatherData();
+
+
+
+/*
+update: function(event) {
+  var tempArr = [];
+  $(this).children().each(function() {
+    var text = $(this)
+      .find("p")
+      .text()
+      .trim();
+    
+    var date = $(this)
+      .find("span")
+      .text()
+      .trim();
+
+    tempArr.push ({
+      text: text,
+      date: date
+    });
+  }
+
+  var arrName = $(this)
+    .attr("id")
+    .replace("list-", "");
+
+  tasks[arrName] = tempArr;
+  saveTasks();
+};
+*/
