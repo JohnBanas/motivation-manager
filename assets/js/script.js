@@ -8,7 +8,7 @@ let now = dayjs().format('YYYY-MM-DD');
 $(document).foundation();
 
 
-// Patch for a Bug in v6.3.1
+// Patch for a Bug in v6.3.1 (Foundation)
 $(window).on('changed.zf.mediaquery', function () {
   $('.is-dropdown-submenu.invisible').removeClass('invisible');
 });
@@ -50,9 +50,8 @@ animatedIcon = (weatherIcon) => {
   $('.sunnyStatement').hide();
   $('#rainy').hide();
   $('.rainyStatement').hide();
-  /*  */
+  /* Display correct icon for current weather */
   if (weatherIcon === '10n' || weatherIcon === '10d' ||
-    // !!! JOHN, is 2nd icon supposed to be 09 or 90?
     weatherIcon === '09d' || weatherIcon === '09n') {
     $('#weatherContainer').show();
     $('#rainy').show();
@@ -99,11 +98,21 @@ $('#headerDate').on('change', function (event) {
   $('#mainTasksList').empty();
   $('#textarea').val('');
   // load page with new date
-  // no need to pass parameter newNow as we make global var now equal to what was newNow  
+  // no need to pass parameter newNow as we make global var now equal to what was newNow
   loadTasks();
   currentDay();
 })
 
+modalOnSavePage = () => {
+  $('#taskList').empty();
+  $('#meetingList').empty();
+  $('#gratefulList').empty();
+  $('#studyList').empty();
+  $('#radarList').empty();
+  $('#developList').empty();
+  $('#mainTasksList').empty();
+  $('#textarea').val('');
+}
 
 // (Casey Comment) I think we can take most of this out of this 
 // function. we only need the value reset, and formatted now.
@@ -112,7 +121,7 @@ $('#headerDate').on('change', function (event) {
 
 const currentDay = function () {
   $('#dateDisplay').empty();
-  displayNow = dayjs().format("dddd, MMMM D, YYYY") //... no format required, now is formatted and all new dates will be formatted as well
+  displayNow = dayjs().format("dddd, MMMM D, YYYY"); //... no format required, now is formatted and all new dates will be formatted as well
   $('#dateDisplay').append(displayNow)
 } 
 
@@ -204,7 +213,7 @@ const saveTasks = function () {
 const createTask = function(object) {
   console.log(object);
   // if date = now
-  if (object.date === now) {
+  //if (object.date === now) {
     let listItem = document.createElement("li");
     let listContainer = document.querySelector("#" + object.type + "List");
     
@@ -240,7 +249,9 @@ const createTask = function(object) {
     if (object.notes) {
       $('#textarea').val(object.notes);
     }
-  }
+  //}
+  console.log(object.date)
+  now = object.date;
 }
   
 
@@ -338,7 +349,7 @@ $('#saveTasksBtn').on('click', function () {
   // let savedNotes = $('textarea').val();
 
   // check for text and date...
-  if (!inputText && !inputDate) {
+  if (!inputText || !inputDate) {
     // alert user on needing this info
     console.log("Need some kind of alert here");
     
@@ -355,6 +366,9 @@ $('#saveTasksBtn').on('click', function () {
     createTask(listObj);
     // consider pushing entire object.
     //createTask(listObj)
+    now = inputDate;
+    modalOnSavePage();
+    loadTasks();
   }
 })
 
@@ -367,8 +381,9 @@ $('#textarea').on('blur', function (event) {
   let noteType = "notes"
   
   // check if there in at least ONE object that fits conditions in some() method
-  if(tasksArr.some(object => object.type === "notes") && tasksArr.some(object => object.date === now)) {
-    // loop the task Arr
+  if(tasksArr.some(object => object.type === "notes" && object.date === now)) {
+    // loop the task Arr 
+    console.log('if you see this then there is an object in local storage with notes')
     for (let i = 0; i < tasksArr.length; i++) {
       // find the object that matches...
       if (tasksArr[i].type === "notes" && tasksArr[i].date === now) {
@@ -377,7 +392,8 @@ $('#textarea').on('blur', function (event) {
       }
     }
 
-   } else {
+  } else {
+    console.log('there is not a notes object.type, is it saving?')
      // if conditionals are false
      // push values as property to new object
      let notesObj = {type: noteType, notes: notes, date: now};
