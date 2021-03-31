@@ -99,11 +99,12 @@ const currentDay = function (newNow) {
   // declare var now = current time for user
   if (newNow) {
     $('#dateDisplay').append(newNow);
+    loadTasks(newNow)
   } else {
     let now = dayjs();
 
     // change format for display
-    displayNow = now.format('YYYY/MM/DD').toString();
+    displayNow = now.format('YYYY-MM-DD').toString();
     $('#dateDisplay').append(displayNow);
   }
 }
@@ -169,10 +170,12 @@ let now = dayjs();
 let notes;
 
 // load tasks function
-const loadTasks = function(newNow, loadNewNotes) {
+const loadTasks = function(newNow) {
 //   // !!! names are editable, key needs to be updated to true value
 //   // add loaded tasks to tasksObj
+  console.log(newNow);
   newTasksObj = JSON.parse(localStorage.getItem("tasksArr"));
+  console.log(newTasksObj);
   if (newTasksObj) {
     tasksArr = newTasksObj;
   } else {
