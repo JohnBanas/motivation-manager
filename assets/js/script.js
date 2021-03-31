@@ -1,3 +1,10 @@
+// Global Var
+let quoteArr = [];
+let tasksArr = [];
+// current date on load
+let now = dayjs().format('YYYY/MM/DD');
+
+
 $(document).foundation();
 
 
@@ -78,9 +85,11 @@ animatedIcon = (weatherIcon) => {
 }
 
 // Casey Code below. needs a lot of TLC
-// function for user date using Day.js
+// function for user date
 $('#headerDate').on('change', function (event) {
-  let newNow = event.target.value;
+  // set chosen date = newNow
+  now = event.target.value;
+  // clear all list containers
   $('#taskList').empty();
   $('#meetingList').empty();
   $('#gratefulList').empty();
@@ -89,24 +98,26 @@ $('#headerDate').on('change', function (event) {
   $('#developList').empty();
   $('#mainTasksList').empty();
   $('#textarea').val('');
-  loadTasks(newNow);
-  currentDay(newNow);
+  // load page with new date
+  // no need to pass parameter newNow as we make global var now equal to what was newNow  
+  loadTasks();
+  currentDay();
 })
 
-const currentDay = function (newNow) {
+
+// (Casey Comment) I think we can take most of this out of this 
+// function. we only need the value reset, and formatted now.
+// we can make now.withFormat global and update its value from calendar event
+// if we dont update now global, we can add a parameter "date" to replace 
+
+const currentDay = function () {
   $('#dateDisplay').empty();
-  // declare var now = current time for user
-  if (newNow) {
-    $('#dateDisplay').append(newNow);
-  } else {
-    let now = dayjs();
+  displayNow = now //... no format required, now is formatted and all new dates will be formatted as well
+  $('#dateDisplay').append(displayNow)
+} 
 
-    // change format for display
-    displayNow = now.format('YYYY/MM/DD').toString();
 
-    $('#dateDisplay').append(displayNow);
-  }
-}
+
 
 // !!!important!!! NOT USING QUOTES.rest here....
 // fetch to get quotes
@@ -138,7 +149,7 @@ const getQuote = function() {
 // Display quote randomly selected from quote Arr function()
 const displayQuote = function () {
   // for functionality check
-  console.log("started");
+  console.log("displayquote() started");
   // find <p> by id
   let $quoteEl = $('#quoteElement');
   // Choose a random index from quoteArr
@@ -162,13 +173,9 @@ const quoteRefreshTimer =  function() {
 // LIST CREATION WITH SAVE AND LOAD BELOW
 // TODO FIGURE OUT HOW TO SAVE!
 
-// Global Var
-let quoteArr = [];
-let tasksArr = [];
-let now = dayjs();
-let notes;
+
 // load tasks function
-const loadTasks = function(newNow, loadNewNotes) {
+const loadTasks = function() {
 //   // !!! names are editable, key needs to be updated to true value
 //   // add loaded tasks to tasksObj
   newTasksObj = JSON.parse(localStorage.getItem("tasksArr"));
@@ -178,62 +185,116 @@ const loadTasks = function(newNow, loadNewNotes) {
   } else {
     return;
   }
-  console.log(newNow)
+
   for (let i = 0; i < tasksArr.length; i++) {
-    if (tasksArr[i].date === newNow && !loadNewNotes) {
-      createTask(tasksArr[i].type, tasksArr[i].text, tasksArr[i].date, tasksArr[i].startTime, tasksArr[i].endTime,tasksArr[i].mainTask, newNow, tasksArr[i].notes);
-    }
-    if (loadNewNotes && tasksArr[i].date === newNow) {
-      createTask(tasksArr[i].type, tasksArr[i].text, tasksArr[i].date, tasksArr[i].startTime, tasksArr[i].endTime, tasksArr[i].mainTask, newNow, loadNewNotes);
+    if (tasksArr[i].date === now) {
+      //createTask(tasksArr[i].type, tasksArr[i].text, tasksArr[i].date, tasksArr[i].startTime, tasksArr[i].endTime, tasksArr[i].mainTask, tasksArr[i].notes)
+      // or send entire obj to createTask if date is correct;
+      createTask(tasksArr[i]);
     }
   }
-  
 }
+//   console.log(newNow)
+//   for (let i = 0; i < tasksArr.length; i++) {
+//     if (tasksArr[i].date === newNow && !loadNewNotes) {
+//       createTask(tasksArr[i].type, tasksArr[i].text, tasksArr[i].date, tasksArr[i].startTime, tasksArr[i].endTime,tasksArr[i].mainTask, newNow, tasksArr[i].notes);
+//     }
+//     if (loadNewNotes && tasksArr[i].date === newNow) {
+//       createTask(tasksArr[i].type, tasksArr[i].text, tasksArr[i].date, tasksArr[i].startTime, tasksArr[i].endTime, tasksArr[i].mainTask, newNow, loadNewNotes);
+//     }
+//   }
+  
+// }
 
 const saveTasks = function () {
+  // save all items in tasks array
   localStorage.setItem("tasksArr", JSON.stringify(tasksArr));
 }
 
-// create tasks from input
+// create function, object = object with data entries
 //(john comment) we need to add delete/edit buttons here later
-const createTask = function(type, text, date, timeStart, timeEnd, mainOnOrOff, newNow, savedNotes) {
-  console.log(type, text, date, timeEnd, timeStart, mainOnOrOff, newNow, savedNotes);
-  if (date === now.format("YYYY-MM-DD") || date === newNow) {
+const createTask = function(object) {
+  console.log(object);
+  // if date = now
+  if (object.date === now) {
     let listItem = document.createElement("li");
-    let listContainer = document.querySelector("#" + type + "List");
+    let listContainer = document.querySelector("#" + object.type + "List");
     
-    switch (type) {
-      case "task":
-        listItem.textContent = "[" + timeStart + "-" + timeEnd + "] " + text;
-        break;
-      case "meeting":
-        listItem.textContent = "[" + timeStart + "] " + text;
-        break;
-      case "grateful":
-        listItem.textContent = text;
-        break;
-      case "study":
-        listItem.textContent = "[" + timeStart + "] " + text;
-        break;
-      case "radar":
-        listItem.textContent = text;
-        break;
-      case "develop":
-        listItem.textContent = text + " To be completed by : " + date;
-        break;
+    if (object.type !== "notes") {
+      switch (object.type) {
+        case "task":
+          listItem.textContent = "[" + object.timeStart + "-" + object.timeEnd + "] " + object.text;
+          break;
+        case "meeting":
+          listItem.textContent = "[" + object.timeStart + "] " + object.text;
+          break;
+        case "grateful":
+          listItem.textContent = object.text;
+          break;
+        case "study":
+          listItem.textContent = "[" + object.timeStart + "] " + object.text;
+          break;
+        case "radar":
+          listItem.textContent = object.text;
+          break;
+        case "develop":
+          listItem.textContent = object.text + " To be completed by : " + object.date;
+          break;
+      }
+      if (object.mainTask === 'true') {
+        listContainer = document.querySelector("#mainTasksList");
+      }
+      
+      listContainer.appendChild(listItem);
     }
-    if (mainOnOrOff === 'true') {
-      listContainer = document.querySelector("#mainTasksList");
+  
+  // if type is notes
+    if (object.notes) {
+      $('#textarea').val(object.notes);
     }
-    if (savedNotes) {
-      $('#textarea').val(savedNotes);
-    }
-    
-    listContainer.appendChild(listItem);
-  } else {
-    return;
   }
 }
+
+// Original create function Below
+
+// const createTask = function(type, text, date, timeStart, timeEnd, mainOnOrOff, newNow, savedNotes) {
+//   console.log(type, text, date, timeEnd, timeStart, mainOnOrOff, newNow, savedNotes);
+//   if (date === now.format("YYYY-MM-DD") || date === newNow) {
+//     let listItem = document.createElement("li");
+//     let listContainer = document.querySelector("#" + type + "List");
+    
+//     switch (type) {
+//       case "task":
+//         listItem.textContent = "[" + timeStart + "-" + timeEnd + "] " + text;
+//         break;
+//       case "meeting":
+//         listItem.textContent = "[" + timeStart + "] " + text;
+//         break;
+//       case "grateful":
+//         listItem.textContent = text;
+//         break;
+//       case "study":
+//         listItem.textContent = "[" + timeStart + "] " + text;
+//         break;
+//       case "radar":
+//         listItem.textContent = text;
+//         break;
+//       case "develop":
+//         listItem.textContent = text + " To be completed by : " + date;
+//         break;
+//     }
+//     if (mainOnOrOff === 'true') {
+//       listContainer = document.querySelector("#mainTasksList");
+//     }
+//     if (savedNotes) {
+//       $('#textarea').val(savedNotes);
+//     }
+    
+//     listContainer.appendChild(listItem);
+//   } else {
+//     return;
+//   }
+// }
 
 //notes save on blur next with date as the key (John comment)
  
@@ -243,7 +304,8 @@ const createTask = function(type, text, date, timeStart, timeEnd, mainOnOrOff, n
 $('#taskModal').on('click', 'button', function (event) {
   // will send target to different modal function 
   let btnId = event.target.getAttribute('id');
-  let $taskDateContainer = $('#taskDateContainer');
+  // no longer used as date is required
+  // let $taskDateContainer = $('#taskDateContainer');
   let $startTimeContainer = $('#startTimeContainer');
   let $endTimeContainer = $('#endTimeContainer');
   let $taskModal = $('#taskModal');
@@ -269,7 +331,7 @@ $('#taskModal').on('click', 'button', function (event) {
         $taskModal.data('tasktype', 'meeting');
         break;
     }
-  // modal manipulation via target
+  // modal task data type manipulation via event.target
   // if button's id = task or meeting
   if (btnId === "modalTaskButton" || btnId === "modalMeetingButton" ) {
     // display original or recreate original
@@ -312,9 +374,10 @@ $('#openBtn').on("click", function() {
 })
 
 //(john comment) we need to make sure we don't allow saving empty tasks
+// (Casey comment) agreed but we have to list conditionals per task type as they require some different inputs 
 // when save btn is clicked in modal...
 $('#saveTasksBtn').on('click', function () {
-  console.log('click');
+
   // capture and cache input-text value
   let inputText = $('#modalTextInput').val();
   // same with date input
@@ -327,32 +390,59 @@ $('#saveTasksBtn').on('click', function () {
   // task type input
   let taskType = $('#taskModal').data('tasktype')
   let mainTask = document.getElementById("mainTaskCheckbox").checked.toString();
-  let savedNotes = $('textarea').val();
+  // we can keep savedNotes here or check comment on textarea handler below
+  // let savedNotes = $('textarea').val();
 
-  // push taskObj to correct list arr in tasksObj
-  
-  let listObj = { type: taskType, text: inputText, startTime: startTime, endTime: endTime, date: inputDate, mainTask: mainTask, notes: savedNotes };
-  tasksArr.push(listObj);
-
-  saveTasks();
-  // create task function call
-  createTask(taskType, inputText, inputDate, startTime, endTime, mainTask, savedNotes);
-})
-
-$('#textarea').on('change', function (event) {
-  newNotes = event.target.value;
-  /*newTasksObj = JSON.parse(localStorage.getItem("tasksArr"));
-
-  if (newTasksObj) {
-    tasksArr = newTasksObj;
+  // check for text and date...
+  if (!inputText && !inputDate) {
+    // alert user on needing this info
+    console.log("Need some kind of alert here");
+    
   } else {
-    return;
+    // Only save and create tasks if inputText and inputDate has values
+    // consolidate all data into object
+    let listObj = { type: taskType, text: inputText, startTime: startTime, endTime: endTime, date: inputDate, mainTask: mainTask};
+    // push listObj to tasksArr
+    tasksArr.push(listObj);
+
+    // save updated taskArr
+    saveTasks();
+    // create task function call
+    createTask(listObj);
+    // consider pushing entire object.
+    //createTask(listObj)
   }
-  //need to change the saved notes to the new notes?
-  for (let i = 0; i < tasksArr.length; i++)
-    tasksArr[i].notes = newNotes;*/
-  
 })
+
+// notes event handler
+// SAMPLE CHANGE for text area
+$('#textarea').on('change', function (event) {
+  let notes = event.target.value;
+  let noteType = "notes"
+  
+  
+  // loop through taskArr
+  for (let i = 0; i < tasksArr.length; i++) {
+    // check task type for "notes" and if date = chosenDate
+    
+    // if type = noteType or "notes" and date = now
+    if (tasksArr[i].type === noteType && tasksArr[i].date === now) {
+      // change value of object to current 'notes' value
+      tasksArr[i].notes = notes;
+    } else {
+      
+      // create new taskObj
+      let notesObj = {type: noteType, notes: notes, date: now}
+      // send(push) it to taskArr
+      tasksArr.push(notesObj);
+    }
+  }
+  //if(tasksArr.some(object => object.type === "notes")) 
+  // saveTasks on event no matter what
+  saveTasks();
+}) 
+
+
 
 //meeting location directions if there is time
 
