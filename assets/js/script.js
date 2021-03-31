@@ -209,6 +209,8 @@ const saveTasks = function () {
   localStorage.setItem("tasksArr", JSON.stringify(tasksArr));
 }
 
+
+let previousStart = 0;
 // create function, object = object with data entries
 //(john comment) we need to add delete/edit buttons here later
 const createTask = function (object) {
@@ -216,9 +218,13 @@ const createTask = function (object) {
   // if date = now
   //if (object.date === now)  {
   //commented this out as it has an effect on the modal display
+  let start = parseInt(object.startTime);
+  console.log(start);
+  
   let listItem = document.createElement("li");
   let listContainer = document.querySelector("#" + object.type + "List");
-
+  
+  
   if (object.type !== "notes") {
     switch (object.type) {
       case "task":
@@ -241,7 +247,14 @@ const createTask = function (object) {
         break;
     }
 
-    listContainer.appendChild(listItem);
+
+    if (start < previousStart) {
+      listContainer.prepend(listItem);
+      previousStart = start;
+    } else {
+      listContainer.appendChild(listItem);
+    }
+    
   }
   if (object.mainTask === 'true') {
     listContainer = document.querySelector('#mainTasksList')
@@ -251,8 +264,6 @@ const createTask = function (object) {
   if (object.notes) {
     $('#textarea').val(object.notes);
   }
-
-  console.log(object.date)
   now = object.date;
 }
 
@@ -382,9 +393,7 @@ const dateAudit = function (tasksArr) {
 
     let taskDate = Date.parse(tasksArr[i].date);
     past = Date.parse(past);
-    console.log(taskDate, past)
     if (taskDate <= past) {
-      console.log('working');
       tasksArr.splice(i, 1);
       saveTasks();
     }
