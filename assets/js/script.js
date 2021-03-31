@@ -211,16 +211,16 @@ const createTask = function(object) {
     if (object.type !== "notes") {
       switch (object.type) {
         case "task":
-          listItem.textContent = "[" + object.timeStart + "-" + object.timeEnd + "] " + object.text;
+          listItem.textContent = "[" + object.startTime + "-" + object.endTime + "] " + object.text;
           break;
         case "meeting":
-          listItem.textContent = "[" + object.timeStart + "] " + object.text;
+          listItem.textContent = "[" + object.startTime + "] " + object.text;
           break;
         case "grateful":
           listItem.textContent = object.text;
           break;
         case "study":
-          listItem.textContent = "[" + object.timeStart + "] " + object.text;
+          listItem.textContent = "[" + object.startTime + "] " + object.text;
           break;
         case "radar":
           listItem.textContent = object.text;
