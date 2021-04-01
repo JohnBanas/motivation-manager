@@ -6,35 +6,19 @@
   --teal: #2596be;
 }
 
-/** body start **/
-body {
-  font: 100%;
-  font-family: "IBM Plex Serif", serif;
-  background-color: var(--lightYellow);
-  color: #ff9100;
-}
-/** body end **/
+
 
 
 /** header start **/
-header {
-  overflow: hidden;
-  background-color: var(--orange);
-  color: var(--lightYellow);
-  padding: 1rem;
+header #navMenu {
+  background-color: #fffbe6;
 }
-
-header a {
-  color: white;
+header #dropDownItems {
+  background-color: #fffbe6;
 }
-
-header a:hover {
-  color: var(--teal);
-}
-
 header img {
   color: #faea9c;
-  width: 10%;
+  max-width: 100%;
   height: auto;
 }
 header #listHeadingDaily > a,
@@ -43,60 +27,25 @@ header #listHeadingMonthly > a {
   background-color: #faea9c;
 }
 
-.title-bar {
-  overflow: hidden;
-  background-color: var(--orange);
-  color: white;
-  margin: 0 auto;
-  position: relative;
-  width: 100%;
-  top: 0;
-}
-
-#subMenuContainer {
-  transition: ease 1s;
-}
-
-#subMenuContainer a {
-  color: #fff;
-}
-
-#subMenuContainer a:hover {
-  color: var(--teal);
-  font-weight: bold;
-  font-size: 110%;
-  transition: ease, 100ms;
-}
-
-#titleBar {
-  background-color: var(--mainYellow);
-  color: var(--orange);
-  margin: 0 auto;
-}
-
-.menu-icon {
-  color: var(--orange);
-}
-
-.button {
-  border-radius: 15px;
-}
-
 /** header end **/
 
-/* dateDisplay Start*/
-#date {
-  text-align: center;
-  padding: 1rem;
-  margin-bottom: 0;
+/** body start **/
+
+body {
+  font: 100%;
+  font-family: "IBM Plex Serif", serif;
+  background-color: var(--lightYellow);
+  color: #ff9100;
 }
+body a:hover {
+  background-color: #fffbe6;
+}
+/** body end **/
 
 /** quote start **/
 #quoteAPI {
   margin-top: 2rem;
 }
-
-
 
 #dateManager,
 #quoteHeading,
@@ -112,6 +61,22 @@ header #listHeadingMonthly > a {
   font-weight: 500;
   margin-top: 3rem;
   padding: 1rem;
+}
+
+#gratefulThings
+ {
+  color: var(--lightYellow);
+  background-color: var(--teal);
+}
+
+#myMeetings {
+  color: var(--lightYellow);
+  background-color: var(--orange);
+}
+
+#mainTasks {
+  color: var(--lightYellow);
+  background-color: maroon;
 }
 
 #quoteElement {
@@ -135,7 +100,7 @@ header #listHeadingMonthly > a {
 
 
 /** tabs for schedule section **/
-#mobileMenuContainer #headerDate, #panel1, #panel2, #panel3, #panel4 {
+#headerDate, #panel1, #panel2, #panel3, #panel4 {
   background-color: #fff5c2;
   color: var(--teal);
 }
@@ -143,7 +108,7 @@ header #listHeadingMonthly > a {
   margin: 1rem;
 }
 
-#subMenuDaily, #subMenuWeekly, #subMenuMonthly, #example-tabs {
+#subMenuContainer, #subMenuDaily, #subMenuWeekly, #subMenuMonthly, #example-tabs {
   background-color: #faea9c;
 }
 
@@ -164,10 +129,6 @@ header #listHeadingMonthly > a {
   color: #fff5c2;
   padding: 1.5rem;
   border-radius: 1rem;
-  position: sticky;
-  top: 0;
-  right: 5rem;
-  bottom: 1.5rem;
 }
 
 #addMyTask:hover {
@@ -199,6 +160,7 @@ header #listHeadingMonthly > a {
 textarea {
   background-color: #fffbe6;
   color: var(--teal);
+  font-size: larger;
 }
 
 #taskModal {
@@ -262,16 +224,11 @@ ul {
   color: var(--teal);
 }
 
-@media screen and (min-width: 640px) {
 
-}
+/*@media screen and (max-width: 500px) 
+  #addMyTask 
+    position: relative;
+    z-index: 10;
+  
+}*/
 
-@media screen and (max-width: 640px) {
-  #subMenuContainer {
-    display: none;
-  }
-}
-
-/* 
-
-*/ 
