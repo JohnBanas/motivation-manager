@@ -3,6 +3,7 @@ let listID;
 let previousStart = 0;
 let quoteArr = [];
 let tasksArr = [];
+let orderedArr = [];
 // current date on load
 let now = dayjs().format('YYYY-MM-DD');
 
@@ -189,13 +190,18 @@ const loadTasks = function () {
   //   // !!! names are editable, key needs to be updated to true value
   //   // add loaded tasks to tasksObj
   newTasksObj = JSON.parse(localStorage.getItem("tasksArr"));
-
+  //.sort() funtion to put them in order
   if (newTasksObj) {
     tasksArr = newTasksObj;
+    tasksArr.sort(function (x, y) {
+      return x.data - y.data;
+    });
+    console.log(tasksArr);
   } else {
     return;
   }
   for (let i = 0; i < tasksArr.length; i++) {
+
     if (tasksArr[i].date === now) {
       //createTask(tasksArr[i].type, tasksArr[i].text, tasksArr[i].date, tasksArr[i].startTime, tasksArr[i].endTime, tasksArr[i].mainTask, tasksArr[i].notes)
       // or send entire obj to createTask if date is correct;
@@ -212,16 +218,12 @@ const saveTasks = function () {
 // create function, object = object with data entries
 //(john comment) we need to add delete/edit buttons here later
 const createTask = function (object) {
-  // if date = now
-  //if (object.date === now)  {
-  //commented this out as it has an effect on the modal display
-  let start = parseInt(object.startTime);
 
+  //commented this -- if (object.date === now) --   out as it has an effect on the modal display
   let listItem = document.createElement("li");
-  $(listItem).attr({ id: 'x' + object.id });
+  $(listItem).attr({ id: 'x' + object.id , data: object.data });
   let listContainer = document.querySelector("#" + object.type + "List");
-  
-  let mainListContainer = document.querySelector('#mainTasksList');
+
 
   if (object.type !== "notes") {
     switch (object.type) {
@@ -244,26 +246,18 @@ const createTask = function (object) {
         listItem.textContent = object.text + " To be completed by : " + object.date;
         break;
     }
+    listContainer.appendChild(listItem);
 
-
-    if (start < previousStart) {
-      listContainer.prepend(listItem);
-      previousStart = start;
-    } else {
-      listContainer.appendChild(listItem);
+    if (object.mainTask === 'true') {
+      $(`#x` + object.id).clone().appendTo('#mainTasksList');
     }
 
+    // if type is notes
+    if (object.notes) {
+      $('#textarea').val(object.notes);
+    }
+    now = object.date;
   }
-  if (object.mainTask === 'true') {
-    console.log($('#mainTasksList'));
-    $(`#x` + object.id).clone().appendTo('#mainTasksList');
-  }
-
-  // if type is notes
-  if (object.notes) {
-    $('#textarea').val(object.notes);
-  }
-  now = object.date;
 }
 
 // event listener for buttons on modal
@@ -344,8 +338,8 @@ $('#openBtn').on("click", function () {
 // when save btn is clicked in modal...
 $('#saveTasksBtn').on('click', function () {
 
-  let checkId = JSON.parse(localStorage.getItem("tasksArr"));
-  if (checkId) {
+  let localObject= JSON.parse(localStorage.getItem("tasksArr"));
+  if (localObject) {
     listID++;
   } else {
     listID = 0;
@@ -361,6 +355,8 @@ $('#saveTasksBtn').on('click', function () {
   // task type input
   let taskType = $('#taskModal').data('tasktype')
   let mainTask = document.getElementById("mainTaskCheckbox").checked.toString();
+  let x = $('#startTime').val().toString().replace(':', '');
+  let dataType = parseInt(x);
   // we can keep savedNotes here or check comment on textarea handler below
   // let savedNotes = $('textarea').val();
 
@@ -372,21 +368,33 @@ $('#saveTasksBtn').on('click', function () {
   } else {
     // Only save and create tasks if inputText and inputDate has values
     // consolidate all data into object
-    let listObj = { type: taskType, text: inputText, startTime: startTime, endTime: endTime, date: inputDate, mainTask: mainTask, id:listID };
+    let listObj = { type: taskType, text: inputText, startTime: startTime, endTime: endTime, date: inputDate, mainTask: mainTask, id: listID, data: dataType };
     // push listObj to tasksArr
     tasksArr.push(listObj);
 
     // save updated taskArr
     saveTasks();
-    // create task function call
-    createTask(listObj);
+    
     // consider pushing entire object.
-    //createTask(listObj)
     now = inputDate;
     modalOnSavePage();
     loadTasks();
   }
 })
+
+
+
+/*
+sort function in here for the li order
+ timeCompare = JSON.parse(localStorage.getItem("tasksArr"));
+  //goes through each object in array and get the start time
+  //changes it to a string and removes the colon
+  //then changes to integer
+  
+
+  
+
+*/
 
 //Casey text with original code John helped comment & code => Auto delete function for past tasks
 const dateAudit = function (tasksArr) {
