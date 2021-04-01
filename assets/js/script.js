@@ -231,11 +231,17 @@ const createTask = function(object) {
   //if (object.date === now) {
     let listItem = document.createElement("li");
     let listContainer = document.querySelector("#" + object.type + "List");
+    let editBtnEl = document.createElement("button");
+    let deleteBtnEl = document.createElement("button");
     
     if (object.type !== "notes") {
       switch (object.type) {
         case "task":
           listItem.textContent = "[" + object.startTime + "-" + object.endTime + "] " + object.text;
+          editBtnEl.textContent = "Edit Task";
+          editBtnEl.addClass = "button";
+          deleteBtnEl.textContent = "Delete";
+          deleteBtnEl.addClass = "button";
           break;
         case "meeting":
           listItem.textContent = "[" + object.startTime + "] " + object.text;
