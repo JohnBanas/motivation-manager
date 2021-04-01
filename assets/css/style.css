@@ -6,14 +6,6 @@
   --teal: #2596be;
 }
 
-/** body start **/
-body {
-  font: 100%;
-  font-family: "IBM Plex Serif", serif;
-  background-color: var(--lightYellow);
-  color: #ff9100;
-}
-/** body end **/
 
 
 /** header start **/
@@ -27,7 +19,6 @@ header {
 header div a {
   color: var(--teal);
 }
-
 header img {
   color: var(--teal);
   width: 10%;
@@ -76,9 +67,7 @@ nav {
   margin: 0 auto;
 }
 
-.menu-icon {
-  color: var(--orange);
-}
+/** body start **/
 
 button {
   background-color: var(--teal);
@@ -97,22 +86,15 @@ button:hover {
 .button {
   border-radius: 15px;
 }
-
-/** header end **/
-
-/* dateDisplay Start*/
-#date {
-  text-align: center;
-  padding: 1rem;
-  margin-bottom: 0;
+body a:hover {
+  background-color: #fffbe6;
 }
+/** body end **/
 
 /** quote start **/
 #quoteAPI {
   margin-top: 2rem;
 }
-
-
 
 #dateManager,
 #quoteHeading,
@@ -130,10 +112,27 @@ button:hover {
   padding: 1rem;
 }
 
+#gratefulThings
+ {
+  color: var(--lightYellow);
+  background-color: var(--teal);
+}
+
+#myMeetings {
+  color: var(--lightYellow);
+  background-color: var(--orange);
+}
+
+#mainTasks {
+  color: var(--lightYellow);
+  background-color: maroon;
+}
+
 #quoteElement {
   margin-top: 2rem;
-  font-family: "Sacramento", cursive;
-  font-size: 4rem;
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  font-size: 3rem;
   color: var(--orange);
 }
 
@@ -161,7 +160,7 @@ button:hover {
   margin: 1rem;
 }
 
-#subMenuDaily, #subMenuWeekly, #subMenuMonthly, #example-tabs {
+#subMenuContainer, #subMenuDaily, #subMenuWeekly, #subMenuMonthly, #example-tabs {
   background-color: #faea9c;
 }
 
@@ -172,6 +171,10 @@ button:hover {
 .tabs-title > a[aria-selected=true] {
   background-color: #fffbe6;
   border: none;
+}
+
+.tabs-title a {
+    font-size: medium;
 }
 
 .tabs-title > a:hover {
@@ -185,10 +188,6 @@ button:hover {
   color: #fff5c2;
   padding: 1.5rem;
   border-radius: 1rem;
-  position: sticky;
-  top: 0;
-  right: 5rem;
-  bottom: 1.5rem;
 }
 
 #addMyTask:hover {
@@ -220,6 +219,7 @@ button:hover {
 textarea {
   background-color: #fffbe6;
   color: var(--teal);
+  font-size: larger;
 }
 
 #taskModal {
@@ -283,18 +283,21 @@ ul {
   color: var(--teal);
 }
 
+@media screen and (max-width: 980px) {
+    #quoteElement {
+        font-size: 3rem;
+    }
+}
+  
+/* MEDIA QUERY FOR MOBILE PHONES AND SMALLER */
+@media screen and (max-width: 575px) {
+    #quoteElement {
+        font-size: 1.5rem;
+    }
+  }
 #subMenuContainer{
   background-color: #ffb453;
 }
 
-/* @media screen and (min-width: 640px) { 
-
-}*/
-
- /*@media screen and (max-width: 640px) { 
-  #subMenuContainer {
-    display: none;
-  }
-} */
 
  

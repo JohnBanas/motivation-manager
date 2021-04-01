@@ -38,7 +38,7 @@ getWeatherData = () => {
       let temperatureEl = data.main.temp;
       // pass variable to function
       showTemp(temperatureEl);
-      
+
     }).catch(function (error) {
       console.log(error);
     });
