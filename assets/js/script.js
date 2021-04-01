@@ -232,7 +232,6 @@ const createTask = function(object) {
     let listItem = document.createElement("li");
     let editBtnEl = document.createElement("button");
     let deleteBtnEl = document.createElement("button");
-    let completeBtnEl = document.createElement("button");
     let listContainer = document.querySelector("#" + object.type + "List");
     
     if (object.type !== "notes") {
@@ -242,8 +241,6 @@ const createTask = function(object) {
           editBtnEl.addClass = "hollow button warning";
           deleteBtnEl.textContent = " [Delete]";
           deleteBtnEl.addClass = "hollow alert button";
-          completeBtnEl.textContent = "[Complete] ";
-          completeBtnEl.addClass = "hollow success button";
           listItem.textContent = "[" + object.startTime + "-" + object.endTime + "] " + object.text;
           break;
         case "meeting":
@@ -267,7 +264,6 @@ const createTask = function(object) {
       }
       
       listContainer.appendChild(listItem);
-      listContainer.appendChild(completeBtnEl);
       listContainer.appendChild(editBtnEl);
       listContainer.appendChild(deleteBtnEl);
     }
