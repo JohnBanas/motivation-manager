@@ -11,32 +11,34 @@
 /** header start **/
 header {
   overflow: hidden;
-  background-color: var(--orange);
-  color: var(--lightYellow);
+  background-color: var(--mainYellow);
+  color: var(--teal);
   padding: 1rem;
 }
 
-header a {
-  color: white;
-}
-
-header a:hover {
+header div a {
   color: var(--teal);
 }
 header img {
-  color: #faea9c;
+  color: var(--teal);
   width: 10%;
   height: auto;
 }
+
 header #listHeadingDaily > a,
 header #listHeadingWeekly > a,
 header #listHeadingMonthly > a {
   background-color: #faea9c;
 }
 
+nav {
+  background-color: var(--lightYellow);
+  color: var(--lightYellow);
+}
+
 .title-bar {
   overflow: hidden;
-  background-color: var(--orange);
+  background-color: var(--lightYellow);
   color: white;
   margin: 0 auto;
   position: relative;
@@ -49,11 +51,11 @@ header #listHeadingMonthly > a {
 }
 
 #subMenuContainer a {
-  color: #fff;
+  color: var(--teal);
 }
 
 #subMenuContainer a:hover {
-  color: var(--teal);
+  color: var(--orange);
   font-weight: bold;
   font-size: 110%;
   transition: ease, 100ms;
@@ -66,6 +68,20 @@ header #listHeadingMonthly > a {
 }
 
 /** body start **/
+
+button {
+  background-color: var(--teal);
+  font-size: 80%;
+  padding: 1% 3%;
+  margin: 0 2%;
+  border-radius: 15px;
+  color: var(--lightYellow);
+}
+
+button:hover {
+  background-color: var(--orange);
+  color: var(--teal);
+}
 
 .button {
   border-radius: 15px;
@@ -90,7 +106,7 @@ body a:hover {
   text-align: center;
   font-size: 2rem;
   background-color: var(--mainYellow);
-  color: var(--orange);
+  color: var(--teal);
   font-weight: 500;
   margin-top: 3rem;
   padding: 1rem;
@@ -134,16 +150,22 @@ body a:hover {
 
 
 /** tabs for schedule section **/
+
 #mobileMenuContainer #headerDate, #panel1, #panel2, #panel3, #panel4 {
   background-color: #fff5c2;
   color: var(--teal);
 }
+
 #menuTitle {
   margin: 1rem;
 }
 
 #subMenuContainer, #subMenuDaily, #subMenuWeekly, #subMenuMonthly, #example-tabs {
   background-color: #faea9c;
+}
+
+.tabs-title > a {
+  font-size: 100%;
 }
 
 .tabs-title > a[aria-selected=true] {
@@ -158,7 +180,6 @@ body a:hover {
 .tabs-title > a:hover {
   background-color: #fffbe6;
 }
-
 
 /** modal **/
 
