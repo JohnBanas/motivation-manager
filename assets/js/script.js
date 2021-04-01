@@ -6,7 +6,6 @@ let tasksArr = [];
 // current date on load
 let now = dayjs().format('YYYY-MM-DD');
 
-
 $(document).foundation();
 
 
@@ -35,8 +34,25 @@ getWeatherData = () => {
       animatedIcon(weatherIcon);
     }).catch(function (error) {
       console.log(error);
+      // // a variable to hold temperature
+      // let temperatureEl = data.main.temp;
+      // // pass variable to function
+      // showTemp(temperatureEl);
     });
 };
+
+// var showTemp = (temperatureEl) => {
+//   // create an h6 element
+//   var tempEl = $("h6")
+//   //add text content
+//   .text("The current temperature is " + temp + "˚F")
+//   // center text to page
+//   .addClass("text-center");
+//   //append to div
+//   $("#temp").append(tempEl);
+// };
+
+
 
 //show animated icon with positive statement based on OpenWeather API icon
 
@@ -199,17 +215,24 @@ const saveTasks = function () {
 
 // create function, object = object with data entries
 //(john comment) we need to add delete/edit buttons here later
+
 const createTask = function (object) {
-
-  //commented this -- if (object.date === now) --   out as it has an effect on the modal display
+  console.log(object);
+  // if date = now
+  //if (object.date === now) {
   let listItem = document.createElement("li");
-  $(listItem).attr({ id: 'x' + object.id, data: object.data });
+  let editBtnEl = document.createElement("button");
+  let deleteBtnEl = document.createElement("button");
   let listContainer = document.querySelector("#" + object.type + "List");
-
-
+  $(listItem).attr({ id: 'x' + object.id, data: object.data });
+  //to style the buttons need id or class
   if (object.type !== "notes") {
     switch (object.type) {
       case "task":
+        editBtnEl.textContent = " [Edit] ";
+        editBtnEl.addClass = "hollow button warning";
+        deleteBtnEl.textContent = " [Delete]";
+        deleteBtnEl.addClass = "hollow alert button";
         listItem.textContent = "[" + object.startTime + "-" + object.endTime + "] " + object.text;
         break;
       case "meeting":
@@ -228,19 +251,22 @@ const createTask = function (object) {
         listItem.textContent = object.text + " To be completed by : " + object.date;
         break;
     }
-    listContainer.appendChild(listItem);
-
     if (object.mainTask === 'true') {
       $(`#x` + object.id).clone().appendTo('#mainTasksList');
     }
 
-    // if type is notes
-    if (object.notes) {
-      $('#textarea').val(object.notes);
-    }
-    now = object.date;
+    listContainer.appendChild(listItem);
+    listContainer.appendChild(editBtnEl);
+    listContainer.appendChild(deleteBtnEl);
   }
+
+  // if type is notes
+  if (object.notes) {
+    $('#textarea').val(object.notes);
+  }
+  now = object.date;
 }
+
 
 // event listener for buttons on modal
 $('#taskModal').on('click', 'button', function (event) {
@@ -401,7 +427,51 @@ $('#textarea').on('blur', function (event) {
   saveTasks();
 })
 
+/* 1.) Add Edit and Delete buttons to Modal
+  2.) Copy Modal and create a new event handler 
+  3.) Hold data from Modal in an object array
+  4.) Add information in
+
+Copy Modal and create a new button for Edit and Delete Tasks 
+
+*/
+
+//meeting location directions if there is time
+
+
+
 getQuote();
 loadTasks();
 currentDay();
 getWeatherData();
+
+
+
+/*
+update: function(event) {
+  var tempArr = [];
+  $(this).children().each(function() {
+    var text = $(this)
+      .find("p")
+      .text()
+      .trim();
+
+    var date = $(this)
+      .find("span")
+      .text()
+      .trim();
+
+    tempArr.push ({
+      text: text,
+      date: date
+    });
+  }
+
+  var arrName = $(this)
+    .attr("id")
+    .replace("list-", "");
+
+  tasks[arrName] = tempArr;
+  saveTasks();
+};
+*/
