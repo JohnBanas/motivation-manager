@@ -38,7 +38,6 @@ getWeatherData = () => {
     });
 };
 
-
 //show animated icon with positive statement based on OpenWeather API icon
 
 animatedIcon = (weatherIcon) => {
