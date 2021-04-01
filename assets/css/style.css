@@ -18,19 +18,20 @@ body {
 
 /** header start **/
 header {
+  overflow: hidden;
   background-color: var(--orange);
   color: var(--lightYellow);
   padding: 1rem;
 }
 
-header #navMenu {
-  background-color: var(--orange);
-  color: var(--lightYellow);
+header a {
+  color: white;
 }
-header #dropDownItems {
-  background-color: var(--orange);
-  color: var(--lightYellow);
+
+header a:hover {
+  color: var(--teal);
 }
+
 header img {
   color: #faea9c;
   width: 10%;
@@ -57,6 +58,16 @@ header #listHeadingMonthly > a {
   transition: ease, 100ms;
 }
 
+#titleBar {
+  background-color: var(--mainYellow);
+  color: var(--orange);
+  margin: 0 auto;
+}
+
+.menu-icon {
+  color: var(--orange);
+}
+
 /** header end **/
 
 /* dateDisplay Start*/
@@ -70,6 +81,8 @@ header #listHeadingMonthly > a {
 #quoteAPI {
   margin-top: 2rem;
 }
+
+
 
 #dateManager,
 #quoteHeading,
