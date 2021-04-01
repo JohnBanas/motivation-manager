@@ -230,9 +230,9 @@ const createTask = function(object) {
   // if date = now
   //if (object.date === now) {
     let listItem = document.createElement("li");
-    let listContainer = document.querySelector("#" + object.type + "List");
     let editBtnEl = document.createElement("button");
     let deleteBtnEl = document.createElement("button");
+    let listContainer = document.querySelector("#" + object.type + "List");
     
     if (object.type !== "notes") {
       switch (object.type) {
@@ -264,6 +264,8 @@ const createTask = function(object) {
       }
       
       listContainer.appendChild(listItem);
+      listContainer.appendChild(editBtnEl);
+      listContainer.appendChild(deleteBtnEl);
     }
   
   // if type is notes
