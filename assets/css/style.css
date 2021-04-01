@@ -117,6 +117,10 @@ body a:hover {
   border: none;
 }
 
+.tabs-title a {
+    font-size: medium;
+}
+
 .tabs-title > a:hover {
   background-color: #fffbe6;
 }
@@ -223,12 +227,3 @@ ul {
   font-size: 1.5rem;
   color: var(--teal);
 }
-
-
-/*@media screen and (max-width: 500px) 
-  #addMyTask 
-    position: relative;
-    z-index: 10;
-  
-}*/
-
