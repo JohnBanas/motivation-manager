@@ -81,8 +81,9 @@ body a:hover {
 
 #quoteElement {
   margin-top: 2rem;
-  font-family: "Sacramento", cursive;
-  font-size: 4rem;
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  font-size: 3rem;
   color: var(--orange);
 }
 
@@ -227,3 +228,16 @@ ul {
   font-size: 1.5rem;
   color: var(--teal);
 }
+
+@media screen and (max-width: 980px) {
+    #quoteElement {
+        font-size: 2rem;
+    }
+}
+  
+/* MEDIA QUERY FOR MOBILE PHONES AND SMALLER */
+@media screen and (max-width: 575px) {
+    #quoteElement {
+        font-size: 1.5rem;
+    }
+  }
