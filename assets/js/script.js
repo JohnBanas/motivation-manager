@@ -36,8 +36,6 @@ getWeatherData = () => {
 
       // a variable to hold temperature
       let temperatureEl = data.main.temp;
-      console.log(data.main.temp);
-      console.log(temperatureEl);
       // pass variable to function
       showTemp(temperatureEl);
       
@@ -47,20 +45,13 @@ getWeatherData = () => {
 };
 
 const showTemp = (temperatureEl) => {
-  // create an h6 element
-  // var tempEl = $("h6")
-  //   .addClass("text-center")
-  //   .text("The current temperature is " + temperatureEl + "˚F");
-
-  console.log(temperatureEl);
-  
+  // create an H4 element for temp
   var tempEl = document.createElement("h4");
-  //add text content
+  // add text content
   tempEl.textContent = "The current temperature is " + temperatureEl + "˚F";
-
+  // add class to align content to center
   tempEl.className = "text-center";
-
-
+  // append child
   divTemp.append(tempEl);
 };
 
@@ -237,14 +228,16 @@ const createTask = function (object) {
   let deleteBtnEl = document.createElement("button");
   let listContainer = document.querySelector("#" + object.type + "List");
   $(listItem).attr({ id: 'x' + object.id, data: object.data });
+
+  editBtnEl.textContent = " [Edit] ";
+  editBtnEl.addClass = "hollow button warning";
+  deleteBtnEl.textContent = " [Delete]";
+  deleteBtnEl.addClass = "hollow alert button";
+
   //to style the buttons need id or class
   if (object.type !== "notes") {
     switch (object.type) {
       case "task":
-        editBtnEl.textContent = " [Edit] ";
-        editBtnEl.addClass = "hollow button warning";
-        deleteBtnEl.textContent = " [Delete]";
-        deleteBtnEl.addClass = "hollow alert button";
         listItem.textContent = "[" + object.startTime + "-" + object.endTime + "] " + object.text;
         break;
       case "meeting":

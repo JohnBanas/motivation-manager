@@ -137,16 +137,23 @@ nav {
 
 
 /** tabs for schedule section **/
+
 #mobileMenuContainer #headerDate, #panel1, #panel2, #panel3, #panel4 {
   background-color: #fff5c2;
   color: var(--teal);
 }
+
 #menuTitle {
   margin: 1rem;
 }
 
 #subMenuDaily, #subMenuWeekly, #subMenuMonthly, #example-tabs {
   background-color: #faea9c;
+}
+
+.tabs-title > a {
+  font-size: 100%;
+  text-align: center;
 }
 
 .tabs-title > a[aria-selected=true] {
@@ -157,7 +164,6 @@ nav {
 .tabs-title > a:hover {
   background-color: #fffbe6;
 }
-
 
 /** modal **/
 
