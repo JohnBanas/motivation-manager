@@ -32,6 +32,12 @@ getWeatherData = () => {
     }).then(function (data) {
       let weatherIcon = data.weather[0].icon;
       animatedIcon(weatherIcon);
+
+      // a variable to hold temperature
+      let temperatureEl = data.main.temp;
+      // pass variable to function
+      showTemp(temperatureEl);
+
     }).catch(function (error) {
       console.log(error);
       // // a variable to hold temperature
