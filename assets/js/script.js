@@ -107,6 +107,8 @@ animatedIcon = (weatherIcon) => {
 
 }
 
+$('#headerDate').datepicker({dateFormat: 'yy-mm-dd'}).datepicker('setDate', 'today');
+
 // function for user date
 $('#headerDate').on('change', function (event) {
   // set chosen date 
