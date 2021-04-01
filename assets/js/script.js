@@ -233,14 +233,15 @@ const createTask = function(object) {
     let editBtnEl = document.createElement("button");
     let deleteBtnEl = document.createElement("button");
     let listContainer = document.querySelector("#" + object.type + "List");
+
+    editBtnEl.textContent = " [Edit] ";
+    editBtnEl.addClass = "hollow button warning";
+    deleteBtnEl.textContent = " [Delete]";
+    deleteBtnEl.addClass = "hollow alert button";
     
     if (object.type !== "notes") {
       switch (object.type) {
         case "task":
-          editBtnEl.textContent = " [Edit] ";
-          editBtnEl.addClass = "hollow button warning";
-          deleteBtnEl.textContent = " [Delete]";
-          deleteBtnEl.addClass = "hollow alert button";
           listItem.textContent = "[" + object.startTime + "-" + object.endTime + "] " + object.text;
           break;
         case "meeting":
