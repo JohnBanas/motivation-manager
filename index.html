@@ -4,7 +4,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="title" content="Motivation Manager"/>
+  <meta name="title" content="Motivation Manager" />
   <meta name="description" content="Fully Responsive, interactive daily motivation scheduler application
     that includes that allows you to accomplishment more with less" />
   <meta name="keywords" content="motivation, scheduler, responsive, interactive" />
@@ -33,15 +33,10 @@
   <link rel="shortcut icon" type="image/jpg" href="assets/images/bobcat-favicon.png" />
   <script src="https://kit.fontawesome.com/2723252070.js" crossorigin="anonymous"></script>
 </head>
-
+<!-- start of body -->
 <body class="grid-container">
   <header class="grid-container full text-center">
     <!--Mobile Navigation Menu-->
-    <div class="title-bar" data-responsive-toggle="responsive-menu" data-hide-for="medium">
-      <button class="menu-icon" type="button" data-toggle="responsive-menu"></button>
-      <div class="title-bar-title">Menu</div>
-    </div>
-    <!-- Site Title -->
     <div>
       <!--Bob Cat Image-->
       <a href="#">
@@ -49,34 +44,36 @@
       </a>
       <!-- Title -->
       <h4><em>Welcome To</em></h4>
-      <a href="#"><h1>Motivation Manager</h1></a>
+      <p>
+        <h1>Motivation Manager</h1>
+      </p>
       <h1 id="dateDisplay" class="text-center"></h1>
-      
+
     </div>
-      <!-- Navigation Menu -->
-      <nav id="navbar-bottom" class="cell">
-        <ul>
-          <li>
-            <ul id="subMenuContainer" class="menu align-center">
-              <li><a href="#myMeetings">Meetings</a></li>
-              <li><a href="#mainTasks">Tasks</a></li>
-              <li><a href="#panel1">Scheduler</a></li>
-              <li><a href="#notes">Notes</a></li>
-              <li><a href="#addMyTask" data-open="taskModal"><i class="fas fa-plus"></i> Create Task</a></li>
-            </ul>
+    <!-- Navigation Menu -->
+  </header>
+  <nav id="navbar-bottom" class="cell">
+    <ul>
+      <li class="grid-container">
+        <ul id="subMenuContainer" class=" grid-x grid-margin-x menu align-center">
+          <li class="cell large-auto"><a href="#myMeetings">Meetings</a></li>
+          <li class="cell large-auto"><a href="#mainTasks">Tasks</a></li>
+          <li class="cell large-auto"><a href="#panel1">Scheduler</a></li>
+          <li class="cell large-auto"><a href="#notes">Notes</a></li>
+          <li class="cell large-auto"><a href="#addMyTask" data-open="taskModal">
+              <i class="fas fa-plus"></i> Create Task</a>
           </li>
         </ul>
-      </div>
-    </nav>
-  </header>
-
+      </li>
+    </ul>
+  </nav>
   <!-- End of Header, Nav Menu -->
   <!--Main-->
   <main>
     <!-- Date & Quote Section-->
     <section id="date">
       <h2 id="dateDisplay" class="text-center"></h2>
-    <!--Quote API Section-->
+      <!--Quote API Section-->
       <p id="quoteElement"></p>
     </section>
     </section>
@@ -154,24 +151,13 @@
     </section>
 
     <!--Big 3 Overview(Tasks) + Meetings Section-->
-    <!--Notes: plus icon is listening and modal pops up with input title, meeting or task selector, and time selector
-        sign changes to an open circle for meeting (<i class="far fa-circle"></i>) drops into meetings tab and into specified time, 
-            closed for task (<i class="fas fa-circle"></i>) drops into "big 3 section" and into time area -->
     <section id="tasks">
-      <!-- Article tag below needs to be a card -->
-      <!-- (John) I don't think we need cards we can style lists?
-      on the list item in these, we could create a button dynamically with jQuery/JavaScript. That button could 
-      pull up the task modal and put all the info in to allow for edits. Let me know what you guys think.-->
       <article>
-        <!-- Div below needs to be card body-->
         <div id="meetingsContainer">
-          <!--Card title-->
           <h3 id="myMeetings">Meetings</h3>
-          <!--Notes: List needs to have open circle bullets-->
           <ul id="meetingList">
           </ul>
         </div>
-        <!--Card Body-->
         <div>
           <!--Card title-->
           <h3 id="mainTasks">Main Tasks</h3>
@@ -233,9 +219,6 @@
 
     <!-- Notes Section-->
     <section id="notes">
-      <!--Notes: TextArea on click allows you to insert text and saves text when you tap outside-->
-      <!-- (John) Should this be something else? If you click into it by accident, wouldn't it delete the content 
-      when you clicked out again? Also with all the different options, do we need a notes section at this stage? -->
       <article>
         <h3 id="myNotes">Notes</h3>
         <textarea id="textarea"></textarea>
@@ -244,24 +227,14 @@
 
     <!-- Add Task Section-->
     <section>
-      <!--Notes: Add task section, fixed, sticky on scroll,
-        above the footer tool bar at the bottom right of the page, 
-        think of easy access to the right thumb
-        Task Modal (from) pops up with title, type (meeting or task), and time selector -->
-      <!-- (john) I will make a sticky bar for this later -->
-      
       <!-- Task Modal -->
       <div class="grid-container">
         <div class="cell">
           <!-- button to activate modal -->
-          <!-- <div class= "cell small-6 right" data-sticky-container>
-            <div class= "sticky" data-sticky data-margin-right> -->
-              <h2 id="plusIcon"><a id="openBtn" data-open="taskModal">
-                <button id="addMyTask">
+          <h2 id="plusIcon"><a id="openBtn" data-open="taskModal">
+              <button id="addMyTask">
                 Add Task
               </button></a></h2>
-            <!-- </div>
-          </div> -->
           <div class="reveal grid-container fluid" id="taskModal" data-reveal data-tasktype="task">
             <!-- modal button options -->
             <div class="grid-x grid-margin-x grid-padding-x">
@@ -340,11 +313,8 @@
   <!--Font Awesome Script-->
   <script src="https://kit.fontawesome.com/6ae9d1af5f.js" crossorigin="anonymous"></script>
   <!-- map script -->
-
   <!--Our Script File-->
   <script src="./assets/js/script.js"></script>
   <!-- Script from W3Schools to animate header navigation-->
-  
 </body>
-
 </html>

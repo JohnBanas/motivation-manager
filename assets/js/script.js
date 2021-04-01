@@ -38,7 +38,7 @@ getWeatherData = () => {
       let temperatureEl = data.main.temp;
       // pass variable to function
       showTemp(temperatureEl);
-      
+
     }).catch(function (error) {
       console.log(error);
     });
@@ -106,6 +106,8 @@ animatedIcon = (weatherIcon) => {
   }
 
 }
+//set datepicker date to current day
+$('#headerDate').datepicker({ dateFormat: 'yy-mm-dd' }).datepicker('setDate', 'today');
 
 // function for user date
 $('#headerDate').on('change', function (event) {
