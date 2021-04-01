@@ -3,7 +3,6 @@ let listID;
 let previousStart = 0;
 let quoteArr = [];
 let tasksArr = [];
-let orderedArr = [];
 // current date on load
 let now = dayjs().format('YYYY-MM-DD');
 
@@ -23,15 +22,20 @@ let cityNameEl = 'nashville'; // either grab input to register user city or figu
 getWeatherData = () => {
   // format "open weather map" api url
   let apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityNameEl + '&appid=882d7b151f3175e892df45d1e68ea9dd';
-
-
   // make a request to the url
-  fetch(apiUrl).then(function (response) {
-    response.json().then(function (data) {
+  fetch(apiUrl)
+    .then(function (response) {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw new Error('Something went wrong.');
+      }
+    }).then(function (data) {
       let weatherIcon = data.weather[0].icon;
       animatedIcon(weatherIcon);
+    }).catch(function (error) {
+      console.log(error);
     });
-  });
 };
 
 
@@ -85,22 +89,12 @@ animatedIcon = (weatherIcon) => {
 
 }
 
-// Casey Code below. needs a lot of TLC
 // function for user date
 $('#headerDate').on('change', function (event) {
-  // set chosen date = newNow
+  // set chosen date 
   now = event.target.value;
-  // clear all list containers
-  $('#taskList').empty();
-  $('#meetingList').empty();
-  $('#gratefulList').empty();
-  $('#studyList').empty();
-  $('#radarList').empty();
-  $('#developList').empty();
-  $('#mainTasksList').empty();
-  $('#textarea').val('');
+  modalOnSavePage();
   // load page with new date
-  // no need to pass parameter newNow as we make global var now equal to what was newNow
   loadTasks();
   currentDay();
 })
@@ -116,21 +110,12 @@ modalOnSavePage = () => {
   $('#textarea').val('');
 }
 
-// (Casey Comment) I think we can take most of this out of this 
-// function. we only need the value reset, and formatted now.
-// we can make now.withFormat global and update its value from calendar event
-// if we dont update now global, we can add a parameter "date" to replace 
-
 const currentDay = function () {
   $('#dateDisplay').empty();
-  displayNow = dayjs().format("dddd, MMMM D, YYYY"); //... no format required, now is formatted and all new dates will be formatted as well
+  displayNow = dayjs(now).format("dddd, MMMM D, YYYY");
   $('#dateDisplay').append(displayNow)
 }
 
-
-
-
-// !!!important!!! NOT USING QUOTES.rest here....
 // fetch to get quotes
 const getQuote = function () {
   // send fetch request
@@ -142,8 +127,8 @@ const getQuote = function () {
         // return .json()-ified response
         return response.json();
       } else {
-        // Currently stop function...maybe add error display?
-        return;
+        // display error 
+        throw new Error('Something went wrong.');
       }
     }).then(function (data) {
       // run for loop  
@@ -154,6 +139,9 @@ const getQuote = function () {
         quoteArr.push(randomQuote);
       }
       quoteRefreshTimer();
+    }) //catch error
+    .catch(function (error) {
+      console.log(error);
     })
 }
 
@@ -182,13 +170,10 @@ const quoteRefreshTimer = function () {
 }
 
 // LIST CREATION WITH SAVE AND LOAD BELOW
-// TODO FIGURE OUT HOW TO SAVE!
-
 
 // load tasks function
 const loadTasks = function () {
-  //   // !!! names are editable, key needs to be updated to true value
-  //   // add loaded tasks to tasksObj
+  // add loaded tasks to tasksObj
   newTasksObj = JSON.parse(localStorage.getItem("tasksArr"));
   //.sort() funtion to put them in order
   if (newTasksObj) {
@@ -196,18 +181,16 @@ const loadTasks = function () {
     tasksArr.sort(function (x, y) {
       return x.data - y.data;
     });
-    console.log(tasksArr);
   } else {
     return;
   }
   for (let i = 0; i < tasksArr.length; i++) {
 
     if (tasksArr[i].date === now) {
-      //createTask(tasksArr[i].type, tasksArr[i].text, tasksArr[i].date, tasksArr[i].startTime, tasksArr[i].endTime, tasksArr[i].mainTask, tasksArr[i].notes)
-      // or send entire obj to createTask if date is correct;
       createTask(tasksArr[i]);
     }
   }
+  //delete old tasks
   dateAudit(tasksArr);
 }
 const saveTasks = function () {
@@ -221,7 +204,7 @@ const createTask = function (object) {
 
   //commented this -- if (object.date === now) --   out as it has an effect on the modal display
   let listItem = document.createElement("li");
-  $(listItem).attr({ id: 'x' + object.id , data: object.data });
+  $(listItem).attr({ id: 'x' + object.id, data: object.data });
   let listContainer = document.querySelector("#" + object.type + "List");
 
 
@@ -338,7 +321,7 @@ $('#openBtn').on("click", function () {
 // when save btn is clicked in modal...
 $('#saveTasksBtn').on('click', function () {
 
-  let localObject= JSON.parse(localStorage.getItem("tasksArr"));
+  let localObject = JSON.parse(localStorage.getItem("tasksArr"));
   if (localObject) {
     listID++;
   } else {
@@ -374,7 +357,7 @@ $('#saveTasksBtn').on('click', function () {
 
     // save updated taskArr
     saveTasks();
-    
+
     // consider pushing entire object.
     now = inputDate;
     modalOnSavePage();
@@ -382,45 +365,21 @@ $('#saveTasksBtn').on('click', function () {
   }
 })
 
-
-
-/*
-sort function in here for the li order
- timeCompare = JSON.parse(localStorage.getItem("tasksArr"));
-  //goes through each object in array and get the start time
-  //changes it to a string and removes the colon
-  //then changes to integer
-  
-
-  
-
-*/
-
 //Casey text with original code John helped comment & code => Auto delete function for past tasks
 const dateAudit = function (tasksArr) {
-  let past = dayjs().subtract(2, 'day').format('YYYY-MM-DD');
-
+  let past = dayjs().subtract(1, 'day').format('YYYY-MM-DD');
   for (let i = 0; i < tasksArr.length; i++) {
-
-    let taskDate = Date.parse(tasksArr[i].date);
-    past = Date.parse(past);
-    if (taskDate <= past) {
+    if (dayjs(tasksArr[i].date).isBefore(past)) {
       tasksArr.splice(i, 1);
       saveTasks();
     }
   }
 }
 
-
-
-
-
 // notes event handler
-// SAMPLE CHANGE for text area
 $('#textarea').on('blur', function (event) {
   let notes = event.target.value;
   let noteType = "notes"
-
   // check if there in at least ONE object that fits conditions in some() method
   //John updated via Casey text message
   if (tasksArr.some(object => object.type === "notes" && object.date === now)) {
@@ -440,16 +399,8 @@ $('#textarea').on('blur', function (event) {
     // push new object to tasks Array
     tasksArr.push(notesObj);
   }
-
-
   saveTasks();
 })
-
-
-
-//meeting location directions if there is time
-
-
 
 getQuote();
 loadTasks();
