@@ -229,9 +229,9 @@ const createTask = function (object) {
   let listContainer = document.querySelector("#" + object.type + "List");
   $(listItem).attr({ id: 'x' + object.id, data: object.data });
 
-  editBtnEl.textContent = " [Edit] ";
+  editBtnEl.textContent = "edit";
   editBtnEl.addClass = "hollow button warning";
-  deleteBtnEl.textContent = " [Delete]";
+  deleteBtnEl.textContent = "delete";
   deleteBtnEl.addClass = "hollow alert button";
 
   //to style the buttons need id or class
@@ -261,8 +261,8 @@ const createTask = function (object) {
     }
 
     listContainer.appendChild(listItem);
-    listContainer.appendChild(editBtnEl);
-    listContainer.appendChild(deleteBtnEl);
+    listItem.appendChild(editBtnEl);
+    listItem.appendChild(deleteBtnEl);
   }
 
   // if type is notes
@@ -345,6 +345,9 @@ $('#openBtn').on("click", function () {
   }
   uncheck();
 })
+
+// EVENT HANDLER TO EDIT BUTTON
+$('#edit')
 
 //(john comment) we need to make sure we don't allow saving empty tasks
 // (Casey comment) agreed but we have to list conditionals per task type as they require some different inputs 
