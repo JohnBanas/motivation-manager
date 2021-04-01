@@ -78,6 +78,10 @@ header #listHeadingMonthly > a {
   color: var(--orange);
 }
 
+.button {
+  border-radius: 15px;
+}
+
 /** header end **/
 
 /* dateDisplay Start*/
