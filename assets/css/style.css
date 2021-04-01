@@ -1,0 +1,234 @@
+/* color pallet */
+:root {
+  --lightYellow: #fffbe6;
+  --mainYellow: #faea9c;
+  --orange: #ff9100;
+  --teal: #2596be;
+}
+
+
+
+
+/** header start **/
+header #navMenu {
+  background-color: #fffbe6;
+}
+header #dropDownItems {
+  background-color: #fffbe6;
+}
+header img {
+  color: #faea9c;
+  max-width: 100%;
+  height: auto;
+}
+header #listHeadingDaily > a,
+header #listHeadingWeekly > a,
+header #listHeadingMonthly > a {
+  background-color: #faea9c;
+}
+
+/** header end **/
+
+/** body start **/
+
+body {
+  font: 100%;
+  font-family: "IBM Plex Serif", serif;
+  background-color: var(--lightYellow);
+  color: #ff9100;
+}
+body a:hover {
+  background-color: #fffbe6;
+}
+/** body end **/
+
+/** quote start **/
+#quoteAPI {
+  margin-top: 2rem;
+}
+
+#dateManager,
+#quoteHeading,
+#forecast,
+#gratefulThings,
+#myMeetings,
+#mainTasks,
+#myNotes {
+  text-align: center;
+  font-size: 2rem;
+  background-color: var(--mainYellow);
+  color: var(--orange);
+  font-weight: 500;
+  margin-top: 3rem;
+  padding: 1rem;
+}
+
+#gratefulThings
+ {
+  color: var(--lightYellow);
+  background-color: var(--teal);
+}
+
+#myMeetings {
+  color: var(--lightYellow);
+  background-color: var(--orange);
+}
+
+#mainTasks {
+  color: var(--lightYellow);
+  background-color: maroon;
+}
+
+#quoteElement {
+  margin-top: 2rem;
+  font-family: "Sacramento", cursive;
+  font-size: 4rem;
+  color: var(--orange);
+}
+
+/** end quote **/
+
+/** weather **/
+#weatherContainer {
+  border: 0.1rem solid black;
+  border-radius: 0.5rem;
+}
+
+#headerDate {
+  font-size: 1.5rem;
+}
+
+
+/** tabs for schedule section **/
+#headerDate, #panel1, #panel2, #panel3, #panel4 {
+  background-color: #fff5c2;
+  color: var(--teal);
+}
+#menuTitle {
+  margin: 1rem;
+}
+
+#subMenuContainer, #subMenuDaily, #subMenuWeekly, #subMenuMonthly, #example-tabs {
+  background-color: #faea9c;
+}
+
+.tabs-title > a[aria-selected=true] {
+  background-color: #fffbe6;
+  border: none;
+}
+
+.tabs-title > a:hover {
+  background-color: #fffbe6;
+}
+
+
+/** modal **/
+
+#addMyTask {
+  background-color: #ffb453;
+  color: #fff5c2;
+  padding: 1.5rem;
+  border-radius: 1rem;
+}
+
+#addMyTask:hover {
+  cursor: pointer;
+  box-shadow: 0 0.4rem 1.4rem 0 rgba(255, 180, 83, 0.616);
+  transform: translateY(-0.1rem);
+  transition: transform 150ms;
+}
+
+#plusIcon,
+.statement {
+  text-align: center;
+}
+
+.modalToggle {
+  display: none;
+}
+
+#taskDate, 
+#startTime,
+#endTime {
+  background-color: #fff5c2;
+}
+
+.map {
+  height: 10rem;
+}
+
+textarea {
+  background-color: #fffbe6;
+  color: var(--teal);
+  font-size: larger;
+}
+
+#taskModal {
+  background-color: #faea9c;
+}
+
+#taskModal > textarea {
+  margin-top: 2rem;
+  background-color: #fffbe6;
+}
+
+#btnListOne > .modalButton, #btnListTwo > .modalButton {
+  font-size: 2rem;
+  background-color: var(--mainYellow);
+  border-color: #f5cc00;
+  color: var(--teal);
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border-radius: 0.5rem;
+  width: 100%;
+}
+
+#btnListOne > .modalButton:hover, #btnListTwo > .modalButton:hover {
+  cursor: pointer;
+  box-shadow: 0 0.4rem 1.4rem 0 rgba(255, 180, 83, 0.616);
+  transform: translateY(-0.1rem);
+  transition: transform 150ms;
+} 
+
+#taskModal > #saveTasksBtn {
+  font-size: 1.5rem;
+  background-color: #ffb453;
+  border-color: #f5cc00;
+  color: #fffbe6;
+  padding: 1rem;
+  margin-top: 2rem;
+  border-radius: 0.5rem;
+}
+
+#taskModal > #saveTasksBtn:hover {
+  cursor: pointer;
+  box-shadow: 0 0.4rem 1.4rem 0 rgba(255, 180, 83, 0.616);
+  transform: translateY(-0.1rem);
+  transition: transform 150ms;
+}
+
+#taskModal > #modalHeading {
+  text-align: center;
+}
+
+#mainTasksList,
+#gratefulList,
+#meetingList {
+  background-color: #fffbe6;
+}
+
+ul {
+  list-style: none;
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--teal);
+}
+
+
+/*@media screen and (max-width: 500px) 
+  #addMyTask 
+    position: relative;
+    z-index: 10;
+  
+}*/
+

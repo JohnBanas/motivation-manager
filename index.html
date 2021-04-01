@@ -1,218 +1,350 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="title" content="Motivation Manager" />
-    <meta
-      name="description"
-      content="Fully Responsive, interactive daily motivation scheduler application
-    that includes that allows you to accomplishment more with less"
-    />
-    <meta
-      name="keywords"
-      content="motivation, scheduler, responsive, interactive"
-    />
-    <meta name="author" content="Vanderbilt Bootcamp Team" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Test comment -->
 
-    <!--Google Fonts-->
-    <link
-      href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap"
-      rel="stylesheet"
-    />
-    <!--Open Iconic Stylesheet-->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic.min.css"
-      integrity="sha512-LeCmts7kEi09nKc+DwGJqDV+dNQi/W8/qb0oUSsBLzTYiBwxj0KBlAow2//jV7jwEHwSCPShRN2+IWwWcn1x7Q=="
-      crossorigin="anonymous"
-    />
-    <!--Style Sheets-->
-    <link rel="stylesheet" href="./assets/css/style.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="title" content="Motivation Manager"/>
+  <meta name="description" content="Fully Responsive, interactive daily motivation scheduler application
+    that includes that allows you to accomplishment more with less" />
+  <meta name="keywords" content="motivation, scheduler, responsive, interactive" />
+  <meta name="author" content="Vanderbilt Bootcamp Team" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Motivation Manager</title>
-    <link rel="shortcut icon" type="image/jpg"
-    href="assets/images/bobcat-favicon.png"
-  </head>
-  <body>
-    <!--Header-->
-    <header>
-      <!--Logo-->
-      <div>
-        <img src="assets/images/bobcat.png" />
-        <!--Header style is Bold for Motivation, then lightest for Manager span-->
-        <h1>Motivation <span>Manager</span></h1>
+  <!--Google Fonts-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@300&family=Sacramento&display=swap"
+    rel="stylesheet">
+  <!--Open Iconic Stylesheet-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic.min.css"
+    integrity="sha512-LeCmts7kEi09nKc+DwGJqDV+dNQi/W8/qb0oUSsBLzTYiBwxj0KBlAow2//jV7jwEHwSCPShRN2+IWwWcn1x7Q=="
+    crossorigin="anonymous" />
+  <!--Compressed CSS with Foundation -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
+    integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+  <!--Style Sheets-->
+  <link rel="stylesheet" href="assets/css/weather-icon.css">
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
+  <title>Motivation Manager</title>
+  <link rel="shortcut icon" type="image/jpg" href="assets/images/bobcat-favicon.png" />
+  <script src="https://kit.fontawesome.com/2723252070.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="grid-container">
+  <!--Header-->
+  <header id="header" class="grid-container full">
+    <!--Navigation Bar is connected to Header (for styling purposes)-->
+    <nav class="cell">
+      <!-- This is for mobile responsive view in Foundation -->
+      <div id="titleBar" class="title-bar" data-responsive-toggle="navMenu" data-hide-for="medium">
+        <button class="menu-icon" type="button" data-toggle="navMenu"></button>
+        <div class="title-bar-title">Menu</div>
       </div>
-      <!--Navigation Bar-->
-      <nav>
-        <ul>
-          <li><a href="#">Daily</a></li>
-          <li><a href="./pages/week.html">Weekly</a></li>
-          <li><a href="./pages/month.html">Monthly</a></li>
-        </ul>
-      </nav>
-    </header>
-    <!--Main-->
-    <main>
-      <!--Quote API Section-->
-      <section id="quoteAPI">
-        <article>
-          <h3>Quote of the day</h3>
-          <p>"To Be or...Not to be... - William Shakespeare</p>
-        </article>
-      </section>
+      <!-- Responsive view and all Header content -->
+      <div class="top-bar" id="navMenu">
+        <!-- Site title -->
+        <h1>Motivation <span>Manager</span></h1>
+        <div class="top-bar-right">
+          <!-- Dropdown Menu (John) side note: do we need daily/weekly/monthly? Or should we have a calendar that
+          drops down and lets you select the date? then it would automatically display/save information based on that.
+          Then you can access the schedule/radar/study/develop from the tabs section on that particular date chosen from the 
+          calendar. Let me know -->
+          <ul id="dropDownItems" class="dropdown menu" data-dropdown-menu>
+            <li>
+              <h2>
+                <!-- Bobcat Image -->
+                <img class="align-center" src="assets/images/bobcat.png" alt="bobcat icon">
+              </h2>
+              <ul id="subMenuContainer" class="menu">
+                <li><a href="#quoteAPI">Inspiring Quote</a></li>
+                <li><a href="#forecast">Weather Today</a></li>
+                <li><a href="#gratefulThings">Gratitude</a></li>
+                <li><a href="#myMeetings">Meetings</a></li>
+                <li><a href="#mainTasks">Main Goals</a></li>
+                <li><a href="#panel1">Schedule</a></li>
+                <li><a href="#notes">Notes</a></li>
+                <li><a href="#addMyTask">Create Tasks</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    </div>
+  </header>
+  <!-- End of Header, Nav Menu -->
 
-      <!--Weather API Section-->
-      <section id="weatherAPI">
-        <article>
-          <h3>Daily Forecast</h3>
-          <!--Notes, simple weather icon with tempurature-->
-          <div></div>
-        </article>
-      </section>
-
-      <!-- Grateful Section-->
-      <!-- Modal pops up with a text box, creates an li element-->
-      <section id="grateful">
-        <article>
-          <div>
-            <h3>Things I Am Grateful For</h3>
-            <ul>
-              <li class="fas fa-plus-circle"></li>
-            </ul>
+  <!--Main-->
+  <main>
+    <!--Weather API Section-->
+    <section id="weatherAPI">
+      <article>
+        <h3 id="forecast">Current Forecast ~ <span id="dateDisplay"></span></h3>
+        <!--weather icon with temperature, (that dynamically affects the page?) -->
+        <div id="weatherContainer">
+          <div id="sunShower" class="icon sun-shower">
+            <div class="cloud"></div>
+            <div class="sun">
+              <div class="rays"></div>
+            </div>
+            <div class="rain"></div>
           </div>
-        </article>
-      </section>
 
-      <!--Big 3 Overview + Meetings Section-->
-      <!--Notes: plus icon is listening and modal pops up with input title, meeting or task selector, and time selector
+          <div id="thunderStorm" class="icon thunder-storm">
+            <div class="cloud"></div>
+            <div class="lightning">
+              <div class="bolt"></div>
+              <div class="bolt"></div>
+            </div>
+          </div>
+
+          <div id="cloudy" class="icon cloudy">
+            <div class="cloud"></div>
+            <div class="cloud"></div>
+          </div>
+
+          <div id="snow" class="icon flurries">
+            <div class="cloud"></div>
+            <div class="snow">
+              <div class="flake"></div>
+              <div class="flake"></div>
+            </div>
+          </div>
+
+          <div id="sunny" class="icon sunny">
+            <div class="sun">
+              <div class="rays"></div>
+            </div>
+          </div>
+
+          <div id="rainy" class="icon rainy">
+            <div class="cloud"></div>
+            <div class="rain"></div>
+          </div>
+
+        </div>
+        <h3 class="statement sunShowerStatement">Scattered showers today, take an umbrella with you.</h3>
+        <h3 class="statement thunderStormStatement">Severe thunderstorms, stay inside and stay safe.</h3>
+        <h3 class="statement cloudyStatement">It's going to be cloudy, but you always brighten up my day!</h3>
+        <h3 class="statement snowStatement">Dress warm and wear good boots, it may snow today.</h3>
+        <h3 class="statement sunnyStatement">Perfect day to be outside, be sure to enjoy it.</h3>
+        <h3 class="statement rainyStatement">Rain expected today, maybe time to work on some indoor projects.</h3>
+      </article>
+    </section>
+
+    <!--Quote API Section-->
+    <section id="quoteAPI">
+      <h3 id="quoteHeading">Quote of the day</h3>
+      <p id="quoteElement"></p>
+    </section>
+
+
+    <h3 id="dateManager">What date would you like to manage?</h3>
+    <input type="date" id="headerDate" name="headerDate"></input>
+
+    <!-- Grateful Section-->
+    <section id="grateful">
+      <article>
+        <h3 id="gratefulThings">Things I Am Grateful For</h3>
+        <div>
+          <ul id="gratefulList">
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <!--Big 3 Overview(Tasks) + Meetings Section-->
+    <!--Notes: plus icon is listening and modal pops up with input title, meeting or task selector, and time selector
         sign changes to an open circle for meeting (<i class="far fa-circle"></i>) drops into meetings tab and into specified time, 
             closed for task (<i class="fas fa-circle"></i>) drops into "big 3 section" and into time area -->
-      <section id="big3">
-        <!-- Article tag below needs to be a card -->
-        <article>
-          <!-- Div below needs to be card body-->
-          <div>
-            <!--Card title-->
-            <h3>Meetings</h3>
-            <!--Notes: List needs to have open circle bullets-->
-            <ul>
-              <li class="fas fa-plus-circle"></li>
-            </ul>
-          </div>
-          <!--Card Body-->
-          <div>
-            <!--Card title-->
-            <h3>Big 3</h3>
-            <!--Notes: List needs to have closed circle bullets when you click on task, you can edit-->
-            <ul>
-              <li class="fas fa-plus-circle"></li>
-            </ul>
-          </div>
-        </article>
-      </section>
-
-      <!--Day Section-->
-      <section id="daySchedule">
+    <section id="tasks">
+      <!-- Article tag below needs to be a card -->
+      <!-- (John) I don't think we need cards we can style lists?
+      on the list item in these, we could create a button dynamically with jQuery/JavaScript. That button could 
+      pull up the task modal and put all the info in to allow for edits. Let me know what you guys think.-->
+      <article>
+        <!-- Div below needs to be card body-->
+        <div id="meetingsContainer">
+          <!--Card title-->
+          <h3 id="myMeetings">Meetings</h3>
+          <!--Notes: List needs to have open circle bullets-->
+          <ul id="meetingList">
+          </ul>
+        </div>
+        <!--Card Body-->
         <div>
-          <!-- Notes: Need help with this... It may be something we have to create an eventListener for..
-            I believe there is a jQuery select dropdown menu that should be an easy fix
-            View drop-down menu for schedule view(#daySchedule), 
-            radar items view(./pages/view/radar.html#radarView), 
-            study items goes to (./pages/view/radar.html#studyView), 
-            and personal development(./pages/view/development.html#developmentView) 
-            goes to page when selected -->
-          <select name="view" id="view">
-            <option value="scheduleView">
-              <a href="#daySchedule"> Schedule </a>
-            </option>
-            <option value="radarView">
-              <a href="./pages/view/radar.html#radarView"> Radar Items </a>
-            </option>
-            <option value="studyView">
-              <a href="./pages/view/study.html#studyView"> Study Materials </a>
-            </option>
-            <option value="personalView">
-              <a href="./pages/view/development.html#developmentView">
-                Personal Development
-              </a>
-            </option>
-          </select>
+          <!--Card title-->
+          <h3 id="mainTasks">Main Tasks</h3>
+          <!--Notes: List needs to have closed circle bullets when you click on task, you can edit-->
+          <ul id="mainTasksList">
+          </ul>
         </div>
-        <!--Time block container-->
-        <div class="timeblocks" id="day">
-          <!--Notes: Script on time blocks starting from 5:00am - 10:00pm -->
-        </div>
-      </section>
+      </article>
+    </section>
 
-      <!-- Notes Section-->
-      <section id="notes">
-        <!--Notes: TextArea on click allows you to insert text and saves text when you tap outside-->
-        <article>
-          <h3>Notes</h3>
-          <textarea id="textarea"></textarea>
-        </article>
-      </section>
+    <!--(JOhn) tabs section display for current day's schedule etc. -->
+    <section class="grid-container">
+      <article class="cell">
+        <ul class="tabs" data-tabs id="example-tabs">
+          <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Schedule</a></li>
+          <li class="tabs-title"><a href="#panel2">Radar Items</a></li>
+          <li class="tabs-title"><a href="#panel4">Personal Development</a></li>
+        </ul>
 
-      <!-- Add Task Section-->
-      <section>
-        <!--Notes: Add task section, fixed, sticky on scroll,
+        <section class="tabs-content" data-tabs-content="example-tabs">
+          <div class="tabs-panel is-active" id="panel1">
+            <div>
+              <!-- schedule tasks content saved here from modal -->
+              <ul id="taskList">
+              </ul>
+            </div>
+          </div>
+          <div class="tabs-panel" id="panel2">
+            <div>
+              <!-- Radar tasks content saved here from modal -->
+              <ul id="radarList">
+              </ul>
+            </div>
+          </div>
+          <div class="tabs-panel" id="panel3">
+            <div>
+              <!-- Study modal content here -->
+              <ul id="studyList">
+              </ul>
+            </div>
+          </div>
+          <div class="tabs-panel" id="panel4">
+            <div>
+              <!-- modal personal development content here -->
+              <ul id="developList">
+              </ul>
+            </div>
+          </div>
+        </section>
+      </article>
+      <!-- (John) Any modal item created needs to be saved to local storage with the Date & Time so that we can 
+      display the correct items on the requested day -->
+      <!--Time block container-->
+      <div class="timeblocks" id="day">
+        <!--Notes: Script on time blocks starting from 5:00am - 10:00pm -->
+      </div>
+    </section>
+
+    <!-- Notes Section-->
+    <section id="notes">
+      <!--Notes: TextArea on click allows you to insert text and saves text when you tap outside-->
+      <!-- (John) Should this be something else? If you click into it by accident, wouldn't it delete the content 
+      when you clicked out again? Also with all the different options, do we need a notes section at this stage? -->
+      <article>
+        <h3 id="myNotes">Notes</h3>
+        <textarea id="textarea"></textarea>
+      </article>
+    </section>
+
+    <!-- Add Task Section-->
+    <section>
+      <!--Notes: Add task section, fixed, sticky on scroll,
         above the footer tool bar at the bottom right of the page, 
         think of easy access to the right thumb
         Task Modal (from) pops up with title, type (meeting or task), and time selector -->
-        <div id="add-task">
-          <h2>
-            Add Task
-            <i class="fas fa-plus-circle"></i>
-          </h2>
+      <!-- (john) I will make a sticky bar for this later -->
+      
+      <!-- Task Modal -->
+      <div class="grid-container">
+        <div class="cell">
+          <!-- button to activate modal -->
+
+              <h2 id="plusIcon">
+                <a id="openBtn" data-open="taskModal">
+                  <button id="addMyTask">Add Task</button>
+                </a>
+              </h2>
+          
+          <div class="reveal grid-container fluid" id="taskModal" data-reveal data-tasktype="task">
+            <!-- modal button options -->
+            <div class="grid-x grid-margin-x grid-padding-x">
+              <h1 class="cell" id="modalHeading">What can we manage for you today?</h1>
+              <div id="btnListOne" class="grid-container full">
+                <button id="modalTaskButton" class="grid-x grid-margin-x grid-padding-x modalButton">Task</button>
+                <button id="modalMeetingButton" class="grid-x grid-margin-x grid-padding-x modalButton">Meeting</button>
+                <button id="modalGratefulButton"
+                  class="grid-x grid-margin-x grid-padding-x modalButton">Grateful</button>
+              </div>
+              <div id="btnListTwo" class="grid-container full">
+                <button id="modalRadarButton" class="grid-x grid-margin-x grid-padding-x modalButton">Radar</button>
+                <button id="modalStudyButton" class="grid-x grid-margin-x grid-padding-x modalButton">Study</button>
+                <button id="modalDevelopButton" class="grid-x grid-margin-x grid-padding-x modalButton">Develop</button>
+              </div>
+            </div>
+            <!-- modal task input area -->
+            <textarea class="cell" id="modalTextInput" placeholder="Title/Description"></textarea>
+            <!-- Create a date selection method -->
+            <div class="cell" id="taskDateContainer">
+              <label for="taskDate">Please choose a date</label>
+              <input type="date" id="taskDate" name="taskDate"></input>
+            </div>
+            <!-- create time start selection method here -->
+            <div class="cell" id="startTimeContainer">
+              <label for="startTime">Start Time</label>
+              <input type="time" id="startTime" name="startTime">
+            </div>
+            <!-- create end time selection method here -->
+            <div class="cell" id="endTimeContainer">
+              <label for="endTime">End Time</label>
+              <input type="time" id="endTime" name="endTime">
+            </div>
+            <!-- meeting location -->
+            <div id="map" class="map"></div>
+            <h3>Would you like to add this to your MAIN tasks?</h3>
+            <div class="switch">
+              <input class="switch-input" id="mainTaskCheckbox" type="checkbox" name="mainTaskCheckbox" checked>
+              <label class="switch-paddle" for="mainTaskCheckbox">
+                <span class="show-for-sr">Is this a main task?</span>
+              </label>
+            </div>
+            <!-- ADD DATA-Close to save button to close modal on save -->
+            <button class="cell" id="saveTasksBtn" data-close>Save</button>
+            <button class="close-button" data-close aria-label="Close reveal" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
         </div>
-      </section>
-    </main>
-    <!--Footer Section-->
-    <footer id="footer-toolbar">
-      <!--Notes: This is where we will add tasks - setup in a row with 4 columns
-        Icon on top and words on bottom-->
-      <ul>
-        <li>
-          <a href="#">
-            <i class="fas fa-home"> </i>
-            Home
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="far fa-check-circle"></i>
-            Day
-          </a>
-        </li>
-        <li>
-          <a href="./pages/week.html#weekSchedule">
-            <i class="fas fa-calendar-week"></i>
-            Week <span>(coming soon)</span>
-          </a>
-        </li>
-        <li>
-          <a href="/pages/month.html#monthSchedule">
-            <i class="far fa-calendar-alt"></i>
-            Month <span>(coming soon)</span>
-          </a>
-        </li>
-      </ul>
-      <p>
-        © 2021 Team Bobcat
-        <br />
-        Vanderbilt University, Owen Graduate School of Business and Engineering
-      </p>
-    </footer>
+      </div>
+    </section>
+  </main>
+  <!--Footer Section-->
+  <footer id="footer-toolbar" class="footer">
+    <p>
+      © 2021 Team Bobcat
+      <br />
+      Vanderbilt University, Owen Graduate School of Business and Engineering
+    </p>
+    <p>Weather animations provided by: <a href="https://codemyui.com/animated-weather-icons-in-css/"
+        target="_blank">Code My UI</a> by
+      Hima Vincent who based her code on <a href="https://dribbble.com/shots/2097042-Widget-Weather"
+        target="_blank">Dribbble</a> by kylor</p>
+  </footer>
+  <!--jQuery-->
+  <script src="./assets/js/jquery.min.js"></script>
+  <!-- jQuery UI CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <!-- Day.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/dayjs.min.js"
+    integrity="sha512-0fcCRl828lBlrSCa8QJY51mtNqTcHxabaXVLPgw/jPA5Nutujh6CbTdDgRzl9aSPYW/uuE7c4SffFUQFBAy6lg=="
+    crossorigin="anonymous"></script>
+  <!--Foundation JavaScript CDN-->
+  <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
+    integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+  <!--Font Awesome Script-->
+  <script src="https://kit.fontawesome.com/6ae9d1af5f.js" crossorigin="anonymous"></script>
+  <!-- map script -->
 
-    <!--Font Awesome Script-->
-    <script
-      src="https://kit.fontawesome.com/6ae9d1af5f.js"
-      crossorigin="anonymous"
-    ></script>
+  <!--Our Script File-->
+  <script src="./assets/js/script.js"></script>
+</body>
 
-    <!--Our Script File-->
-    <script src="./assets/js/script.js"></script>
-  </body>
 </html>
