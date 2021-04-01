@@ -207,5 +207,8 @@ ul {
   color: var(--teal);
 }
 
-
+/* deal with below */
+.required {
+  border: 2px solid red;
+}
 

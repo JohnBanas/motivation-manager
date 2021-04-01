@@ -349,7 +349,7 @@ $('#saveTasksBtn').on('click', function () {
   if (taskType === 'task') {
     // check for necessary data inputs
       if (!inputText || !startTime || !endTime || !inputDate) {
-        // if not
+        $('#modalTextInput #taskDate #startTime #endTime').addClass("required");
         console.log("No sir, we need that data");
         
         return;
