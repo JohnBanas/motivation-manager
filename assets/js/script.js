@@ -347,14 +347,17 @@ $('#saveTasksBtn').on('click', function () {
   if (taskType === 'task') {
       if (!inputText || !startTime || !endTime || !date) {
         console.log("No sir, we need that data");
+        return;
       }
   } else if (taskType === 'radar' || taskType === "grateful" || taskType === "develop") {
     if (!inputText || !inputDate) {
       console.log("Seriously, its two inputs");
+      return;
     }
   } else if (taskType === 'meeting' || taskType === "study")
     if (!inputText || !inputDate || !startTime) {
       console.log("FILL IT OUT!!!!")
+      return;
     } else {
     // Only save and create tasks if that taskType has necessary input values
     // consolidate all data into object
