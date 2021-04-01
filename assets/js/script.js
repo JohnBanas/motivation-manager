@@ -434,6 +434,8 @@ $('#textarea').on('blur', function (event) {
   saveTasks();
 })
 
+
+
 getQuote();
 loadTasks();
 currentDay();
