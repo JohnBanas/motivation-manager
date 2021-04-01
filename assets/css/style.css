@@ -19,33 +19,35 @@ body {
 /** header start **/
 header {
   overflow: hidden;
-  background-color: var(--orange);
-  color: var(--lightYellow);
+  background-color: var(--mainYellow);
+  color: var(--teal);
   padding: 1rem;
 }
 
-header a {
-  color: white;
-}
-
-header a:hover {
+header div a {
   color: var(--teal);
 }
 
 header img {
-  color: #faea9c;
+  color: var(--teal);
   width: 10%;
   height: auto;
 }
+
 header #listHeadingDaily > a,
 header #listHeadingWeekly > a,
 header #listHeadingMonthly > a {
   background-color: #faea9c;
 }
 
+nav {
+  background-color: var(--lightYellow);
+  color: var(--lightYellow);
+}
+
 .title-bar {
   overflow: hidden;
-  background-color: var(--orange);
+  background-color: var(--lightYellow);
   color: white;
   margin: 0 auto;
   position: relative;
@@ -58,11 +60,11 @@ header #listHeadingMonthly > a {
 }
 
 #subMenuContainer a {
-  color: #fff;
+  color: var(--teal);
 }
 
 #subMenuContainer a:hover {
-  color: var(--teal);
+  color: var(--orange);
   font-weight: bold;
   font-size: 110%;
   transition: ease, 100ms;
