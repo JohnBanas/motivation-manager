@@ -43,6 +43,16 @@ header #listHeadingMonthly > a {
   background-color: #faea9c;
 }
 
+.title-bar {
+  overflow: hidden;
+  background-color: var(--orange);
+  color: white;
+  margin: 0 auto;
+  position: relative;
+  width: 100%;
+  top: 0;
+}
+
 #subMenuContainer {
   transition: ease 1s;
 }
