@@ -5,6 +5,7 @@ let quoteArr = [];
 let tasksArr = [];
 // current date on load
 let now = dayjs().format('YYYY-MM-DD');
+var divTemp = document.querySelector("#temp");
 
 $(document).foundation();
 
@@ -20,7 +21,7 @@ let cityNameEl = 'nashville'; // either grab input to register user city or figu
 
 getWeatherData = () => {
   // format "open weather map" api url
-  let apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityNameEl + '&appid=882d7b151f3175e892df45d1e68ea9dd';
+  let apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityNameEl + '&appid=882d7b151f3175e892df45d1e68ea9dd' + "&units=imperial";
   // make a request to the url
   fetch(apiUrl)
     .then(function (response) {
@@ -32,25 +33,27 @@ getWeatherData = () => {
     }).then(function (data) {
       let weatherIcon = data.weather[0].icon;
       animatedIcon(weatherIcon);
+
+      // a variable to hold temperature
+      let temperatureEl = data.main.temp;
+      // pass variable to function
+      showTemp(temperatureEl);
+      
     }).catch(function (error) {
       console.log(error);
-      // // a variable to hold temperature
-      // let temperatureEl = data.main.temp;
-      // // pass variable to function
-      // showTemp(temperatureEl);
     });
 };
 
-// var showTemp = (temperatureEl) => {
-//   // create an h6 element
-//   var tempEl = $("h6")
-//   //add text content
-//   .text("The current temperature is " + temp + "˚F")
-//   // center text to page
-//   .addClass("text-center");
-//   //append to div
-//   $("#temp").append(tempEl);
-// };
+const showTemp = (temperatureEl) => {
+  // create an H4 element for temp
+  var tempEl = document.createElement("h4");
+  // add text content
+  tempEl.textContent = "The current temperature is " + temperatureEl + "˚F";
+  // add class to align content to center
+  tempEl.className = "text-center";
+  // append child
+  divTemp.append(tempEl);
+};
 
 
 
@@ -225,14 +228,16 @@ const createTask = function (object) {
   let deleteBtnEl = document.createElement("button");
   let listContainer = document.querySelector("#" + object.type + "List");
   $(listItem).attr({ id: 'x' + object.id, data: object.data });
+
+  editBtnEl.textContent = "edit";
+  editBtnEl.addClass = "hollow button warning";
+  deleteBtnEl.textContent = "delete";
+  deleteBtnEl.addClass = "hollow alert button";
+
   //to style the buttons need id or class
   if (object.type !== "notes") {
     switch (object.type) {
       case "task":
-        editBtnEl.textContent = " [Edit] ";
-        editBtnEl.addClass = "hollow button warning";
-        deleteBtnEl.textContent = " [Delete]";
-        deleteBtnEl.addClass = "hollow alert button";
         listItem.textContent = "[" + object.startTime + "-" + object.endTime + "] " + object.text;
         break;
       case "meeting":
@@ -256,8 +261,8 @@ const createTask = function (object) {
     }
 
     listContainer.appendChild(listItem);
-    listContainer.appendChild(editBtnEl);
-    listContainer.appendChild(deleteBtnEl);
+    listItem.appendChild(editBtnEl);
+    listItem.appendChild(deleteBtnEl);
   }
 
   // if type is notes
@@ -339,7 +344,7 @@ $('#openBtn').on("click", function () {
     document.getElementById("mainTaskCheckbox").checked = false;
   }
   uncheck();
-})
+});
 
 //(john comment) we need to make sure we don't allow saving empty tasks
 // (Casey comment) agreed but we have to list conditionals per task type as they require some different inputs 
