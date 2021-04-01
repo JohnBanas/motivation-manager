@@ -5,6 +5,7 @@ let quoteArr = [];
 let tasksArr = [];
 // current date on load
 let now = dayjs().format('YYYY-MM-DD');
+var divTemp = document.querySelector("#temp");
 
 $(document).foundation();
 
@@ -20,7 +21,7 @@ let cityNameEl = 'nashville'; // either grab input to register user city or figu
 
 getWeatherData = () => {
   // format "open weather map" api url
-  let apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityNameEl + '&appid=882d7b151f3175e892df45d1e68ea9dd';
+  let apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityNameEl + '&appid=882d7b151f3175e892df45d1e68ea9dd' + "&units=imperial";
   // make a request to the url
   fetch(apiUrl)
     .then(function (response) {
@@ -32,25 +33,36 @@ getWeatherData = () => {
     }).then(function (data) {
       let weatherIcon = data.weather[0].icon;
       animatedIcon(weatherIcon);
+
+      // a variable to hold temperature
+      let temperatureEl = data.main.temp;
+      console.log(data.main.temp);
+      console.log(temperatureEl);
+      // pass variable to function
+      showTemp(temperatureEl);
+      
     }).catch(function (error) {
       console.log(error);
-      // // a variable to hold temperature
-      // let temperatureEl = data.main.temp;
-      // // pass variable to function
-      // showTemp(temperatureEl);
     });
 };
 
-// var showTemp = (temperatureEl) => {
-//   // create an h6 element
-//   var tempEl = $("h6")
-//   //add text content
-//   .text("The current temperature is " + temp + "˚F")
-//   // center text to page
-//   .addClass("text-center");
-//   //append to div
-//   $("#temp").append(tempEl);
-// };
+const showTemp = (temperatureEl) => {
+  // create an h6 element
+  // var tempEl = $("h6")
+  //   .addClass("text-center")
+  //   .text("The current temperature is " + temperatureEl + "˚F");
+
+  console.log(temperatureEl);
+  
+  var tempEl = document.createElement("h4");
+  //add text content
+  tempEl.textContent = "The current temperature is " + temperatureEl + "˚F";
+
+  tempEl.className = "text-center";
+
+
+  divTemp.append(tempEl);
+};
 
 
 
