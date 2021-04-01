@@ -344,10 +344,7 @@ $('#openBtn').on("click", function () {
     document.getElementById("mainTaskCheckbox").checked = false;
   }
   uncheck();
-})
-
-// EVENT HANDLER TO EDIT BUTTON
-$('#edit')
+});
 
 //(john comment) we need to make sure we don't allow saving empty tasks
 // (Casey comment) agreed but we have to list conditionals per task type as they require some different inputs 
