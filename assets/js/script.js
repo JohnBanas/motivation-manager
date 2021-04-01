@@ -276,7 +276,7 @@ $('#taskModal').on('click', 'button', function (event) {
   }
   // modal task data type manipulation via event.target
   // if button's id = task or meeting
-  if (btnId === "modalTaskButton" || btnId === "modalMeetingButton") {
+  if (btnId === "modalTaskButton") {
     // display original or recreate original
 
     $startTimeContainer.removeClass("modalToggle");
@@ -290,10 +290,10 @@ $('#taskModal').on('click', 'button', function (event) {
 
 
     // if button id = study
-  } else if (btnId === "modalStudyButton") {
+  } else if (btnId === "modalStudyButton" || btnId === "modalMeetingButton") {
     // change modal to accept text and time value only
     $startTimeContainer.removeClass("modalToggle");
-    $endTimeContainer.removeClass("modalToggle");
+    $endTimeContainer.addClass("modalToggle");
 
   } else if (btnId === "modalDevelopButton") {
     // change modal to accept only text and date choice
@@ -342,14 +342,21 @@ $('#saveTasksBtn').on('click', function () {
   let dataType = parseInt(x);
   // we can keep savedNotes here or check comment on textarea handler below
   // let savedNotes = $('textarea').val();
-
-  // check for text and date...
-  if (!inputText || !inputDate) {
-    // alert user on needing this info
-    console.log("Need some kind of alert here");
-
-  } else {
-    // Only save and create tasks if inputText and inputDate has values
+  
+  // data check below!
+  if (taskType === 'task') {
+      if (!inputText || !startTime || !endTime || !date) {
+        console.log("No sir, we need that data");
+      }
+  } else if (taskType === 'radar' || taskType === "grateful" || taskType === "develop") {
+    if (!inputText || !inputDate) {
+      console.log("Seriously, its two inputs");
+    }
+  } else if (taskType === 'meeting' || taskType === "study")
+    if (!inputText || !inputDate || !startTime) {
+      console.log("FILL IT OUT!!!!")
+    } else {
+    // Only save and create tasks if that taskType has necessary input values
     // consolidate all data into object
     let listObj = { type: taskType, text: inputText, startTime: startTime, endTime: endTime, date: inputDate, mainTask: mainTask, id: listID, data: dataType };
     // push listObj to tasksArr
