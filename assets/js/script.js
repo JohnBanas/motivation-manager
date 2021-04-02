@@ -221,18 +221,25 @@ const saveTasks = function () {
 
 const createTask = function (object) {
   console.log(object);
-  // if date = now
-  //if (object.date === now) {
+
   let listItem = document.createElement("li");
-  let editBtnEl = document.createElement("button");
-  let deleteBtnEl = document.createElement("button");
-  let listContainer = document.querySelector("#" + object.type + "List");
   $(listItem).attr({ id: 'x' + object.id, data: object.data });
 
+  let listContainer = document.querySelector("#" + object.type + "List");
+
+  let editBtnEl = document.createElement("button");
+  let deleteBtnEl = document.createElement("button");
+
+  $(editBtnEl).attr({ id: 'y' + object.id })
+  $(deleteBtnEl).attr({ id: 'z' + object.id })
+
   editBtnEl.textContent = "edit";
-  editBtnEl.setAttribute('class','editBtn');
+  editBtnEl.setAttribute('class', 'editBtn');
+
   deleteBtnEl.textContent = "delete";
   deleteBtnEl.setAttribute('class', 'deleteBtn');
+
+
 
   //to style the buttons need id or class
   if (object.type !== "notes") {
@@ -271,6 +278,61 @@ const createTask = function (object) {
   }
   now = object.date;
 }
+
+//picks up click event from created edit button
+//create variable to open modal without click event
+var modalPopUp = new Foundation.Reveal($('#taskModal'));
+//edit button clicked
+$(document).on('click', '.editBtn', function (event) {
+  //clear any input
+  clearModalInputs();
+  //pull current array
+  let editTaskArr = JSON.parse(localStorage.getItem("tasksArr"));
+  //loop through array
+  for (let i = 0; i < editTaskArr.length; i++) {
+    //if the array id equals the button id 
+    if ('y' + editTaskArr[i].id === event.target.id) {
+      //open modal
+      modalPopUp.open();
+      //populate modal inputs with the matching array values
+        $("#modalTextInput").val(editTaskArr[i].text);
+        $('#taskDate').val(editTaskArr[i].date);
+        $('#startTime').val(editTaskArr[i].startTime);
+        $('#endTime').val(editTaskArr[i].endTime);
+        // reset toggle value to false
+        uncheck = () => {
+          document.getElementById("mainTaskCheckbox").checked = false;
+        }
+        uncheck();
+      //remove the task from the array because it will be added with the save button
+      //trying to do that with map() to dynamically make a new array, not working yet.
+      //var $newArray = $.makeArray(editTaskArr[i]);
+      // $.map($newArray, function (value, key) {
+      //   value.text = '';
+      //   value.date = '';
+      //   value.startTime = '';
+      //   value.endTime = '';
+      // })
+    }
+  }
+});
+
+//picks up click event for delete button 
+$(document).on('click', '.deleteBtn', function (event) {
+  //pull from local storage
+  let editTaskArr = JSON.parse(localStorage.getItem("tasksArr"));
+  for (let i = 0; i < editTaskArr.length; i++) {
+    //if the id of the array equals the button id
+    if ('z' + editTaskArr[i].id === event.target.id) {
+      //pull it from the array
+      tasksArr.splice(i, 1);
+      //save the new array
+      saveTasks();
+      //clear the page of the old list items just deleted
+      $(`x` + event.target.id).remove();
+    }
+  }
+});
 
 
 // event listener for buttons on modal
@@ -335,7 +397,12 @@ $('#taskModal').on('click', 'button', function (event) {
 
 // EVENT HANDLER TO RESET INPUTS ON MODAL OPEN->REVEAL. 
 $('#openBtn').on("click", function () {
-  $("#modalTextInput").val("");
+  clearModalInputs();
+})
+
+
+clearModalInputs = () => {  
+$("#modalTextInput").val("");
   $('#taskDate').val("");
   $('#startTime').val("");
   $('#endTime').val("");
@@ -346,13 +413,12 @@ $('#openBtn').on("click", function () {
   uncheck();
   // remove data type from save button
   $('#saveTasksBtn').removeAttr("data-close");
-})
+}
 
 //(john comment) we need to make sure we don't allow saving empty tasks
 // (Casey comment) agreed but we have to list conditionals per task type as they require some different inputs 
 // when save btn is clicked in modal...
 $('#saveTasksBtn').on('click', function () {
-
   let localObject = JSON.parse(localStorage.getItem("tasksArr"));
   if (localObject) {
     listID++;
@@ -372,26 +438,26 @@ $('#saveTasksBtn').on('click', function () {
   let mainTask = document.getElementById("mainTaskCheckbox").checked.toString();
   let x = $('#startTime').val().toString().replace(':', '');
   let dataType = parseInt(x);
-  
+
   // data check below!
   // consolidate all data into object
   let listObj = { type: taskType, text: inputText, startTime: startTime, endTime: endTime, date: inputDate, mainTask: mainTask, id: listID, data: dataType };
   // check all task types
   if (taskType === 'task') {
     // check for necessary data inputs
-      if (!inputText || !startTime || !endTime || !inputDate) {
-        $('#modalTextInput #taskDate #startTime #endTime').addClass("required");
-        console.log("No sir, we need that data");
-        
-        return;
-      } else {
-        // if so send obj to new function below
-        clickCloseBtn(listObj);
-      }
+    if (!inputText || !startTime || !endTime || !inputDate) {
+      $('#modalTextInput #taskDate #startTime #endTime').addClass("required");
+      console.log("No sir, we need that data");
+
+      return;
+    } else {
+      // if so send obj to new function below
+      clickCloseBtn(listObj);
+    }
   } else if (taskType === 'radar' || taskType === "grateful" || taskType === "develop") {
     if (!inputText || !inputDate) {
       console.log("Seriously, its two inputs");
-      
+
       return;
     } else {
       clickCloseBtn(listObj);
@@ -399,12 +465,12 @@ $('#saveTasksBtn').on('click', function () {
   } else if (taskType === 'meeting' || taskType === "study")
     if (!inputText || !inputDate || !startTime) {
       console.log("FILL IT OUT!!!!")
-      
+
       return;
     } else {
       clickCloseBtn(listObj);
     }
-})
+});
 
 // close modal function
 const clickCloseBtn = function (listObj) {
@@ -419,8 +485,9 @@ const clickCloseBtn = function (listObj) {
   now = listObj.date;
   modalOnSavePage();
   loadTasks();
-//closeBtn.click;
-//console.log("blah");
+  //closeBtn.click;
+  //console.log("blah");
+  
 }
 
 //Casey text with original code John helped comment & code => Auto delete function for past tasks
