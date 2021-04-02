@@ -230,9 +230,9 @@ const createTask = function (object) {
   $(listItem).attr({ id: 'x' + object.id, data: object.data });
 
   editBtnEl.textContent = "edit";
-  editBtnEl.addClass = "hollow button warning";
+  editBtnEl.setAttribute('class','editBtn');
   deleteBtnEl.textContent = "delete";
-  deleteBtnEl.addClass = "hollow alert button";
+  deleteBtnEl.setAttribute('class', 'deleteBtn');
 
   //to style the buttons need id or class
   if (object.type !== "notes") {
@@ -306,7 +306,7 @@ $('#taskModal').on('click', 'button', function (event) {
   }
   // modal task data type manipulation via event.target
   // if button's id = task or meeting
-  if (btnId === "modalTaskButton" || btnId === "modalMeetingButton") {
+  if (btnId === "modalTaskButton") {
     // display original or recreate original
 
     $startTimeContainer.removeClass("modalToggle");
@@ -320,10 +320,10 @@ $('#taskModal').on('click', 'button', function (event) {
 
 
     // if button id = study
-  } else if (btnId === "modalStudyButton") {
+  } else if (btnId === "modalStudyButton" || btnId === "modalMeetingButton") {
     // change modal to accept text and time value only
     $startTimeContainer.removeClass("modalToggle");
-    $endTimeContainer.removeClass("modalToggle");
+    $endTimeContainer.addClass("modalToggle");
 
   } else if (btnId === "modalDevelopButton") {
     // change modal to accept only text and date choice
@@ -344,7 +344,9 @@ $('#openBtn').on("click", function () {
     document.getElementById("mainTaskCheckbox").checked = false;
   }
   uncheck();
-});
+  // remove data type from save button
+  $('#saveTasksBtn').removeAttr("data-close");
+})
 
 //(john comment) we need to make sure we don't allow saving empty tasks
 // (Casey comment) agreed but we have to list conditionals per task type as they require some different inputs 
@@ -370,30 +372,56 @@ $('#saveTasksBtn').on('click', function () {
   let mainTask = document.getElementById("mainTaskCheckbox").checked.toString();
   let x = $('#startTime').val().toString().replace(':', '');
   let dataType = parseInt(x);
-  // we can keep savedNotes here or check comment on textarea handler below
-  // let savedNotes = $('textarea').val();
-
-  // check for text and date...
-  if (!inputText || !inputDate) {
-    // alert user on needing this info
-    console.log("Need some kind of alert here");
-
-  } else {
-    // Only save and create tasks if inputText and inputDate has values
-    // consolidate all data into object
-    let listObj = { type: taskType, text: inputText, startTime: startTime, endTime: endTime, date: inputDate, mainTask: mainTask, id: listID, data: dataType };
-    // push listObj to tasksArr
-    tasksArr.push(listObj);
-
-    // save updated taskArr
-    saveTasks();
-
-    // consider pushing entire object.
-    now = inputDate;
-    modalOnSavePage();
-    loadTasks();
-  }
+  
+  // data check below!
+  // consolidate all data into object
+  let listObj = { type: taskType, text: inputText, startTime: startTime, endTime: endTime, date: inputDate, mainTask: mainTask, id: listID, data: dataType };
+  // check all task types
+  if (taskType === 'task') {
+    // check for necessary data inputs
+      if (!inputText || !startTime || !endTime || !inputDate) {
+        $('#modalTextInput #taskDate #startTime #endTime').addClass("required");
+        console.log("No sir, we need that data");
+        
+        return;
+      } else {
+        // if so send obj to new function below
+        clickCloseBtn(listObj);
+      }
+  } else if (taskType === 'radar' || taskType === "grateful" || taskType === "develop") {
+    if (!inputText || !inputDate) {
+      console.log("Seriously, its two inputs");
+      
+      return;
+    } else {
+      clickCloseBtn(listObj);
+    }
+  } else if (taskType === 'meeting' || taskType === "study")
+    if (!inputText || !inputDate || !startTime) {
+      console.log("FILL IT OUT!!!!")
+      
+      return;
+    } else {
+      clickCloseBtn(listObj);
+    }
 })
+
+// close modal function
+const clickCloseBtn = function (listObj) {
+  // add the data-close to saveTasksBtn
+  $('#saveTasksBtn').attr("data-close", "");
+  // push obj to array
+  tasksArr.push(listObj);
+  // save updated taskArr
+  saveTasks();
+
+  // update date to chosen date
+  now = listObj.date;
+  modalOnSavePage();
+  loadTasks();
+//closeBtn.click;
+//console.log("blah");
+}
 
 //Casey text with original code John helped comment & code => Auto delete function for past tasks
 const dateAudit = function (tasksArr) {
@@ -441,7 +469,9 @@ Copy Modal and create a new button for Edit and Delete Tasks
 
 */
 
-//meeting location directions if there is time
+
+
+
 
 
 

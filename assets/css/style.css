@@ -299,5 +299,9 @@ ul {
   background-color: #ffb453;
 }
 
+/* deal with below */
+.required {
+  border: 2px solid red;
+}
 
  
