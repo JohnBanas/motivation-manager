@@ -302,7 +302,7 @@ ul {
 
 /* deal with below */
 .required {
-  border: 2px solid red;
+  border: 2rem solid red;
 }
 
 .title-bar-title {
@@ -328,4 +328,9 @@ ul {
   padding-bottom: .5rem;
   border-bottom: .1rem solid var(--teal) ;
 }
+
+#notesList {
+  background-color: var(--lightYellow);
+}
+
  

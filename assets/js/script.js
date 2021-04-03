@@ -242,22 +242,53 @@ const createTask = function (object) {
   deleteBtnEl.textContent = "delete";
   deleteBtnEl.setAttribute('class', 'deleteBtn');
 
+  //change starting military time to standard
+  //change hours to string save to variable
+  let startHours = object.startTime.toString();
+  //minutes
+  var startMinutes = startHours.substr(3);
+  //am or pm
+  var AmOrPm = startHours >= 12 ? 'pm' : 'am';
+  //changing to standard time
+  startHours = (startHours % 12) || 12;
+
+  //same for end time hours
+  let endHours = object.endTime.toString();
+  //minutes
+  let endMinutes = endHours.substr(3);
+  //am or pm is already controlled
+  //change hour to standard time
+  endHours = (endHours % 12) || 12;
+
 
 
   //to style the buttons need id or class
   if (object.type !== "notes") {
     switch (object.type) {
       case "task":
-        listItem.textContent = "[" + object.startTime + "-" + object.endTime + "] " + object.text;
+        listItem.textContent = "[" +
+          startHours + ":" +
+          startMinutes + " " +
+          AmOrPm + " " + "-" +
+          " " + endHours + ":" +
+          endMinutes + " " +
+          AmOrPm + "]" +
+          " - " + object.text;
         break;
       case "meeting":
-        listItem.textContent = "[" + object.startTime + "] " + object.text;
+        listItem.textContent = "[" + " " +
+          startHours + ":" +
+          startMinutes + " " +
+          AmOrPm + "]" + " - " + object.text;
         break;
       case "grateful":
         listItem.textContent = object.text;
         break;
       case "study":
-        listItem.textContent = "[" + object.startTime + "] " + object.text;
+        listItem.textContent = "[" + " " +
+          startHours + ":" +
+          startMinutes + " " +
+          AmOrPm + "]" + " - " + object.text;
         break;
       case "radar":
         listItem.textContent = object.text;
@@ -451,7 +482,7 @@ $('#saveTasksBtn').on('click', function () {
   if (taskType === 'task') {
     // check for necessary data inputs
     if (!inputText || !startTime || !endTime || !inputDate) {
-      $('#modalTextInput #taskDate #startTime #endTime').addClass("required");
+      $('#modalTextInput', '#taskDate', '#startTime', '#endTime').addClass("required");
       console.log("No sir, we need that data");
 
       return;
@@ -508,6 +539,11 @@ const dateAudit = function (tasksArr) {
 
 // notes event handler
 $('#textarea').on('blur', function (event) {
+  //notes <ul>
+  let notesEl = document.querySelector('#notesList');
+  //create list item
+  let noteListItem = document.createElement('li');
+
   let notes = event.target.value;
   let noteType = "notes"
   // check if there in at least ONE object that fits conditions in some() method
@@ -519,6 +555,10 @@ $('#textarea').on('blur', function (event) {
       if (tasksArr[i].type === "notes" && tasksArr[i].date === now) {
         // change property value to new value
         tasksArr[i].notes = notes;
+        console.log(notes);
+        // //put in <li> in <ul>
+        // noteListItem.textContent = notes;
+        // notesEl.appendChild(noteListItem);
       }
     }
 
