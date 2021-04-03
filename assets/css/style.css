@@ -304,7 +304,6 @@ ul {
   border: 2px solid red;
 }
 
-<<<<<<< HEAD
 .title-bar-title {
   color: var(--mainYellow);
   font-size: 1.5rem;
@@ -318,6 +317,4 @@ ul {
 }
 
 
-=======
->>>>>>> parent of c3b7729 (added tabs stacking in mobile view not taking away blue border on :focus because that is necessary for accesibility)
  
