@@ -224,6 +224,7 @@ textarea {
 
 #taskModal {
   background-color: #faea9c;
+  padding: 3rem;
 }
 
 #taskModal > textarea {
@@ -330,7 +331,7 @@ ul {
 }
 
 #notesList {
-  background-color: var(--lightYellow);
+  background-color: #ffb453;
 }
 
  

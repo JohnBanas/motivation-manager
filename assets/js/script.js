@@ -107,6 +107,15 @@ animatedIcon = (weatherIcon) => {
 
 }
 
+Date.prototype.toDateInputValue = (function () {
+  var local = new Date(this);
+  local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+  return local.toJSON().slice(0, 10);
+});
+
+document.getElementById('headerDate').value = new Date().toDateInputValue();
+
+
 // function for user date
 $('#headerDate').on('change', function (event) {
   // set chosen date 
@@ -241,10 +250,11 @@ const createTask = function (object) {
 
   deleteBtnEl.textContent = "delete";
   deleteBtnEl.setAttribute('class', 'deleteBtn');
-
+  console.log(object.startTime)
   //change starting military time to standard
   //change hours to string save to variable
   let startHours = object.startTime.toString();
+  
   //minutes
   var startMinutes = startHours.substr(3);
   //am or pm
@@ -369,7 +379,6 @@ $(document).on('click', '.deleteBtn', function (event) {
     }
   }
 });
-
 
 // event listener for buttons on modal
 $('#taskModal').on('click', 'button', function (event) {
@@ -537,13 +546,66 @@ const dateAudit = function (tasksArr) {
   }
 }
 
-// notes event handler
-$('#textarea').on('blur', function (event) {
-  //notes <ul>
-  let notesEl = document.querySelector('#notesList');
-  //create list item
-  let noteListItem = document.createElement('li');
+//working on saving notes in a seperate array and 
+//dynamically adding them to a list with edit and 
+//delete buttons
 
+// let notesArr = [];
+// const iteration = notesArr.keys();
+// let idNumber;
+// saveNotesFunction = () => {
+//   if (notesArr) {
+//     for (let i = 0; i < notesArr.length; i++) {
+//       localStorage.setItem(notesArr[i].id, notesArr[i].text);
+//     }
+//   } else
+//   {
+//     localStorage.setItem( 0, notesArr);
+//   }
+// }
+
+// // notes event handler
+// $(saveNotes).on('click', function (event) {
+//   //get text from notes
+//   let notes = $('#textarea').val()
+//   //create list item
+//   let noteListItem = document.createElement('li');
+//   //notes <ul>
+//   let notesEl = document.querySelector('#notesList');
+  
+//   noteListItem.textContent = notes;
+
+//   // for (const key of iteration) {
+//   //   idNumber = key;
+//   //   console.log(idNumber);}
+  
+  
+//     let notesObj = { id: idNumber, date: now, text: notes };
+//     notesArr.push(notesObj);
+//     saveNotesFunction();
+  
+  
+
+//   let buttonContainer = document.createElement("div");
+//   $(buttonContainer).attr({ class: 'editDeleteContainers' });
+
+//   let notesEditBtnEl = document.createElement("button");
+//   let notesDeleteBtnEl = document.createElement("button");
+
+
+//   notesEditBtnEl.textContent = "EDIT";
+//   notesEditBtnEl.setAttribute('class', 'notesEditBtn');
+
+//   notesDeleteBtnEl.textContent = "DELETE";
+//   notesDeleteBtnEl.setAttribute('class', 'notesDeleteBtn');
+
+//   buttonContainer.appendChild(notesEditBtnEl);
+//   buttonContainer.appendChild(notesDeleteBtnEl);
+//   noteListItem.appendChild(buttonContainer);
+//   notesEl.appendChild(noteListItem);
+// })
+
+$('#textarea').on('blur', function (event) {
   let notes = event.target.value;
   let noteType = "notes"
   // check if there in at least ONE object that fits conditions in some() method
@@ -556,9 +618,9 @@ $('#textarea').on('blur', function (event) {
         // change property value to new value
         tasksArr[i].notes = notes;
         console.log(notes);
-        // //put in <li> in <ul>
-        // noteListItem.textContent = notes;
-        // notesEl.appendChild(noteListItem);
+        //put in <li> in <ul>
+        noteListItem.textContent = notes;
+        notesEl.appendChild(noteListItem);
       }
     }
 
