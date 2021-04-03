@@ -54,23 +54,21 @@
     <!-- Navigation Menu -->
   </header>
   <nav id="navbar-bottom" class="cell">
-    <div data-sticky-container>
-      <div class="title-bar" data-hide-for="medium" data-sticky data-sticky-on="small" data-options="marginTop:0;">
-        <div class="align-center grid-container title-bar" data-responsive-toggle="navMenu">
-          <button id="menu-btn" class="title-bar-title cell" type="button" data-toggle="navMenu">Menu</button>
-          <li id="navMenu" class="top-bar">
-            <ul id="subMenuContainer" class="dropdown menu align-center" data-dropdown-menu>
-              <li><a href="#myMeetings">Meetings</a></li>
-              <li><a href="#mainTasks">Tasks</a></li>
-              <li><a href="#panel1">Scheduler</a></li>
-              <li><a href="#notes">Notes</a></li>
-              <li><a href="#addMyTask" data-open="taskModal">Create Task</a></li>
-            </ul>
-          </li>
-          </ul>
+    <div data-sticky-container class="grid-container fluid">
+      <div class="title-bar grid-x" data-sticky data-sticky-on="small" data-options="marginTop:0;">
+        <div class="align-center cell title-bar" data-responsive-toggle="navMenu">
+          <button id="menu-btn" class="title-bar-title" type="button" data-toggle="navMenu">Menu</button>
         </div>
+        <li id="navMenu" class="cell top-bar">
+          <ul id="subMenuContainer" class="dropdown menu align-center" data-dropdown-menu>
+            <li><a href="#myMeetings">Meetings</a></li>
+            <li><a href="#mainTasks">Tasks</a></li>
+            <li><a href="#panel1">Scheduler</a></li>
+            <li><a href="#notes">Notes</a></li>
+            <li><a href="#addMyTask" data-open="taskModal">Create Task</a></li>
+          </ul>
+        </li>
       </div>
-    </div>
     </div>
   </nav>
   <!-- End of Header, Nav Menu -->
@@ -178,20 +176,12 @@
       <!--(JOhn) tabs section display for current day's schedule etc. -->
       <section>
         <article class="cell">
-<<<<<<< HEAD
           <ul class="tabs grid-x center" data-tabs id="example-tabs">
             <li class="tabs-title large-3 medium-3 cell is-active"><a href="#panel1" aria-selected="true">Schedule</a>
             </li>
             <li class="tabs-title large-3 medium-3 cell"><a href="#panel2">Radar Items</a></li>
             <li class="tabs-title large-3 medium-3 cell"><a href="#panel3">Study Materials</a></li>
             <li class="tabs-title large-3 medium-3 cell"><a href="#panel4">Personal Development</a></li>
-=======
-          <ul class="tabs grid-container center" data-tabs id="example-tabs">
-            <li class="tabs-title  is-active"><a href="#panel1" aria-selected="true">Schedule</a></li>
-            <li class="tabs-title"><a href="#panel2">Radar Items</a></li>
-            <li class="tabs-title"><a href="#panel3">Study Materials</a></li>
-            <li class="tabs-title"><a href="#panel4">Personal Development</a></li>
->>>>>>> parent of c3b7729 (added tabs stacking in mobile view not taking away blue border on :focus because that is necessary for accesibility)
           </ul>
 
           <section id="" class="tabs-content" data-tabs-content="example-tabs">
@@ -241,10 +231,10 @@
       <div class="grid-container">
         <div class="cell">
           <!-- button to activate modal -->
-          <h2 id="plusIcon"><a id="openBtn" data-open="taskModal">
+          <!-- <h2 id="plusIcon"><a id="openBtn" data-open="taskModal">
               <button id="addMyTask">
                 Add Task
-              </button></a></h2>
+              </button></a></h2> -->
           <div class="reveal grid-container fluid" id="taskModal" data-reveal-id="taskModal" data-tasktype="task">
             <!-- modal button options -->
             <div class="grid-x grid-margin-x grid-padding-x">

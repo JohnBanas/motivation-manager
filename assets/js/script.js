@@ -551,34 +551,3 @@ getQuote();
 loadTasks();
 currentDay();
 getWeatherData();
-
-
-
-/*
-update: function(event) {
-  var tempArr = [];
-  $(this).children().each(function() {
-    var text = $(this)
-      .find("p")
-      .text()
-      .trim();
-
-    var date = $(this)
-      .find("span")
-      .text()
-      .trim();
-
-    tempArr.push ({
-      text: text,
-      date: date
-    });
-  }
-
-  var arrName = $(this)
-    .attr("id")
-    .replace("list-", "");
-
-  tasks[arrName] = tempArr;
-  saveTasks();
-};
-*/
