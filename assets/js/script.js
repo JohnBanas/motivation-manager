@@ -537,7 +537,12 @@ Copy Modal and create a new button for Edit and Delete Tasks
 
 */
 
-
+//sticky nav bar 
+$('.title-bar').on('sticky.zf.stuckto:top', function () {
+  $(this).addClass('shrink');
+}).on('sticky.zf.unstuckfrom:top', function () {
+  $(this).removeClass('shrink');
+})
 
 
 

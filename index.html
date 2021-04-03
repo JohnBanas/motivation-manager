@@ -54,23 +54,29 @@
     <!-- Navigation Menu -->
   </header>
   <nav id="navbar-bottom" class="cell">
-    <ul>
-      <li class="grid-container">
-        <ul id="subMenuContainer" class=" grid-x grid-margin-x menu align-center">
-          <li class="cell large-auto"><a href="#myMeetings">Meetings</a></li>
-          <li class="cell large-auto"><a href="#mainTasks">Tasks</a></li>
-          <li class="cell large-auto"><a href="#panel1">Scheduler</a></li>
-          <li class="cell large-auto"><a href="#notes">Notes</a></li>
-          <li class="cell large-auto"><a href="#addMyTask" data-open="taskModal">
-              <i class="fas fa-plus"></i> Create Task</a>
+    <div data-sticky-container>
+      <div class="title-bar" data-hide-for="medium" data-sticky data-sticky-on="small" data-options="marginTop:0;">
+        <div class="align-center grid-container title-bar" data-responsive-toggle="navMenu">
+          <button id="menu-btn" class="title-bar-title cell" type="button" data-toggle="navMenu">Menu</button>
+          <li id="navMenu" class="top-bar">
+            <ul id="subMenuContainer" class="dropdown menu align-center" data-dropdown-menu>
+              <li><a href="#myMeetings">Meetings</a></li>
+              <li><a href="#mainTasks">Tasks</a></li>
+              <li><a href="#panel1">Scheduler</a></li>
+              <li><a href="#notes">Notes</a></li>
+              <li><a href="#addMyTask" data-open="taskModal">Create Task</a></li>
+            </ul>
           </li>
-        </ul>
-      </li>
-    </ul>
+          </ul>
+        </div>
+      </div>
+    </div>
+    </div>
   </nav>
   <!-- End of Header, Nav Menu -->
+
   <!--Main-->
-  <main>
+  <main id="main">
     <!-- Date & Quote Section-->
     <section id="date">
       <h2 id="dateDisplay" class="text-center"></h2>
@@ -173,7 +179,8 @@
       <section>
         <article class="cell">
           <ul class="tabs grid-x center" data-tabs id="example-tabs">
-            <li class="tabs-title large-3 medium-3 cell is-active"><a href="#panel1" aria-selected="true">Schedule</a></li>
+            <li class="tabs-title large-3 medium-3 cell is-active"><a href="#panel1" aria-selected="true">Schedule</a>
+            </li>
             <li class="tabs-title large-3 medium-3 cell"><a href="#panel2">Radar Items</a></li>
             <li class="tabs-title large-3 medium-3 cell"><a href="#panel3">Study Materials</a></li>
             <li class="tabs-title large-3 medium-3 cell"><a href="#panel4">Personal Development</a></li>

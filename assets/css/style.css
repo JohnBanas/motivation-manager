@@ -79,7 +79,7 @@ button {
 }
 
 button:hover {
-  background-color: var(--orange);
+  background-color: #fffbe6;
   color: var(--teal);
 }
 
@@ -87,7 +87,7 @@ button:hover {
   border-radius: 15px;
 }
 body a:hover {
-  background-color: #fffbe6;
+  background-color: var(--mainYellow);
 }
 /** body end **/
 
@@ -302,6 +302,18 @@ ul {
 /* deal with below */
 .required {
   border: 2px solid red;
+}
+
+.title-bar-title {
+  color: var(--mainYellow);
+  font-size: 1.5rem;
+}
+.top-bar {
+  background-color: #fffbe6;
+}
+
+#navMenu {
+  background-color: #fffbe6;
 }
 
 
