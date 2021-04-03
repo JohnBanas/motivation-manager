@@ -460,53 +460,7 @@ $('#textarea').on('blur', function (event) {
   saveTasks();
 })
 
-/* 1.) Add Edit and Delete buttons to Modal
-  2.) Copy Modal and create a new event handler 
-  3.) Hold data from Modal in an object array
-  4.) Add information in
-
-Copy Modal and create a new button for Edit and Delete Tasks 
-
-*/
-
-
-
-
-
-
-
 getQuote();
 loadTasks();
 currentDay();
 getWeatherData();
-
-
-
-/*
-update: function(event) {
-  var tempArr = [];
-  $(this).children().each(function() {
-    var text = $(this)
-      .find("p")
-      .text()
-      .trim();
-
-    var date = $(this)
-      .find("span")
-      .text()
-      .trim();
-
-    tempArr.push ({
-      text: text,
-      date: date
-    });
-  }
-
-  var arrName = $(this)
-    .attr("id")
-    .replace("list-", "");
-
-  tasks[arrName] = tempArr;
-  saveTasks();
-};
-*/

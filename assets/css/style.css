@@ -296,6 +296,7 @@ ul {
     }
   }
 #subMenuContainer{
+  width: 100%;
   background-color: #ffb453;
 }
 
@@ -304,4 +305,8 @@ ul {
   border: 2px solid red;
 }
 
+#navMenu {
+  width: 100%;
+  font-size: 1rem;
+}
  
