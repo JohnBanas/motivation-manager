@@ -227,6 +227,9 @@ const createTask = function (object) {
 
   let listContainer = document.querySelector("#" + object.type + "List");
 
+  let buttonContainer = document.createElement("div");
+  $(buttonContainer).attr({ class: 'editDeleteContainers' });
+
   let editBtnEl = document.createElement("button");
   let deleteBtnEl = document.createElement("button");
 
@@ -268,8 +271,10 @@ const createTask = function (object) {
     }
 
     listContainer.appendChild(listItem);
-    listItem.appendChild(editBtnEl);
-    listItem.appendChild(deleteBtnEl);
+    buttonContainer.appendChild(editBtnEl);
+    buttonContainer.appendChild(deleteBtnEl);
+    listItem.appendChild(buttonContainer);
+    
   }
 
   // if type is notes
