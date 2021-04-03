@@ -329,8 +329,7 @@ $(document).on('click', '.deleteBtn', function (event) {
       //save the new array
       saveTasks();
       //clear the page of the old list items just deleted
-      //not working yet
-      //$(`x` + event.target.id).remove();
+      $(`x` + event.target.id).remove();
     }
   }
 });
