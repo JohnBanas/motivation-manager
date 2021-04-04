@@ -239,6 +239,9 @@ const loadTasks = function () {
     return;
   }
 
+  // reset and adjust idCounter BEFORE task is created
+  initialIdCount();
+
   // send only current date data to create Task
   for (let i = 0; i < tasksArr.length; i++) {
 
@@ -332,6 +335,7 @@ const createTask = function (object) {
   deleteBtnEl.setAttribute('class', 'deleteBtn');
   console.log(object.startTime)
   //change starting military time to standard
+  //debugger;
   //change hours to string save to variable
   let startHours = object.startTime.toString();
   
@@ -470,20 +474,53 @@ const createTask = function (object) {
 // });
 
 
-// John Banas's Edit and Delete Functionality Above
-
+// // John Banas's Edit and Delete Functionality Above
+const modalTypeEdit = function (taskType) {
+    // declare vars for inputs that may or may not be required
+    let $startTimeContainer = $('#startTimeContainer');
+    let $endTimeContainer = $('#endTimeContainer');
+    
+    // modal task data type manipulation via event.target
+    
+    // if button's id = task
+    if (taskType === "task") {
+      
+      // display original or recreate original
+      // Show All Input Fields
+      $startTimeContainer.removeClass("modalToggle");
+      $endTimeContainer.removeClass("modalToggle");
+  
+      // if button's Id = radar or grateful or develop
+    } else if (taskType === "grateful" || taskType === "radar" || taskType === "develop") {
+      
+      // change modal to accept only text input
+      // Hide startTime and endTime
+      $startTimeContainer.addClass("modalToggle");
+      $endTimeContainer.addClass("modalToggle");
+  
+  
+      // if button id = study or meeting
+    } else if (taskType === "study" || taskType === "meeting") {
+      // change modal to accept text and time value only
+      // shows startTime and hides endTime
+      $startTimeContainer.removeClass("modalToggle");
+      $endTimeContainer.addClass("modalToggle");
+  
+    }
+}
 
 
 // event listener for buttons on modal
 $('#taskModal').on('click', 'button', function (event) {
   // will send target to different modal function 
   let btnId = event.target.getAttribute('id');
+  console.log(btnId);
 
-  // declare vars for inputs that may or may not be required
+  //modalTypeEdit(btnId);
+  // // declare vars for inputs that may or may not be required
   let $startTimeContainer = $('#startTimeContainer');
   let $endTimeContainer = $('#endTimeContainer');
   let $taskModal = $('#taskModal');
-
   // change taskModal data-listtype to send to proper parent upon creation
   switch (btnId) {
     case "modalTaskButton":
@@ -507,35 +544,37 @@ $('#taskModal').on('click', 'button', function (event) {
   }
   
   // modal task data type manipulation via event.target
-  
-  // if button's id = task
-  if (btnId === "modalTaskButton") {
+  let type = $taskModal.data('tasktype');
+  modalTypeEdit(type);
+  // console.log(type);
+  // // if button's id = task
+  // if (type === "task") {
     
-    // display original or recreate original
-    // Show All Input Fields
-    $startTimeContainer.removeClass("modalToggle");
-    $endTimeContainer.removeClass("modalToggle");
+  //   // display original or recreate original
+  //   // Show All Input Fields
+  //   $startTimeContainer.removeClass("modalToggle");
+  //   $endTimeContainer.removeClass("modalToggle");
 
-    // if button's Id = radar or grateful or develop
-  } else if (btnId === "modalGratefulButton" || btnId === "modalRadarButton" || btnId === "modalDevelopButton") {
+  //   // if button's Id = radar or grateful or develop
+  // } else if (type === "grateful" || type === "radar" || type === "develop") {
     
-    // change modal to accept only text input
-    // Hide startTime and endTime
-    $startTimeContainer.addClass("modalToggle");
-    $endTimeContainer.addClass("modalToggle");
+  //   // change modal to accept only text input
+  //   // Hide startTime and endTime
+  //   $startTimeContainer.addClass("modalToggle");
+  //   $endTimeContainer.addClass("modalToggle");
 
 
-    // if button id = study or meeting
-  } else if (btnId === "modalStudyButton" || btnId === "modalMeetingButton") {
-    // change modal to accept text and time value only
-    // shows startTime and hides endTime
-    $startTimeContainer.removeClass("modalToggle");
-    $endTimeContainer.addClass("modalToggle");
+  //   // if button id = study or meeting
+  // } else if (type === "study" || type === "meeting") {
+  //   // change modal to accept text and time value only
+  //   // shows startTime and hides endTime
+  //   $startTimeContainer.removeClass("modalToggle");
+  //   $endTimeContainer.addClass("modalToggle");
 
-  }
+  // }
   
 // Remove because updated date requirements make develop required fields match radar and grateful
-//else if (btnId === "modalDevelopButton") {
+// else if (btnId === "modalDevelopButton") {
 //     // change modal to accept only text and date choice
 
 //     $startTimeContainer.addClass("modalToggle");
@@ -559,9 +598,11 @@ $('#openBtn').on("click", function () {
 
 clearModalInputs = () => {  
 $("#modalTextInput").val("");
-  $('#taskDate').val("");
+  $('#taskDate').val(now);
   $('#startTime').val("");
   $('#endTime').val("");
+  modalTypeEdit('task')
+  console.log($('#taskModal').data('tasktype'));
   // reset toggle value to false
   uncheck = () => {
     document.getElementById("mainTaskCheckbox").checked = false;
@@ -783,16 +824,20 @@ Copy Modal and create a new button for Edit and Delete Tasks
 // EVENT HANDLER FOR DYNAMIC-GENERATED EDIT/DELETE By: Casey Arrington 
 
 const editModalOpen = function (task) {
+  //modalTypeEdit(task.type);
+  //console.log(task.type);
+  //$('#taskModal').data("tasktype");
+  modalTypeEdit(task.type);
   $("#modalTextInput").val(task.text);
   $('#taskDate').val(task.date);
   $('#startTime').val(task.startTime);
   $('#endTime').val(task.endTime);
   // set value of mainTask to task.mainTask value
   uncheckOrCheck = () => {
-    if (task.mainTask === false) {
-    document.getElementById("mainTaskCheckbox").checked = false;
+    if (task.mainTask === 'true') {
+    document.getElementById("mainTaskCheckbox").checked = true;
     } else {
-      document.getElementById("mainTaskCheckbox").checked = true;
+      document.getElementById("mainTaskCheckbox").checked = false;
     }
   }
 
@@ -807,7 +852,7 @@ $('.tasklistContainer').on('click', 'button', function(event) {
   // get class of btnClicked (edit or delete)
   let btnClickedType = btnClicked.getAttribute('class');
   let btnClickedId = btnClicked.getAttribute('id').toString();
-  debugger;
+  //debugger;
   if (btnClickedType === "deleteBtn") {
     for (let i = 0; i < tasksArr.length; i++) {
       //console.log(btnClickedId);
@@ -827,10 +872,11 @@ $('.tasklistContainer').on('click', 'button', function(event) {
   } else if (btnClickedType === "editBtn") {
     for (let i = 0; i < tasksArr.length; i++) {
       if (btnClickedId === tasksArr[i].id.toString()) {
-        debugger;
-        tasksArr.splice(i, 1);
+        //debugger;
+        //tasksArr.splice(i, 1);
         console.log("edit this?");
         editModalOpen(tasksArr[i]);
+        tasksArr.splice(i, 1);
         //console.log(taskArr);
         
         
@@ -857,14 +903,18 @@ const initialIdCount = function () {
   if (tasksArr) {
     let currentMax = 0;
     for (let i = 0; i < tasksArr.length; i++) {
-      if (tasksArr[i].id > currentMax) {
-        currentMax = tasksArr[i].id;
-      }
-      idCounter = currentMax + 1;
-
-      //Math.max.apply(Math, tasksArr.map(function(o) {return o.id; }))
+      //if (tasksArr[i].id > currentMax) {
+        //currentMax = tasksArr[i].id;
       //}
-    } 
+      //idCounter = currentMax + 1;
+      
+      // reset all ids on load, 
+      tasksArr[i].id = currentMax;
+      currentMax++;
+      
+    }
+    
+    idCounter = currentMax;
     
   }
 }
@@ -874,4 +924,3 @@ getQuote();
 loadTasks();
 currentDay();
 getWeatherData();
-initialIdCount();
