@@ -230,7 +230,7 @@ const createTask = function (object) {
   $(listItem).attr({ id: 'x' + object.id, data: object.data });
 
   listContainer.setAttribute('class', 'row align-justify listContainer');
-  listItem.setAttribute('class', 'column small-4');
+  listItem.setAttribute('class', 'column small-4 listItem');
   editBtnEl.textContent = "edit";
   editBtnEl.setAttribute('class','editBtn column small-4');
   deleteBtnEl.textContent = "delete";
@@ -462,7 +462,7 @@ $('#textarea').on('blur', function (event) {
   saveTasks();
 })
 
-/* 1.) Add Edit and Delete buttons to Modal
+/* 1.) Add Edit and Delete buttons to Modal √
   2.) Copy Modal and create a new event handler 
   3.) Hold data from Modal in an object array
   4.) Add information in
