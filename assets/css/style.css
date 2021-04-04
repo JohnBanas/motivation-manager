@@ -303,7 +303,7 @@ ul {
 
 /* deal with below */
 .required {
-  border: 2rem solid red;
+  border: 3px solid red;
 }
 
 .title-bar-title {

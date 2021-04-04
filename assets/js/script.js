@@ -494,7 +494,11 @@ const modalTypeEdit = function (taskType) {
     // declare vars for inputs that may or may not be required
     let $startTimeContainer = $('#startTimeContainer');
     let $endTimeContainer = $('#endTimeContainer');
-    
+    // Remove required class if task-type is changed after initial attempt
+    $('#modalTextInput').removeClass('required');
+    $('#startTime').removeClass('required');
+    $('#endTime').removeClass('required');
+    $('#taskDate').removeClass('required');
     // modal task data type manipulation via event.target
     
     // if button's id = task
@@ -526,7 +530,7 @@ const modalTypeEdit = function (taskType) {
 
 
 // event listener for buttons on modal
-$('#taskModal').on('click', 'button', function (event) {
+$('#taskModal').on('click', 'button.modalButton', function (event) {
   // will send target to different modal function 
   let btnId = event.target.getAttribute('id');
   console.log(btnId);
@@ -697,7 +701,10 @@ $('#saveTasksBtn').on('click', function () {
   if (taskType === 'task') {
     // check for necessary data inputs
     if (!inputText || !startTime || !endTime || !inputDate) {
-      $('#modalTextInput', '#taskDate', '#startTime', '#endTime').addClass("required");
+      $('#modalTextInput').addClass('required');
+      $('#startTime').addClass('required');
+      $('#endTime').addClass('required');
+      $('#taskDate').addClass('required');
       console.log("No sir, we need that data");
 
       return;
@@ -707,6 +714,8 @@ $('#saveTasksBtn').on('click', function () {
     }
   } else if (taskType === 'radar' || taskType === "grateful" || taskType === "develop") {
     if (!inputText || !inputDate) {
+      $('#modalTextInput').addClass('required');
+      $('#taskDate').addClass('required');
       console.log("Seriously, its two inputs");
 
       return;
@@ -715,6 +724,9 @@ $('#saveTasksBtn').on('click', function () {
     }
   } else if (taskType === 'meeting' || taskType === "study")
     if (!inputText || !inputDate || !startTime) {
+      $('#modalTextInput').addClass('required');
+      $('#startTime').addClass('required');
+      $('#taskDate').addClass('required');
       console.log("FILL IT OUT!!!!")
 
       return;
@@ -727,6 +739,11 @@ $('#saveTasksBtn').on('click', function () {
 const clickCloseBtn = function (listObj) {
   // add the data-close to saveTasksBtn
   $('#saveTasksBtn').attr("data-close", "");
+  // remove required class for inputs
+  $('#modalTextInput').removeClass('required');
+  $('#startTime').removeClass('required');
+  $('#endTime').removeClass('required');
+  $('#taskDate').removeClass('required');
   // push obj to array
   tasksArr.push(listObj);
   // save updated taskArr
@@ -905,6 +922,7 @@ const editModalOpen = function (task) {
 $('.tasklistContainer').on('click', 'button', function(event) {
   // to edit or to delete? that is the question
   let btnClicked = event.target;
+  console.log(btnClicked);
   // get class of btnClicked (edit or delete)
   let btnClickedType = btnClicked.getAttribute('class');
   let btnClickedId = btnClicked.getAttribute('id').toString();
