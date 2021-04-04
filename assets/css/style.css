@@ -147,6 +147,7 @@ body a:hover {
 }
 
 #quoteElement {
+  text-align: center;
   margin-top: 2rem;
   padding: 0 2rem;
   font-family: 'Times New Roman', Times, serif;
