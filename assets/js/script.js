@@ -602,6 +602,19 @@ $('#taskModal').on('click', 'button', function (event) {
 })
 
 
+// Edit Notes!
+
+const editNotes = function (noteObj) {
+  $('#textarea').val(noteObj.text);
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -769,7 +782,10 @@ const dateAudit = function (tasksArr) {
 $('#saveNotes').on('click', function (event) {
   let noteType = "notes";
   let notes = $('#textarea').val();
-
+  if (!notes) {
+    console.log("Nothing to save here");
+    return;
+  }
   // create the note object 
   let notesObj = {type: noteType, text: notes, id: idCounter, date: now};
   tasksArr.push(notesObj);
@@ -884,9 +900,10 @@ const editModalOpen = function (task) {
   // remove data type from save button to prevent close on save with missing data
   $('#saveTasksBtn').removeAttr("data-close");
 }
- 
+
+// event handler for dynamically created edit and delete buttons
 $('.tasklistContainer').on('click', 'button', function(event) {
-  console.log('clciked');
+  // to edit or to delete? that is the question
   let btnClicked = event.target;
   // get class of btnClicked (edit or delete)
   let btnClickedType = btnClicked.getAttribute('class');
@@ -914,7 +931,11 @@ $('.tasklistContainer').on('click', 'button', function(event) {
         //debugger;
         //tasksArr.splice(i, 1);
         console.log("edit this?");
-        editModalOpen(tasksArr[i]);
+        if (tasksArr[i].type === 'notes') {
+          editNotes(tasksArr[i]);
+        } else {  
+          editModalOpen(tasksArr[i]);
+        }
         tasksArr.splice(i, 1);
         //console.log(taskArr);
         
