@@ -5,7 +5,9 @@ let quoteArr = [];
 let tasksArr = [];
 // current date on load
 let now = dayjs().format('YYYY-MM-DD');
+// consider localizing divTemp to showTemp() function
 var divTemp = document.querySelector("#temp");
+// task item id counter
 let idCounter = 0;
 $(document).foundation();
 
@@ -126,6 +128,7 @@ animatedIcon = (weatherIcon) => {
 
 // Experiment
 //$('#headerDate').val(now);
+// Moved to updated currentDay() so all date related displays occur in same function
 
 // function for user date By: John Banas
 $('#headerDate').on('change', function (event) {
@@ -147,6 +150,7 @@ modalOnSavePage = () => {
   $('#developList').empty();
   $('#mainTasksList').empty();
   $('#textarea').val('');
+  $('#notesList').empty();
 }
 
 // // Current/Chosen Date to Display. By: Casey Arrington and John Banas
@@ -303,111 +307,122 @@ const saveTasks = function () {
 // Change in edit/delete id's to match object id for ease in identification and add editBtn.Attr (data-open= "taskModal") to open modal
 const createTask = function (object) {
   console.log(object);
-
-  let listItem = document.createElement("li");
-  //$(listItem).attr({ id: 'x' + object.id, data: object.data });
-  // changed it to equal pure value
-  listItem.setAttribute('id', object.id);
-  // for your (john) data attr
-  listItem.setAttribute('data', object.data)
-
-  let listContainer = document.querySelector("#" + object.type + "List");
-
-  let buttonContainer = document.createElement("div");
-  $(buttonContainer).attr({ class: 'editDeleteContainers' });
   
-  let editBtnEl = document.createElement("button");
-  let deleteBtnEl = document.createElement("button");
+    let listItem = document.createElement("li");
+    //$(listItem).attr({ id: 'x' + object.id, data: object.data });
+    // changed it to equal pure value
+    listItem.setAttribute('id', object.id);
+    // for your (john) data attr
+    listItem.setAttribute('data', object.data)
 
-  //$(editBtnEl).attr({ id: 'y' + object.id })
-  //$(deleteBtnEl).attr({ id: 'z' + object.id })
+    let listContainer = document.querySelector("#" + object.type + "List");
 
-  // changed to equal pure value of object
-  editBtnEl.setAttribute('id', object.id);
-  deleteBtnEl.setAttribute('id', object.id);
-
-  editBtnEl.textContent = "edit";
-  editBtnEl.setAttribute('class', 'editBtn');
-  // Give editBtn power to open modal
-  editBtnEl.setAttribute('data-open', 'taskModal');
-
-  deleteBtnEl.textContent = "delete";
-  deleteBtnEl.setAttribute('class', 'deleteBtn');
-  console.log(object.startTime)
-  //change starting military time to standard
-  //debugger;
-  //change hours to string save to variable
-  let startHours = object.startTime.toString();
-  
-  //minutes
-  var startMinutes = startHours.substr(3);
-  //am or pm
-  var AmOrPm = startHours >= 12 ? 'pm' : 'am';
-  //changing to standard time
-  startHours = (startHours % 12) || 12;
-
-  //same for end time hours
-  let endHours = object.endTime.toString();
-  //minutes
-  let endMinutes = endHours.substr(3);
-  //am or pm is already controlled
-  //change hour to standard time
-  endHours = (endHours % 12) || 12;
-
-
-
-  //to style the buttons need id or class
-  if (object.type !== "notes") {
-    switch (object.type) {
-      case "task":
-        listItem.textContent = "[" +
-          startHours + ":" +
-          startMinutes + " " +
-          AmOrPm + " " + "-" +
-          " " + endHours + ":" +
-          endMinutes + " " +
-          AmOrPm + "]" +
-          " - " + object.text;
-        break;
-      case "meeting":
-        listItem.textContent = "[" + " " +
-          startHours + ":" +
-          startMinutes + " " +
-          AmOrPm + "]" + " - " + object.text;
-        break;
-      case "grateful":
-        listItem.textContent = object.text;
-        break;
-      case "study":
-        listItem.textContent = "[" + " " +
-          startHours + ":" +
-          startMinutes + " " +
-          AmOrPm + "]" + " - " + object.text;
-        break;
-      case "radar":
-        listItem.textContent = object.text;
-        break;
-      case "develop":
-        listItem.textContent = object.text + " To be completed by : " + object.date;
-        break;
-    }
-    if (object.mainTask === 'true') {
-      // clones tasks WITHOUT edit and delete btns. I like it but can change
-      $(listItem).clone().appendTo('#mainTasksList');
-    }
-
-    listContainer.appendChild(listItem);
-    buttonContainer.appendChild(editBtnEl);
-    buttonContainer.appendChild(deleteBtnEl);
-    listItem.appendChild(buttonContainer);
+    let buttonContainer = document.createElement("div");
+    $(buttonContainer).attr({ class: 'editDeleteContainers' });
     
-  }
+    let editBtnEl = document.createElement("button");
+    let deleteBtnEl = document.createElement("button");
 
-  // if type is notes
-  if (object.notes) {
-    $('#textarea').val(object.notes);
-  }
-  now = object.date;
+    // changed to equal pure value of object
+    editBtnEl.setAttribute('id', object.id);
+    deleteBtnEl.setAttribute('id', object.id);
+
+    editBtnEl.textContent = "edit";
+    deleteBtnEl.textContent = "delete";
+
+    editBtnEl.setAttribute('class', 'editBtn');
+    deleteBtnEl.setAttribute('class', 'deleteBtn');
+
+    //$(editBtnEl).attr({ id: 'y' + object.id })
+    //$(deleteBtnEl).attr({ id: 'z' + object.id })
+    if (object.type !== 'notes') {
+    // All !notes type specific code
+
+    editBtnEl.setAttribute('class', 'editBtn');
+    // Give editBtn power to open modal
+    editBtnEl.setAttribute('data-open', 'taskModal');
+
+    
+    deleteBtnEl.setAttribute('class', 'deleteBtn');
+    console.log(object.startTime)
+    //change starting military time to standard
+    //debugger;
+    //change hours to string save to variable
+    let startHours = object.startTime.toString();
+    
+    //minutes
+    var startMinutes = startHours.substr(3);
+    //am or pm
+    var AmOrPm = startHours >= 12 ? 'pm' : 'am';
+    //changing to standard time
+    startHours = (startHours % 12) || 12;
+
+    //same for end time hours
+    let endHours = object.endTime.toString();
+    //minutes
+    let endMinutes = endHours.substr(3);
+    //am or pm is already controlled
+    //change hour to standard time
+    endHours = (endHours % 12) || 12;
+
+    // update below section to implement note creation in createTask
+    //to style the buttons need id or class
+    
+      switch (object.type) {
+        case "task":
+          listItem.textContent = "[" +
+            startHours + ":" +
+            startMinutes + " " +
+            AmOrPm + " " + "-" +
+            " " + endHours + ":" +
+            endMinutes + " " +
+            AmOrPm + "]" +
+            " - " + object.text;
+          break;
+        case "meeting":
+          listItem.textContent = "[" + " " +
+            startHours + ":" +
+            startMinutes + " " +
+            AmOrPm + "]" + " - " + object.text;
+          break;
+        case "grateful":
+          listItem.textContent = object.text;
+          break;
+        case "study":
+          listItem.textContent = "[" + " " +
+            startHours + ":" +
+            startMinutes + " " +
+            AmOrPm + "]" + " - " + object.text;
+          break;
+        case "radar":
+          listItem.textContent = object.text;
+          break;
+        case "develop":
+          listItem.textContent = object.text + " To be completed by : " + object.date;
+          break;
+      }
+      if (object.mainTask === 'true') {
+        // clones tasks WITHOUT edit and delete btns. I like it but can change
+        $(listItem).clone().appendTo('#mainTasksList');
+      }
+    
+    } else {
+      listItem.textContent = object.text;
+
+    }
+      listContainer.appendChild(listItem);
+      buttonContainer.appendChild(editBtnEl);
+      buttonContainer.appendChild(deleteBtnEl);
+      listItem.appendChild(buttonContainer);
+      //listContainer.appendChild(listItem);
+    
+
+    // // if type is notes
+    // if (object.notes) {
+    //   $('#textarea').val(object.notes);
+    // }
+    // now = object.date;
+  
 }
 
 
@@ -518,8 +533,8 @@ $('#taskModal').on('click', 'button', function (event) {
 
   //modalTypeEdit(btnId);
   // // declare vars for inputs that may or may not be required
-  let $startTimeContainer = $('#startTimeContainer');
-  let $endTimeContainer = $('#endTimeContainer');
+  // let $startTimeContainer = $('#startTimeContainer');
+  // let $endTimeContainer = $('#endTimeContainer');
   let $taskModal = $('#taskModal');
   // change taskModal data-listtype to send to proper parent upon creation
   switch (btnId) {
@@ -546,6 +561,9 @@ $('#taskModal').on('click', 'button', function (event) {
   // modal task data type manipulation via event.target
   let type = $taskModal.data('tasktype');
   modalTypeEdit(type);
+
+  // moved code below to own function to be useable by edit modal open DRY
+
   // console.log(type);
   // // if button's id = task
   // if (type === "task") {
@@ -740,9 +758,29 @@ const dateAudit = function (tasksArr) {
 //   }
 // }
 
-// // notes event handler
-// $(saveNotes).on('click', function (event) {
-//   //get text from notes
+// create Notes
+// const createNotes = function (noteObj) {
+//   let $notesContainer = $('#notesList');
+//   let $noteListItem = $('<li>')
+//   let 
+// }
+
+// save notes event handler
+$('#saveNotes').on('click', function (event) {
+  let noteType = "notes";
+  let notes = $('#textarea').val();
+
+  // create the note object 
+  let notesObj = {type: noteType, text: notes, id: idCounter, date: now};
+  tasksArr.push(notesObj);
+  // push it to tasksArr
+  saveTasks();
+  idCounter++
+  modalOnSavePage();
+  loadTasks();
+})
+
+  //   //get text from notes
 //   let notes = $('#textarea').val()
 //   //create list item
 //   let noteListItem = document.createElement('li');
@@ -783,34 +821,34 @@ const dateAudit = function (tasksArr) {
 
 // Current Note Event Handler Below
 
-$('#textarea').on('blur', function (event) {
-  let notes = event.target.value;
-  let noteType = "notes"
-  // check if there in at least ONE object that fits conditions in some() method
-  //John Banas updated via Casey Arrington text message
-  if (tasksArr.some(object => object.type === "notes" && object.date === now)) {
-    // loop the task Arr 
-    for (let i = 0; i < tasksArr.length; i++) {
-      // find the object that matches...
-      if (tasksArr[i].type === "notes" && tasksArr[i].date === now) {
-        // change property value to new value
-        tasksArr[i].notes = notes;
-        console.log(notes);
-        //put in <li> in <ul>
-        noteListItem.textContent = notes;
-        notesEl.appendChild(noteListItem);
-      }
-    }
+// $('#textarea').on('blur', function (event) {
+//   let notes = event.target.value;
+//   let noteType = "notes"
+//   // check if there in at least ONE object that fits conditions in some() method
+//   //John Banas updated via Casey Arrington text message
+//   if (tasksArr.some(object => object.type === "notes" && object.date === now)) {
+//     // loop the task Arr 
+//     for (let i = 0; i < tasksArr.length; i++) {
+//       // find the object that matches...
+//       if (tasksArr[i].type === "notes" && tasksArr[i].date === now) {
+//         // change property value to new value
+//         tasksArr[i].notes = notes;
+//         console.log(notes);
+//         //put in <li> in <ul>
+//         noteListItem.textContent = notes;
+//         notesEl.appendChild(noteListItem);
+//       }
+//     }
 
-  } else {
-    // if conditionals are false
-    // push values as property to new object
-    let notesObj = { type: noteType, notes: notes, date: now };
-    // push new object to tasks Array
-    tasksArr.push(notesObj);
-  }
-  saveTasks();
-})
+//   } else {
+//     // if conditionals are false
+//     // push values as property to new object
+//     let notesObj = { type: noteType, notes: notes, date: now };
+//     // push new object to tasks Array
+//     tasksArr.push(notesObj);
+//   }
+//   saveTasks();
+// })
 
 /* 1.) Add Edit and Delete buttons to Modal
   2.) Copy Modal and create a new event handler 
@@ -848,6 +886,7 @@ const editModalOpen = function (task) {
 }
  
 $('.tasklistContainer').on('click', 'button', function(event) {
+  console.log('clciked');
   let btnClicked = event.target;
   // get class of btnClicked (edit or delete)
   let btnClickedType = btnClicked.getAttribute('class');
@@ -855,9 +894,9 @@ $('.tasklistContainer').on('click', 'button', function(event) {
   //debugger;
   if (btnClickedType === "deleteBtn") {
     for (let i = 0; i < tasksArr.length; i++) {
-      //console.log(btnClickedId);
-      //console.log(tasksArr[i].id);
-      //console.log(btnClickedId === tasksArr[i].id.toString());
+      console.log(btnClickedId);
+      console.log(tasksArr[i].id);
+      console.log(btnClickedId === tasksArr[i].id.toString());
       // if ID of button and task match
       if (btnClickedId === tasksArr[i].id.toString()) {
         // Delete Task from array with splice
