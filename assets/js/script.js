@@ -389,7 +389,8 @@ const modalTypeEdit = function (taskType) {
     $('#endTime').removeClass('required');
     $('#taskDate').removeClass('required');
     // modal task data type manipulation via event.target
-    
+    debugger;
+    console.log(taskType);
     // if button's id = task
     if (taskType === "task") {
       
@@ -559,6 +560,7 @@ $('#taskModal').on('click', 'button.modalButton', function (event) {
       $taskModal.data('tasktype', 'meeting');
       break;
   }
+  modalTypeEdit($taskModal.data('tasktype'));
 })
 
 
