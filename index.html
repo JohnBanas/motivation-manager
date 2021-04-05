@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Changes Commentary -->
-<!-- Casey's Edit and Delete -->
-  <!-- Add a unstyled class (taskListContainer) to UL for JS identification To Apply Event Handler on UL for edit and delete buttons -->
-
-
 <head>
   <meta charset="UTF-8" />
   <meta name="title" content="Motivation Manager" />
@@ -227,21 +222,13 @@
 
       <!-- Notes Section-->
       <section id="notes">
-        <!-- <article>
-          <h3 id="myNotes">Notes</h3>
-          <textarea id="textarea"></textarea>
-          <ul class="notesList" id="notesList"></ul>
-        </article> -->
+       
         <article>
           <div id="myNotes">
             <h3>Notes</h3>
           <textarea id="textarea"></textarea>
           <button id="saveNotes">Save Note</button>
           </div>
-
-
-          <!-- JOHN!!!! Added class taskListContainer For now, unsure if needed but may be able to 
-          implement save functionality for notesList -->
           
           <div>
             <ul class="notesList tasklistContainer" id="notesList">
@@ -255,12 +242,6 @@
       <!-- Task Modal -->
       <div class="grid-container">
         <div class="cell">
-          <!-- button to activate modal -->
-          <!-- <h2 id="plusIcon">
-              <button id="openBtn" data-open="taskModal">
-                Add Task
-              </button>
-            </h2> -->
 
             <!-- data-reveal-id="taskModal" was in div class below! -->
           <div class="reveal grid-container fluid" id="taskModal" data-reveal data-tasktype="task">

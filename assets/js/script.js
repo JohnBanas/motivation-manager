@@ -1,5 +1,4 @@
 // Global Var
-let listID;
 let previousStart = 0;
 let quoteArr = [];
 let tasksArr = [];
@@ -17,6 +16,28 @@ $(window).on('changed.zf.mediaquery', function () {
   $('.is-dropdown-submenu.invisible').removeClass('invisible');
 });
 
+//sticky nav bar 
+$('.title-bar').on('sticky.zf.stuckto:top', function () {
+  $(this).addClass('shrink');
+}).on('sticky.zf.unstuckfrom:top', function () {
+  $(this).removeClass('shrink');
+})
+
+// Get up counter synced to loaded tasks
+const initialIdCount = function () {
+  if (tasksArr) {
+    let currentMax = 0;
+    for (let i = 0; i < tasksArr.length; i++) {
+      tasksArr[i].id = currentMax;
+      currentMax++;
+      
+    }
+    
+    idCounter = currentMax;
+    
+  }
+}
+
 
 // ALL SERVERSIDE API / FETCH-RELATED FUNCTIONS BELOW 
 
@@ -24,7 +45,7 @@ let currentWeather;
 // Hard-coded city for showcase
 let cityNameEl = 'nashville'; // either grab input to register user city or figure out how to use GPS data
 
-// Weather Api Fetch. By: Initial: Phil, Major Overhaul/Additions: John Banas
+// Weather Api Fetch.
 getWeatherData = () => {
   // format "open weather map" api url
   let apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityNameEl + '&appid=882d7b151f3175e892df45d1e68ea9dd' + "&units=imperial";
@@ -50,6 +71,7 @@ getWeatherData = () => {
     });
 };
 
+// temp display function
 const showTemp = (temperatureEl) => {
   // create an H4 element for temp
   var tempEl = document.createElement("h4");
@@ -64,8 +86,6 @@ const showTemp = (temperatureEl) => {
 
 
 //show animated icon with positive statement based on OpenWeather API icon
-// By: John Banas and Third-Party Code (I -Casey Arrington- think). Credit Given At Bottom Of Web Page/index.html 
-
 animatedIcon = (weatherIcon) => {
   /* hide html elements */
   $('#weatherContainer').hide();
@@ -114,23 +134,7 @@ animatedIcon = (weatherIcon) => {
 
 }
 
-// JOHN!  VVV Unnecessary and I dont even really understand the code.
-// $('headerDate').val(now) in loadTasks will do the same but I think more completely b/c
-// code below left me with some small bugs that i didnt get with my method yet. we'll see
-// with more testing
-// Date.prototype.toDateInputValue = (function () {
-//   var local = new Date(this);
-//   local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-//   return local.toJSON().slice(0, 10);
-// });
-
-// document.getElementById('headerDate').value = new Date().toDateInputValue();
-
-// Experiment
-//$('#headerDate').val(now);
-// Moved to updated currentDay() so all date related displays occur in same function
-
-// function for user date By: John Banas
+// function for user date
 $('#headerDate').on('change', function (event) {
   // set chosen date 
   now = event.target.value;
@@ -140,7 +144,7 @@ $('#headerDate').on('change', function (event) {
   currentDay();
 })
 
-// Clear (Loaded)Lists For Current-Displayed Date For New Date Load. By: John Banas
+// Clear (Loaded)Lists For Current-Displayed Date For New Date Load.
 modalOnSavePage = () => {
   $('#taskList').empty();
   $('#meetingList').empty();
@@ -153,13 +157,7 @@ modalOnSavePage = () => {
   $('#notesList').empty();
 }
 
-// // Current/Chosen Date to Display. By: Casey Arrington and John Banas
-// const currentDay = function () {
-//   $('#dateDisplay').empty();
-//   displayNow = dayjs(now).format("dddd, MMMM D, YYYY");
-//   $('#dateDisplay').append(displayNow)
-// }
-
+// date displays
 const currentDay = function () {
   // load in new Day
   $('#headerDate').val(now);
@@ -169,7 +167,7 @@ const currentDay = function () {
   $('#dateDisplay').text(displayNow);
 }
 
-// fetch Function for Quote Api. By: Casey Arrington
+// fetch Function for Quote Api.
 const getQuote = function () {
   // send fetch request
   fetch("https://type.fit/api/quotes")
@@ -199,10 +197,8 @@ const getQuote = function () {
 }
 
 
-// Display quote randomly selected from quote Arr function(). By: Casey Arrington 
+// Display quote randomly selected from quote Arr function(). 
 const displayQuote = function () {
-  // for functionality check
-  console.log("displayquote() started");
   // find <p> by id
   let $quoteEl = $('#quoteElement');
   // Choose a random index from quoteArr
@@ -211,7 +207,7 @@ const displayQuote = function () {
   $quoteEl.html(randomIndexQuote.text + "<span> -" + randomIndexQuote.author + "</span>");
 }
 
-// Function to refresh QuoteDisplay. By: Casey
+// Function to refresh QuoteDisplay.
 const quoteRefreshTimer = function () {
   // run displayQuote once
   displayQuote();
@@ -228,9 +224,9 @@ const quoteRefreshTimer = function () {
 
 // LIST CREATION WITH SAVE AND LOAD BELOW
 
-// Load tasks/tasksArr function By: Casey Arrington and John Banas
+// Load tasks/tasksArr function 
 const loadTasks = function () {
-  //$('#headerDate').val(now);
+
   // add loaded tasks to tasksObj
   newTasksObj = JSON.parse(localStorage.getItem("tasksArr"));
   //.sort() funtion to put them in order
@@ -258,61 +254,19 @@ dateAudit(tasksArr);
 }
 
 
-
-
-
-// Save TaskArr function By: Casey Arrington
+// Save TaskArr function
 const saveTasks = function () {
   // save all items in tasks array
   localStorage.setItem("tasksArr", JSON.stringify(tasksArr));
 }
 
-
-
-
-// const displayTasks = function (object) {}
-// // send only current date data to create Task
-// for (let i = 0; i < tasksArr.length; i++) {
-
-//   if (tasksArr[i].date === now) {
-//     createTask(tasksArr[i]);
-//   }
-// }
-// //delete old tasks
-// dateAudit(tasksArr);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// create function, object = object with data entries
-//(John Banas comment) we need to add delete/edit buttons here later
-
-// Create Task Function By: Casey Arrington and John Banas
-
-// Casey Changes (4/3/21)
-// Change in edit/delete id's to match object id for ease in identification and add editBtn.Attr (data-open= "taskModal") to open modal
+// create task function
 const createTask = function (object) {
-  console.log(object);
-  
+
     let listItem = document.createElement("li");
-    //$(listItem).attr({ id: 'x' + object.id, data: object.data });
-    // changed it to equal pure value
+    
     listItem.setAttribute('id', object.id);
-    // for your (john) data attr
+    // for data attr
     listItem.setAttribute('data', object.data)
 
     let listContainer = document.querySelector("#" + object.type + "List");
@@ -323,7 +277,7 @@ const createTask = function (object) {
     let editBtnEl = document.createElement("button");
     let deleteBtnEl = document.createElement("button");
 
-    // changed to equal pure value of object
+    // Add button attributes and values
     editBtnEl.setAttribute('id', object.id);
     deleteBtnEl.setAttribute('id', object.id);
 
@@ -333,8 +287,6 @@ const createTask = function (object) {
     editBtnEl.setAttribute('class', 'editBtn');
     deleteBtnEl.setAttribute('class', 'deleteBtn');
 
-    //$(editBtnEl).attr({ id: 'y' + object.id })
-    //$(deleteBtnEl).attr({ id: 'z' + object.id })
     if (object.type !== 'notes') {
     // All !notes type specific code
 
@@ -344,9 +296,9 @@ const createTask = function (object) {
 
     
     deleteBtnEl.setAttribute('class', 'deleteBtn');
-    console.log(object.startTime)
+    
     //change starting military time to standard
-    //debugger;
+    
     //change hours to string save to variable
     let startHours = object.startTime.slice(0, 2);
     
@@ -423,86 +375,14 @@ const createTask = function (object) {
       buttonContainer.appendChild(editBtnEl);
       buttonContainer.appendChild(deleteBtnEl);
       listItem.appendChild(buttonContainer);
-      //listContainer.appendChild(listItem);
-    
-
-    // // if type is notes
-    // if (object.notes) {
-    //   $('#textarea').val(object.notes);
-    // }
-    // now = object.date;
-  
 }
 
-
-
-
-// John Banas's edit and Delete Functionality Below
-
-// Causes Bug on Closing Modal with My code?
-
-//picks up click event from created edit button
-//create variable to open modal without click event
-
-// var modalPopUp = new Foundation.Reveal($('#taskModal'));
-// //edit button clicked
-// $(document).on('click', '.editBtn', function (event) {
-//   //clear any input
-//   clearModalInputs();
-//   //pull current array
-//   let editTaskArr = JSON.parse(localStorage.getItem("tasksArr"));
-//   //loop through array
-//   for (let i = 0; i < editTaskArr.length; i++) {
-//     //if the array id equals the button id 
-//     if ('y' + editTaskArr[i].id === event.target.id) {
-//       //open modal
-//       modalPopUp.open();
-//       //populate modal inputs with the matching array values
-//         $("#modalTextInput").val(editTaskArr[i].text);
-//         $('#taskDate').val(editTaskArr[i].date);
-//         $('#startTime').val(editTaskArr[i].startTime);
-//         $('#endTime').val(editTaskArr[i].endTime);
-//         // reset toggle value to false
-//         uncheck = () => {
-//           document.getElementById("mainTaskCheckbox").checked = false;
-//         }
-//         uncheck();
-//       //remove the task from the array because it will be added with the save button
-//       //trying to do that with map() to dynamically make a new array, not working yet.
-//       //var $newArray = $.makeArray(editTaskArr[i]);
-//       // $.map($newArray, function (value, key) {
-//       //   value.text = '';
-//       //   value.date = '';
-//       //   value.startTime = '';
-//       //   value.endTime = '';
-//       // })
-//     }
-//   }
-// });
-
-// //picks up click event for delete button 
-// $(document).on('click', '.deleteBtn', function (event) {
-//   //pull from local storage
-//   let editTaskArr = JSON.parse(localStorage.getItem("tasksArr"));
-//   for (let i = 0; i < editTaskArr.length; i++) {
-//     //if the id of the array equals the button id
-//     if ('z' + editTaskArr[i].id === event.target.id) {
-//       //pull it from the array
-//       tasksArr.splice(i, 1);
-//       //save the new array
-//       saveTasks();
-//       //clear the page of the old list items just deleted
-//       $(`x` + event.target.id).remove();
-//     }
-//   }
-// });
-
-
-// // John Banas's Edit and Delete Functionality Above
+// function for changing modal thru task type
 const modalTypeEdit = function (taskType) {
     // declare vars for inputs that may or may not be required
     let $startTimeContainer = $('#startTimeContainer');
     let $endTimeContainer = $('#endTimeContainer');
+    
     // Remove required class if task-type is changed after initial attempt
     $('#modalTextInput').removeClass('required');
     $('#startTime').removeClass('required');
@@ -538,16 +418,125 @@ const modalTypeEdit = function (taskType) {
 }
 
 
+// Edit Notes!
+
+const editNotes = function (noteObj) {
+  $('#textarea').val(noteObj.text);
+}
+
+
+
+// Clear Modal Inputs Function. By Casey Arrington  initially, heavily refactored by John Banas
+
+clearModalInputs = () => {  
+$("#modalTextInput").val("");
+  $('#taskDate').val(now);
+  $('#startTime').val("");
+  $('#endTime').val("");
+  modalTypeEdit('task')
+  
+  // reset toggle value to false
+  uncheck = () => {
+    document.getElementById("mainTaskCheckbox").checked = false;
+  }
+  uncheck();
+  // remove data type from save button
+  $('#saveTasksBtn').removeAttr("data-close");
+  
+}
+
+
+
+
+
+
+
+// close modal function.
+const clickCloseBtn = function (listObj) {
+  // add the data-close to saveTasksBtn
+  $('#saveTasksBtn').attr("data-close", "");
+  // remove required class for inputs
+  $('#modalTextInput').removeClass('required');
+  $('#startTime').removeClass('required');
+  $('#endTime').removeClass('required');
+  $('#taskDate').removeClass('required');
+  // push obj to array
+  tasksArr.push(listObj);
+  // save updated taskArr
+  saveTasks();
+
+  // update date to chosen date
+  now = listObj.date;
+  currentDay();
+  modalOnSavePage();
+  loadTasks();
+  
+}
+
+// Function to auto-delete if object.date is before yesterday.
+const dateAudit = function (tasksArr) {
+  let past = dayjs().subtract(1, 'day').format('YYYY-MM-DD');
+  for (let i = 0; i < tasksArr.length; i++) {
+    if (dayjs(tasksArr[i].date).isBefore(past)) {
+      tasksArr.splice(i, 1);
+      saveTasks();
+    }
+  }
+}
+
+
+const editModalOpen = function (task) {
+  // run modalTypeEdit to run based off task-to-be-edited
+  modalTypeEdit(task.type);
+  // log all data from task
+  $("#modalTextInput").val(task.text);
+  $('#taskDate').val(task.date);
+  $('#startTime').val(task.startTime);
+  $('#endTime').val(task.endTime);
+  // set value of mainTask to task.mainTask value
+  uncheckOrCheck = () => {
+    if (task.mainTask === 'true') {
+    document.getElementById("mainTaskCheckbox").checked = true;
+    } else {
+      document.getElementById("mainTaskCheckbox").checked = false;
+    }
+  }
+
+  uncheckOrCheck();
+
+  // remove data type from save button to prevent close on save with missing data
+  $('#saveTasksBtn').removeAttr("data-close");
+}
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// ALL EVENT HANDLERS BELOW
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+// event handler for user chosen date
+$('#headerDate').on('change', function (event) {
+  // set chosen date 
+  now = event.target.value;
+  modalOnSavePage();
+  // load page with new date
+  loadTasks();
+  currentDay();
+})
+
+// EVENT HANDLER TO RESET INPUTS ON MODAL OPEN->REVEAL. 
+// When Modal opens via #openBtn
+$('#openBtn').on("click", function () {
+  // clear all inputs
+  clearModalInputs();
+})
+
+
 // event listener for buttons on modal
 $('#taskModal').on('click', 'button.modalButton', function (event) {
   // will send target to different modal function 
   let btnId = event.target.getAttribute('id');
-  console.log(btnId);
 
-  //modalTypeEdit(btnId);
-  // // declare vars for inputs that may or may not be required
-  // let $startTimeContainer = $('#startTimeContainer');
-  // let $endTimeContainer = $('#endTimeContainer');
+
   let $taskModal = $('#taskModal');
   // change taskModal data-listtype to send to proper parent upon creation
   switch (btnId) {
@@ -570,120 +559,12 @@ $('#taskModal').on('click', 'button.modalButton', function (event) {
       $taskModal.data('tasktype', 'meeting');
       break;
   }
-  
-  // modal task data type manipulation via event.target
-  let type = $taskModal.data('tasktype');
-  modalTypeEdit(type);
-
-  // moved code below to own function to be useable by edit modal open DRY
-
-  // console.log(type);
-  // // if button's id = task
-  // if (type === "task") {
-    
-  //   // display original or recreate original
-  //   // Show All Input Fields
-  //   $startTimeContainer.removeClass("modalToggle");
-  //   $endTimeContainer.removeClass("modalToggle");
-
-  //   // if button's Id = radar or grateful or develop
-  // } else if (type === "grateful" || type === "radar" || type === "develop") {
-    
-  //   // change modal to accept only text input
-  //   // Hide startTime and endTime
-  //   $startTimeContainer.addClass("modalToggle");
-  //   $endTimeContainer.addClass("modalToggle");
-
-
-  //   // if button id = study or meeting
-  // } else if (type === "study" || type === "meeting") {
-  //   // change modal to accept text and time value only
-  //   // shows startTime and hides endTime
-  //   $startTimeContainer.removeClass("modalToggle");
-  //   $endTimeContainer.addClass("modalToggle");
-
-  // }
-  
-// Remove because updated date requirements make develop required fields match radar and grateful
-// else if (btnId === "modalDevelopButton") {
-//     // change modal to accept only text and date choice
-
-//     $startTimeContainer.addClass("modalToggle");
-//     $endTimeContainer.addClass("modalToggle");
-
-//   }
 })
 
 
-// Edit Notes!
-
-const editNotes = function (noteObj) {
-  $('#textarea').val(noteObj.text);
-}
-
-
-
-
-
-
-
-
-
-
-
-// EVENT HANDLER TO RESET INPUTS ON MODAL OPEN->REVEAL. 
-// When Modal opens via #openBtn
-$('#openBtn').on("click", function () {
-  // clear all inputs
-  clearModalInputs();
-})
-
-// Clear Modal Inputs Function. By Casey Arrington  initially, heavily refactored by John Banas
-
-clearModalInputs = () => {  
-$("#modalTextInput").val("");
-  $('#taskDate').val(now);
-  $('#startTime').val("");
-  $('#endTime').val("");
-  modalTypeEdit('task')
-  console.log($('#taskModal').data('tasktype'));
-  // reset toggle value to false
-  uncheck = () => {
-    document.getElementById("mainTaskCheckbox").checked = false;
-  }
-  uncheck();
-  // remove data type from save button
-  $('#saveTasksBtn').removeAttr("data-close");
-  
-}
-
-
-
-
-
-
-
-// Modal Save Event Handler. By: John Banas and Casey Arrington
+// Modal Save Event Handler.
 $('#saveTasksBtn').on('click', function () {
-  //let localObject = JSON.parse(localStorage.getItem("tasksArr"));
-  //console.log(localObject)
-  //if (localObject) {
-    //listID++;
-  //} else {
-    //listID = 0;
-  //}
-  //console.log(listID);
-
-  // Current Id Generator above
-  // Testing New Below
-  
-  // if idCounter = 0
-  // if (idCounter === 0) {
-  //   listId = 0;
-  //   idCounter++
-  // } else {
-  //   listId = idCounter;
-  //   idCounter++
+  // set id for task
   let listId = idCounter;
   idCounter++;
 
@@ -704,114 +585,60 @@ $('#saveTasksBtn').on('click', function () {
   let x = $('#startTime').val().toString().replace(':', '');
   let dataType = parseInt(x);
 
-  // data check below!
+  
   // consolidate all data into object
   // removing id: listId in object for test
   let listObj = { type: taskType, text: inputText, startTime: startTime, endTime: endTime, date: inputDate, mainTask: mainTask, data: dataType, id: listId};
+  
   // check all task types
   if (taskType === 'task') {
     // check for necessary data inputs
     if (!inputText || !startTime || !endTime || !inputDate) {
+      // Add class if non-existent
       $('#modalTextInput').addClass('required');
       $('#startTime').addClass('required');
       $('#endTime').addClass('required');
       $('#taskDate').addClass('required');
-      console.log("No sir, we need that data");
 
       return;
+
     } else {
       // if so send obj to new function below
       clickCloseBtn(listObj);
     }
+
   } else if (taskType === 'radar' || taskType === "grateful" || taskType === "develop") {
     if (!inputText || !inputDate) {
       $('#modalTextInput').addClass('required');
       $('#taskDate').addClass('required');
-      console.log("Seriously, its two inputs");
-
+      
       return;
+
     } else {
+
       clickCloseBtn(listObj);
     }
+
   } else if (taskType === 'meeting' || taskType === "study")
     if (!inputText || !inputDate || !startTime) {
       $('#modalTextInput').addClass('required');
       $('#startTime').addClass('required');
       $('#taskDate').addClass('required');
-      console.log("FILL IT OUT!!!!")
 
       return;
+
     } else {
       clickCloseBtn(listObj);
     }
 });
 
-// close modal function. By: Casey Arrington
-const clickCloseBtn = function (listObj) {
-  // add the data-close to saveTasksBtn
-  $('#saveTasksBtn').attr("data-close", "");
-  // remove required class for inputs
-  $('#modalTextInput').removeClass('required');
-  $('#startTime').removeClass('required');
-  $('#endTime').removeClass('required');
-  $('#taskDate').removeClass('required');
-  // push obj to array
-  tasksArr.push(listObj);
-  // save updated taskArr
-  saveTasks();
-
-  // update date to chosen date
-  now = listObj.date;
-  currentDay();
-  modalOnSavePage();
-  loadTasks();
-  //closeBtn.click;
-  //console.log("blah");
-  
-}
-
-// Function to auto-delete if object.date is before yesterday. By: Casey Arrington and John Banas 
-const dateAudit = function (tasksArr) {
-  let past = dayjs().subtract(1, 'day').format('YYYY-MM-DD');
-  for (let i = 0; i < tasksArr.length; i++) {
-    if (dayjs(tasksArr[i].date).isBefore(past)) {
-      tasksArr.splice(i, 1);
-      saveTasks();
-    }
-  }
-}
-
-//working on saving notes in a seperate array and 
-//dynamically adding them to a list with edit and 
-//delete buttons
-
-// let notesArr = [];
-// const iteration = notesArr.keys();
-// let idNumber;
-// saveNotesFunction = () => {
-//   if (notesArr) {
-//     for (let i = 0; i < notesArr.length; i++) {
-//       localStorage.setItem(notesArr[i].id, notesArr[i].text);
-//     }
-//   } else
-//   {
-//     localStorage.setItem( 0, notesArr);
-//   }
-// }
-
-// create Notes
-// const createNotes = function (noteObj) {
-//   let $notesContainer = $('#notesList');
-//   let $noteListItem = $('<li>')
-//   let 
-// }
 
 // save notes event handler
-$('#saveNotes').on('click', function (event) {
+$('#saveNotes').on('click', function () {
   let noteType = "notes";
   let notes = $('#textarea').val();
   if (!notes) {
-    console.log("Nothing to save here");
+    
     return;
   }
   // create the note object 
@@ -824,132 +651,26 @@ $('#saveNotes').on('click', function (event) {
   loadTasks();
 })
 
-  //   //get text from notes
-//   let notes = $('#textarea').val()
-//   //create list item
-//   let noteListItem = document.createElement('li');
-//   //notes <ul>
-//   let notesEl = document.querySelector('#notesList');
-  
-//   noteListItem.textContent = notes;
 
-//   // for (const key of iteration) {
-//   //   idNumber = key;
-//   //   console.log(idNumber);}
-  
-  
-//     let notesObj = { id: idNumber, date: now, text: notes };
-//     notesArr.push(notesObj);
-//     saveNotesFunction();
-  
-  
-
-//   let buttonContainer = document.createElement("div");
-//   $(buttonContainer).attr({ class: 'editDeleteContainers' });
-
-//   let notesEditBtnEl = document.createElement("button");
-//   let notesDeleteBtnEl = document.createElement("button");
-
-
-//   notesEditBtnEl.textContent = "EDIT";
-//   notesEditBtnEl.setAttribute('class', 'notesEditBtn');
-
-//   notesDeleteBtnEl.textContent = "DELETE";
-//   notesDeleteBtnEl.setAttribute('class', 'notesDeleteBtn');
-
-//   buttonContainer.appendChild(notesEditBtnEl);
-//   buttonContainer.appendChild(notesDeleteBtnEl);
-//   noteListItem.appendChild(buttonContainer);
-//   notesEl.appendChild(noteListItem);
-// })
-
-// Current Note Event Handler Below
-
-// $('#textarea').on('blur', function (event) {
-//   let notes = event.target.value;
-//   let noteType = "notes"
-//   // check if there in at least ONE object that fits conditions in some() method
-//   //John Banas updated via Casey Arrington text message
-//   if (tasksArr.some(object => object.type === "notes" && object.date === now)) {
-//     // loop the task Arr 
-//     for (let i = 0; i < tasksArr.length; i++) {
-//       // find the object that matches...
-//       if (tasksArr[i].type === "notes" && tasksArr[i].date === now) {
-//         // change property value to new value
-//         tasksArr[i].notes = notes;
-//         console.log(notes);
-//         //put in <li> in <ul>
-//         noteListItem.textContent = notes;
-//         notesEl.appendChild(noteListItem);
-//       }
-//     }
-
-//   } else {
-//     // if conditionals are false
-//     // push values as property to new object
-//     let notesObj = { type: noteType, notes: notes, date: now };
-//     // push new object to tasks Array
-//     tasksArr.push(notesObj);
-//   }
-//   saveTasks();
-// })
-
-/* 1.) Add Edit and Delete buttons to Modal
-  2.) Copy Modal and create a new event handler 
-  3.) Hold data from Modal in an object array
-  4.) Add information in
-
-Copy Modal and create a new button for Edit and Delete Tasks 
-
-*/
-
-// EVENT HANDLER FOR DYNAMIC-GENERATED EDIT/DELETE By: Casey Arrington 
-
-const editModalOpen = function (task) {
-  //modalTypeEdit(task.type);
-  //console.log(task.type);
-  //$('#taskModal').data("tasktype");
-  modalTypeEdit(task.type);
-  $("#modalTextInput").val(task.text);
-  $('#taskDate').val(task.date);
-  $('#startTime').val(task.startTime);
-  $('#endTime').val(task.endTime);
-  // set value of mainTask to task.mainTask value
-  uncheckOrCheck = () => {
-    if (task.mainTask === 'true') {
-    document.getElementById("mainTaskCheckbox").checked = true;
-    } else {
-      document.getElementById("mainTaskCheckbox").checked = false;
-    }
-  }
-
-  uncheckOrCheck();
-
-  // remove data type from save button to prevent close on save with missing data
-  $('#saveTasksBtn').removeAttr("data-close");
-}
-
+// EVENT HANDLER FOR DYNAMIC-GENERATED EDIT/DELETE
 // event handler for dynamically created edit and delete buttons
 $('.tasklistContainer').on('click', 'button', function(event) {
   // to edit or to delete? that is the question
   let btnClicked = event.target;
-  console.log(btnClicked);
-  // get class of btnClicked (edit or delete)
+  
+  // get class of btnClicked(edit or delete) and id
   let btnClickedType = btnClicked.getAttribute('class');
   let btnClickedId = btnClicked.getAttribute('id').toString();
-  //debugger;
+  
+  // if deleteBtn
   if (btnClickedType === "deleteBtn") {
-    for (let i = 0; i < tasksArr.length; i++) {
-      console.log(btnClickedId);
-      console.log(tasksArr[i].id);
-      console.log(btnClickedId === tasksArr[i].id.toString());
+    for (let i = 0; i < tasksArr.length; i++) {;
       // if ID of button and task match
       if (btnClickedId === tasksArr[i].id.toString()) {
         // Delete Task from array with splice
-        console.log('delete?')
+ 
         tasksArr.splice(i, 1);
         saveTasks()
-        // loadTasks again
         modalOnSavePage();
         loadTasks()
       }
@@ -957,57 +678,19 @@ $('.tasklistContainer').on('click', 'button', function(event) {
   } else if (btnClickedType === "editBtn") {
     for (let i = 0; i < tasksArr.length; i++) {
       if (btnClickedId === tasksArr[i].id.toString()) {
-        //debugger;
-        //tasksArr.splice(i, 1);
-        console.log("edit this?");
+
         if (tasksArr[i].type === 'notes') {
           editNotes(tasksArr[i]);
         } else {  
           editModalOpen(tasksArr[i]);
         }
-        tasksArr.splice(i, 1);
-        //console.log(taskArr);
-        
+        tasksArr.splice(i, 1);   
         
       }
 
     }
   } 
 })
-
-
-
-
-
-
-//sticky nav bar 
-$('.title-bar').on('sticky.zf.stuckto:top', function () {
-  $(this).addClass('shrink');
-}).on('sticky.zf.unstuckfrom:top', function () {
-  $(this).removeClass('shrink');
-})
-
-// Get up counter synced to loaded tasks
-const initialIdCount = function () {
-  if (tasksArr) {
-    let currentMax = 0;
-    for (let i = 0; i < tasksArr.length; i++) {
-      //if (tasksArr[i].id > currentMax) {
-        //currentMax = tasksArr[i].id;
-      //}
-      //idCounter = currentMax + 1;
-      
-      // reset all ids on load, 
-      tasksArr[i].id = currentMax;
-      currentMax++;
-      
-    }
-    
-    idCounter = currentMax;
-    
-  }
-}
-
 
 getQuote();
 loadTasks();
