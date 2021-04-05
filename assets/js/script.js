@@ -353,55 +353,53 @@ const createTask = function (object) {
     // //minutes
     let startMinutes = object.startTime.slice(3);
     // //am or pm
-    let parsedHours = parseInt(startHours);
-    console.log(parsedHours);
-    // if (parsedHours >= 12) {
-    //   amOrPm = 'pm'
-    // } else {
-    //   amOrPm = 'am'
-    // }
-    var AmOrPm = parsedHours >= 12 ? 'pm' : 'am';
+    // let parsedHours = parseInt(startHours);
+    //console.log(parsedHours);
+    let parsedHour = parseInt(startHours);
+    
+    if (parsedHour >= 12) {
+       startAmOrPm = 'pm'
+       startHours = startHours - 12;
+     } else {
+       startAmOrPm = 'am'
+     }
+    
+    //var AmOrPm = parsedHours >= 12 ? 'pm' : 'am';
     //changing to standard time
     startHours = (startHours % 12) || 12;
 
     //same for end time hours
-    let endHours = object.endTime.toString();
+    
+    let endHours = object.endTime.slice(0,2);
+    let parsedEndHour = parseInt(endHours);
+    if (parsedEndHour >= 12) {
+      endHours = endHours - 12;
+      endAmOrPm = 'pm'
+    } else {
+      endAmOrPm = 'am'
+    }
     // //minutes
-    // let endMinutes = endHours.substr(3);
+    let endMinutes = object.endTime.slice(3);
     // //am or pm is already controlled
     // //change hour to standard time
     // endHours = (endHours % 12) || 12;
-
+    let startString = (startHours + ":" + startMinutes + " " + startAmOrPm).toString();
+    let endString = (endHours + ":" + endMinutes + " " + endAmOrPm).toString();
     // update below section to implement note creation in createTask
     //to style the buttons need id or class
     
       switch (object.type) {
         case "task":
-          listItem.textContent = "[" +
-            startHours + ":" +
-            //startMinutes + " " +
-            AmOrPm + " " + "-" +
-            " " + endHours + ":" +
-            //endMinutes + " " +
-            //AmOrPm +
-             "]" + " - " + object.text;
+          listItem.textContent = "[" + startString + " - " + endString + "] - " + object.text;
           break;
         case "meeting":
-          listItem.textContent = "[ " +
-            startHours +
-            //startMinutes + " " +
-            //AmOrPm + "]" + 
-            " - " + object.text;
+          listItem.textContent = "[ " + startString + "] - " + object.text;
           break;
         case "grateful":
           listItem.textContent = object.text;
           break;
         case "study":
-          listItem.textContent = "[" + " " +
-            startHours +
-            //startMinutes + " " +
-            //AmOrPm + 
-            "]" + " - " + object.text;
+          listItem.textContent = listItem.textContent = "[ " + startString + "] - " + object.text;
           break;
         case "radar":
           listItem.textContent = object.text;
