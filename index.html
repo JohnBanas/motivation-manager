@@ -155,63 +155,79 @@
         </article>
       </section>
 
-      <!--Big 3 Overview(Tasks) + Meetings Section-->
-      <section id="tasks">
-        <article>
-          <div id="meetingsContainer">
-            <h3 id="myMeetings">Meetings</h3>
-            <ul id="meetingList">
-            </ul>
-          </div>
-          <div>
-            <!--Card title-->
-            <h3 id="mainTasks">Main Tasks</h3>
-            <!--Notes: List needs to have closed circle bullets when you click on task, you can edit-->
-            <ul id="mainTasksList">
-            </ul>
-          </div>
-        </article>
-      </section>
-
-      <!--(JOhn) tabs section display for current day's schedule etc. -->
-      <section>
-        <article class="cell">
-          <ul class="tabs grid-x center" data-tabs id="example-tabs">
-            <li class="tabs-title large-3 medium-3 cell is-active"><a href="#panel1" aria-selected="true">Schedule</a>
-            </li>
-            <li class="tabs-title large-3 medium-3 cell"><a href="#panel2">Radar Items</a></li>
-            <li class="tabs-title large-3 medium-3 cell"><a href="#panel3">Study Materials</a></li>
-            <li class="tabs-title large-3 medium-3 cell"><a href="#panel4">Personal Development</a></li>
+    <!-- Grateful Section-->
+    <section id="grateful">
+      <article>
+        <h3 id="gratefulThings">Things I Am Grateful For</h3>
+        <div>
+          <ul id="gratefulList">
+            <li><i class="fas fa-plus-circle" data-open="taskModal"></i></li>
           </ul>
+        </div>
+      </article>
+    </section>
 
-          <section id="" class="tabs-content" data-tabs-content="example-tabs">
-            <div class="tabs-panel is-active" id="panel1">
-              <div>
-                <!-- schedule tasks content saved here from modal -->
-                <ul id="taskList">
-                </ul>
-              </div>
+    <!--Big 3 Overview(Tasks) + Meetings Section-->
+    <section id="tasks">
+      <article>
+        <div id="meetingsContainer">
+          <h3 id="myMeetings">Meetings</h3>
+          <ul id="meetingList">
+            <li><i class="fas fa-plus-circle" data-open="taskModal"></i></li>
+          </ul>
+        </div>
+        <div>
+          <!--Card title-->
+          <h3 id="mainTasks">Main Tasks</h3>
+          <!--Notes: List needs to have closed circle bullets when you click on task, you can edit-->
+          <ul id="mainTasksList">
+            <li><i class="fas fa-plus-circle" data-open="taskModal"></i></li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <!--(JOhn) tabs section display for current day's schedule etc. -->
+    <section>
+      <article class="cell">
+        <ul class="tabs grid-container center" data-tabs id="example-tabs">
+          <li class="tabs-title  is-active"><a href="#panel1" aria-selected="true">Schedule</a></li>
+          <li class="tabs-title"><a href="#panel2">Radar Items</a></li>
+          <li class="tabs-title"><a href="#panel3">Study Materials</a></li>
+          <li class="tabs-title"><a href="#panel4">Personal Development</a></li>
+        </ul>
+
+        <section class="tabs-content" data-tabs-content="example-tabs">
+          <div class="tabs-panel is-active" id="panel1">
+            <div>
+              <!-- schedule tasks content saved here from modal -->
+              <ul id="taskList">
+                <li><i class="fas fa-plus-circle" data-open="taskModal"></i></li>
+              </ul>
             </div>
-            <div class="tabs-panel" id="panel2">
-              <div>
-                <!-- Radar tasks content saved here from modal -->
-                <ul id="radarList">
-                </ul>
-              </div>
+          </div>
+          <div class="tabs-panel" id="panel2">
+            <div>
+              <!-- Radar tasks content saved here from modal -->
+              <ul id="radarList">
+                <li><i class="fas fa-plus-circle" data-open="taskModal"></i></li>
+              </ul>
             </div>
-            <div class="tabs-panel" id="panel3">
-              <div>
-                <!-- Study modal content here -->
-                <ul id="studyList">
-                </ul>
-              </div>
+          </div>
+          <div class="tabs-panel" id="panel3">
+            <div>
+              <!-- Study modal content here -->
+              <ul id="studyList">
+                <li><i class="fas fa-plus-circle" data-open="taskModal"></i></li>
+              </ul>
             </div>
-            <div class="tabs-panel" id="panel4">
-              <div>
-                <!-- modal personal development content here -->
-                <ul id="developList">
-                </ul>
-              </div>
+          </div>
+          <div class="tabs-panel" id="panel4">
+            <div>
+              <!-- modal personal development content here -->
+              <ul id="developList">
+                <li><i class="fas fa-plus-circle" data-open="taskModal"></i></li>
+              </ul>
             </div>
           </section>
         </article>

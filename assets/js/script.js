@@ -229,10 +229,12 @@ const createTask = function (object) {
   let listContainer = document.querySelector("#" + object.type + "List");
   $(listItem).attr({ id: 'x' + object.id, data: object.data });
 
+  listContainer.setAttribute('class', 'row align-justify listContainer');
+  listItem.setAttribute('class', 'column small-4 listItem');
   editBtnEl.textContent = "edit";
-  editBtnEl.setAttribute('class','editBtn');
+  editBtnEl.setAttribute('class','editBtn column small-4');
   deleteBtnEl.textContent = "delete";
-  deleteBtnEl.setAttribute('class', 'deleteBtn');
+  deleteBtnEl.setAttribute('class', 'deleteBtn column small-4');
 
   //to style the buttons need id or class
   if (object.type !== "notes") {
@@ -257,10 +259,10 @@ const createTask = function (object) {
         break;
     }
     if (object.mainTask === 'true') {
-      $(`#x` + object.id).clone().appendTo('#mainTasksList');
+      $(`#x` + object.id).clone().prependTo('#mainTasksList');
     }
 
-    listContainer.appendChild(listItem);
+    listContainer.prepend(listItem);
     listItem.appendChild(editBtnEl);
     listItem.appendChild(deleteBtnEl);
   }
