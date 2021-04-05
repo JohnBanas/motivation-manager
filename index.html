@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- Test comment -->
 
 <head>
   <meta charset="UTF-8" />
@@ -54,23 +53,31 @@
     <!-- Navigation Menu -->
   </header>
   <nav id="navbar-bottom" class="cell">
-    <ul>
-      <li class="grid-container">
-        <ul id="subMenuContainer" class=" grid-x grid-margin-x menu align-center">
-          <li class="cell large-auto"><a href="#myMeetings">Meetings</a></li>
-          <li class="cell large-auto"><a href="#mainTasks">Tasks</a></li>
-          <li class="cell large-auto"><a href="#panel1">Scheduler</a></li>
-          <li class="cell large-auto"><a href="#notes">Notes</a></li>
-          <li class="cell large-auto"><a href="#addMyTask" data-open="taskModal">
-              <i class="fas fa-plus"></i> Create Task</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
+    <div data-sticky-container class="grid-container fluid">
+      <div class="title-bar grid-x" data-sticky data-sticky-on="small" data-options="marginTop:0;">
+        <div class="align-center cell title-bar" data-responsive-toggle="navMenu">
+          <button id="menu-btn" class="title-bar-title" type="button" data-toggle="navMenu">Menu</button>
+        </div>
+        <li id="navMenu" class="cell top-bar">
+          <ul id="subMenuContainer" class="dropdown menu align-center" data-dropdown-menu>
+            <li><a href="#myMeetings">Meetings</a></li>
+            <li><a href="#mainTasks">Tasks</a></li>
+            <li><a href="#panel1">Scheduler</a></li>
+            <li><a href="#notes">Notes</a></li>
+            <li>
+              <button type="button" data-open="taskModal" id="openBtn">
+                Create Task
+              </button>
+            </li>
+          </ul>
+        </li>
+      </div>
+    </div>
   </nav>
   <!-- End of Header, Nav Menu -->
+
   <!--Main-->
-  <main>
+  <main id="main">
     <!-- Date & Quote Section-->
     <section id="date">
       <h2 id="dateDisplay" class="text-center"></h2>
@@ -139,103 +146,108 @@
 
     <h3 id="dateManager">What date would you like to manage?</h3>
     <input type="date" id="headerDate" name="headerDate"></input>
+    <div id="bubble">
+      <!-- Grateful Section-->
+      <section id="grateful">
+        <article>
+          <h3 id="gratefulThings">Things I Am Grateful For</h3>
+          <div>
+            <ul id="gratefulList" class="tasklistContainer">
+            </ul>
+          </div>
+        </article>
+      </section>
 
-    <!-- Grateful Section-->
-    <section id="grateful">
-      <article>
-        <h3 id="gratefulThings">Things I Am Grateful For</h3>
-        <div>
-          <ul id="gratefulList">
+      <!--Big 3 Overview(Tasks) + Meetings Section-->
+      <section id="tasks">
+        <article>
+          <div id="meetingsContainer">
+            <h3 id="myMeetings">Meetings</h3>
+            <ul id="meetingList" class="tasklistContainer">
+            </ul>
+          </div>
+          <div>
+            <!--Card title-->
+            <h3 id="mainTasks">Main Tasks</h3>
+            <!--Notes: List needs to have closed circle bullets when you click on task, you can edit-->
+            <ul id="mainTasksList" class="tasklistContainer">
+            </ul>
+          </div>
+        </article>
+      </section>
+
+      <!--(JOhn) tabs section display for current day's schedule etc. -->
+      <section>
+        <article class="cell">
+          <ul class="tabs grid-x center" data-tabs id="example-tabs">
+            <li class="tabs-title large-3 medium-3 cell is-active"><a href="#panel1" aria-selected="true">Schedule</a>
+            </li>
+            <li class="tabs-title large-3 medium-3 cell"><a href="#panel2">Radar Items</a></li>
+            <li class="tabs-title large-3 medium-3 cell"><a href="#panel3">Study Materials</a></li>
+            <li class="tabs-title large-3 medium-3 cell"><a href="#panel4">Personal Development</a></li>
           </ul>
-        </div>
-      </article>
-    </section>
 
-    <!--Big 3 Overview(Tasks) + Meetings Section-->
-    <section id="tasks">
-      <article>
-        <div id="meetingsContainer">
-          <h3 id="myMeetings">Meetings</h3>
-          <ul id="meetingList">
-          </ul>
-        </div>
-        <div>
-          <!--Card title-->
-          <h3 id="mainTasks">Main Tasks</h3>
-          <!--Notes: List needs to have closed circle bullets when you click on task, you can edit-->
-          <ul id="mainTasksList">
-          </ul>
-        </div>
-      </article>
-    </section>
-
-    <!--(JOhn) tabs section display for current day's schedule etc. -->
-    <section>
-      <article class="cell">
-        <ul class="tabs grid-container center" data-tabs id="example-tabs">
-          <li class="tabs-title  is-active"><a href="#panel1" aria-selected="true">Schedule</a></li>
-          <li class="tabs-title"><a href="#panel2">Radar Items</a></li>
-          <li class="tabs-title"><a href="#panel3">Study Materials</a></li>
-          <li class="tabs-title"><a href="#panel4">Personal Development</a></li>
-        </ul>
-
-        <section class="tabs-content" data-tabs-content="example-tabs">
-          <div class="tabs-panel is-active" id="panel1">
-            <div>
-              <!-- schedule tasks content saved here from modal -->
-              <ul id="taskList">
-              </ul>
+          <section id="" class="tabs-content" data-tabs-content="example-tabs">
+            <div class="tabs-panel is-active" id="panel1">
+              <div>
+                <!-- schedule tasks content saved here from modal -->
+                <ul id="taskList" class="tasklistContainer">
+                </ul>
+              </div>
             </div>
-          </div>
-          <div class="tabs-panel" id="panel2">
-            <div>
-              <!-- Radar tasks content saved here from modal -->
-              <ul id="radarList">
-              </ul>
+            <div class="tabs-panel" id="panel2">
+              <div>
+                <!-- Radar tasks content saved here from modal -->
+                <ul id="radarList" class="tasklistContainer">
+                </ul>
+              </div>
             </div>
-          </div>
-          <div class="tabs-panel" id="panel3">
-            <div>
-              <!-- Study modal content here -->
-              <ul id="studyList">
-              </ul>
+            <div class="tabs-panel" id="panel3">
+              <div>
+                <!-- Study modal content here -->
+                <ul id="studyList" class="tasklistContainer">
+                </ul>
+              </div>
             </div>
-          </div>
-          <div class="tabs-panel" id="panel4">
-            <div>
-              <!-- modal personal development content here -->
-              <ul id="developList">
-              </ul>
+            <div class="tabs-panel" id="panel4">
+              <div>
+                <!-- modal personal development content here -->
+                <ul id="developList" class="tasklistContainer">
+                </ul>
+              </div>
             </div>
-          </div>
-        </section>
-      </article>
-      <!-- (John) Any modal item created needs to be saved to local storage with the Date & Time so that we can 
-      display the correct items on the requested day -->
-      <!--Time block container-->
-      <div class="timeblocks" id="day">
-        <!--Notes: Script on time blocks starting from 5:00am - 10:00pm -->
-      </div>
-    </section>
+          </section>
+        </article>
+      </section>
 
-    <!-- Notes Section-->
-    <section id="notes">
-      <article>
-        <h3 id="myNotes">Notes</h3>
-        <textarea id="textarea"></textarea>
-      </article>
-    </section>
+      <!-- Notes Section-->
+      <section id="notes">
 
+        <article>
+          <div id="myNotes">
+            <h3>Notes</h3>
+          <textarea id="textarea"></textarea>
+          <button id="saveNotes">Save Note</button>
+          </div>
+
+
+ 
+          
+          <div>
+            <ul class="notesList tasklistContainer" id="notesList">
+            </ul>
+          </div>
+        </article>
+      </section>
+    </div>
     <!-- Add Task Section-->
     <section>
       <!-- Task Modal -->
       <div class="grid-container">
         <div class="cell">
-          <!-- button to activate modal -->
-          <h2 id="plusIcon"><a id="openBtn" data-open="taskModal">
-              <button id="addMyTask">
-                Add Task
-              </button></a></h2>
+         
+
+            <!-- data-reveal-id="taskModal" was in div class below! -->
           <div class="reveal grid-container fluid" id="taskModal" data-reveal data-tasktype="task">
             <!-- modal button options -->
             <div class="grid-x grid-margin-x grid-padding-x">
@@ -279,8 +291,8 @@
               </label>
             </div>
             <!-- ADD DATA-Close to save button to close modal on save -->
-            <button class="cell" id="saveTasksBtn" data-close>Save</button>
-            <button class="close-button" data-close aria-label="Close reveal" type="button">
+            <button class="cell" id="saveTasksBtn">Save</button>
+            <button class="close-button" data-close aria-label="Close reveal" type="button" id="closeBtn">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
