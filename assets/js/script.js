@@ -348,22 +348,29 @@ const createTask = function (object) {
     //change starting military time to standard
     //debugger;
     //change hours to string save to variable
-    let startHours = object.startTime.toString();
+    let startHours = object.startTime.slice(0, 2);
     
-    //minutes
-    var startMinutes = startHours.substr(3);
-    //am or pm
-    var AmOrPm = startHours >= 12 ? 'pm' : 'am';
+    // //minutes
+    let startMinutes = object.startTime.slice(3);
+    // //am or pm
+    let parsedHours = parseInt(startHours);
+    console.log(parsedHours);
+    // if (parsedHours >= 12) {
+    //   amOrPm = 'pm'
+    // } else {
+    //   amOrPm = 'am'
+    // }
+    var AmOrPm = parsedHours >= 12 ? 'pm' : 'am';
     //changing to standard time
     startHours = (startHours % 12) || 12;
 
     //same for end time hours
     let endHours = object.endTime.toString();
-    //minutes
-    let endMinutes = endHours.substr(3);
-    //am or pm is already controlled
-    //change hour to standard time
-    endHours = (endHours % 12) || 12;
+    // //minutes
+    // let endMinutes = endHours.substr(3);
+    // //am or pm is already controlled
+    // //change hour to standard time
+    // endHours = (endHours % 12) || 12;
 
     // update below section to implement note creation in createTask
     //to style the buttons need id or class
@@ -372,27 +379,29 @@ const createTask = function (object) {
         case "task":
           listItem.textContent = "[" +
             startHours + ":" +
-            startMinutes + " " +
+            //startMinutes + " " +
             AmOrPm + " " + "-" +
             " " + endHours + ":" +
-            endMinutes + " " +
-            AmOrPm + "]" +
-            " - " + object.text;
+            //endMinutes + " " +
+            //AmOrPm +
+             "]" + " - " + object.text;
           break;
         case "meeting":
-          listItem.textContent = "[" + " " +
-            startHours + ":" +
-            startMinutes + " " +
-            AmOrPm + "]" + " - " + object.text;
+          listItem.textContent = "[ " +
+            startHours +
+            //startMinutes + " " +
+            //AmOrPm + "]" + 
+            " - " + object.text;
           break;
         case "grateful":
           listItem.textContent = object.text;
           break;
         case "study":
           listItem.textContent = "[" + " " +
-            startHours + ":" +
-            startMinutes + " " +
-            AmOrPm + "]" + " - " + object.text;
+            startHours +
+            //startMinutes + " " +
+            //AmOrPm + 
+            "]" + " - " + object.text;
           break;
         case "radar":
           listItem.textContent = object.text;
@@ -686,7 +695,9 @@ $('#saveTasksBtn').on('click', function () {
   // start time data input
   let startTime = $('#startTime').val();
   // end time data input
+  
   let endTime = $('#endTime').val();
+
   // task type input
   let taskType = $('#taskModal').data('tasktype')
   let mainTask = document.getElementById("mainTaskCheckbox").checked.toString();
